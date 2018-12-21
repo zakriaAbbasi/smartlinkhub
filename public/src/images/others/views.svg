@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="14px" viewBox="0 0 17 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Blocks-&amp;-Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="elements/views/color/white" fill="#FFFFFF">
+            <path d="M8.50166051,13.2897579 C13.7962058,13.2897579 16.8216602,7.6231854 16.8216602,6.67875666 C16.8216602,5.73432791 13.7962058,0.0677554482 8.50166051,0.0677554482 C3.20711525,0.0677554482 0.181660817,5.73432791 0.181660817,6.67875666 C0.181660817,7.6231854 3.20711525,13.2897579 8.50166051,13.2897579 Z M8.50166051,9.70600068 C10.1725729,9.70600068 11.5271149,8.35145859 11.5271149,6.68054625 C11.5271149,5.0096339 10.1725729,3.65509181 8.50166051,3.65509181 C6.83074817,3.65509181 5.47620608,5.0096339 5.47620608,6.68054625 C5.47620608,8.35145859 6.83074817,9.70600068 8.50166051,9.70600068 Z" id="icon"></path>
+        </g>
+    </g>
+</svg>

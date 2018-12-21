@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>like_rose</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Blocks-&amp;-Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons/likes/I-like-it/rose" transform="translate(-12.000000, -13.000000)">
+            <g id="like_rose">
+                <rect id="frame" x="0" y="0" width="45" height="45"></rect>
+                <path d="M22.5000005,17.1718757 C21.6594536,14.0642645 19.76276,13 17.9062501,13 C14.6440442,13 12,15.8541001 12,19.3750001 C12,26.6667336 22.5000002,30.8500004 22.5000002,30.8500004 C22.5000002,30.8500004 33.0000004,26.6667336 33.0000004,19.3750001 C33.0000004,15.8541001 30.3559563,13 27.0937503,13 C25.2372405,13 23.5281757,14.0642645 22.5000005,17.1718757 Z" id="icon" fill="#F6148E"></path>
+            </g>
+        </g>
+    </g>
+</svg>
