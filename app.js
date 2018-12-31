@@ -11,7 +11,7 @@ const busboyBodyParser = require('busboy-body-parser');
 
 const app = express();
 const PORT = process.env.PORT;
-
+var flash = require('connect-flash');
 var hbsHelpers = exphbs.create({
     helpers: require("./config/handlebars").helpers,
     defaultLayout: 'main',
@@ -27,6 +27,8 @@ app.use(bodyParser.json());
 app.use(busboyBodyParser());
 app.use(express.static("public"));
 app.use(busboy()); 
+app.use(flash());
+
 
 app.use(session({
     key: process.env.KEY,

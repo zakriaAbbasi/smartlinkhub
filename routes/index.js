@@ -32,8 +32,9 @@ router.get('/signup', function(req, res, next){
 
 
 router.post('/signup', function(req, res ){
+  console.log(req.body);
   if (!req.body.email || !req.body.password || !req.body.name || !req.body.type) {
-    res.json({success: false, msg: 'Please provide all the credentials'});
+    res.render('signup', { messages: req.flash('please provide all the credentials') });
   } else {
     var newUser = new usermodel({
       username:req.body.name, email: req.body.email, password: req.body.password,
@@ -42,9 +43,9 @@ router.post('/signup', function(req, res ){
     // save the user
     newUser.save(function(err) {
       if (err) {
-        return res.json({success: false, msg: 'This email has already been registered.'});
+        res.render('signup', { messages: req.flash('This email has already been used') });
       }
-      res.json({success: true, msg: 'Successful created new user.'});
+      res.render('home', { messages: req.flash('succesfully created new user') });
       
     });
   }
