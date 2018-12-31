@@ -21,9 +21,15 @@ router.get('/', function(req, res, next){
   res.render('home');
 });
 
-router.get('/test', function(req, res, next){
-  res.render('login');
+router.get('/login', function(req, res, next){
+  res.render('login', {layout: 'login'});
 });
+
+
+router.get('/signup', function(req, res, next){
+  res.render('signup', {layout: 'login'});
+});
+
 
 router.post('/signup', function(req, res ){
   if (!req.body.email || !req.body.password || !req.body.name || !req.body.type) {

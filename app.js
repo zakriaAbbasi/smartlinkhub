@@ -21,12 +21,6 @@ var hbsHelpers = exphbs.create({
 app.engine('.hbs', hbsHelpers.engine);
 app.set('view engine', '.hbs');
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6cec6c74c6d004c61d613b5808c9b9580d4747bd
-
-
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(busboyBodyParser());
