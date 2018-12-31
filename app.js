@@ -26,10 +26,7 @@ app.engine( 'hbs', hbs( {
   
   app.set( 'view engine', 'hbs' );
 
-hbs.registerHelper('userinfo', function() { 
-    if(!req.user){return 'login';}
-    else{ return req.user}
-  });
+
 
 
 app.use(express.static("public"));
