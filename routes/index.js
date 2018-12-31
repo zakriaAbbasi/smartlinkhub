@@ -18,7 +18,7 @@ const isAuthenticated = require('../config/isAuthenticated');
 
 
 router.get('/', function(req, res, next){
-  res.render('index', { title: 'Welcome to my music app' });
+  res.render('home');
 });
 
 router.post('/signup', function(req, res ){

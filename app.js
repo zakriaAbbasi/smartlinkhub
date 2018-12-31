@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const uuid = require('uuid/v4')
 require('dotenv').config();
-const exphbs = require('express-handlebars');
+const hbs = require('express-handlebars');
 const session      = require('express-session');
 const passport = require('./config/passport');
 const busboy = require('connect-busboy');
@@ -17,8 +17,16 @@ const PORT = process.env.PORT;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(busboyBodyParser());
-app.engine('.hbs', exphbs({defaultLayout: 'layout', extname: '.hbs'}));
-app.set('view engine', '.hbs');
+app.engine( 'hbs', hbs( { 
+    extname: 'hbs', 
+    defaultLayout: __dirname + '/views/layouts/main.hbs',
+    partialsDir: __dirname + '/views/partials',
+    layoutsDir: __dirname + '/views/layouts'
+  } ) );
+  
+  app.set( 'view engine', 'hbs' );
+
+
 app.use(express.static("public"));
 app.use(busboy()); 
 
