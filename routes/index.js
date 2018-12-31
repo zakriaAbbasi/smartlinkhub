@@ -18,7 +18,7 @@ const isAuthenticated = require('../config/isAuthenticated');
 
 
 router.get('/', function(req, res, next){
-  res.render('home');
+  res.render('index');
 });
 
 router.get('/login', function(req, res, next){

@@ -1,30 +1,64 @@
-
-<h2>Login Form</h2>
-
-<form action="/action_page.php">
-  <div class="imgcontainer">
-
-
-
-<img  src="" alt="Avatar" class="avatar">
-  </div>
-
-  <div class="container">
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-        
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-      <button type="button" class="cancelbtn" style="background-color:#356331"> <a href="/signup" > Sign Up ?</a></button>
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
+ <div class = "views">
+         <div class = "view view-main">
+         
+            <div class = "navbar">
+               <div class = "navbar-inner">
+                  <div class = "center sliding">Start App With Login Screen</div>
+               </div>
+            </div>
+            
+            <div class = "pages">
+               <div data-page = "index" class = "page navbar-fixed">
+                  <div class = "page-content">
+                     <div class = "content-block">
+                        <p><a href = "#" class = "open-login-screen">Click here to open Login Screen</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            
+         </div>
+      </div>
+      
+      <div class = "login-screen modal-in">
+         <div class = "view">
+            <div class = "page">
+               <div class = "page-content login-screen-content">
+                  <div class = "login-screen-title">Login Here</div>
+                  
+                  <form>
+                     <div class = "list-block">
+                        <ul>
+                           <li class = "item-content">
+                              <div class = "item-inner">
+                                 <div class = "item-title label">Username</div>
+                                 <div class = "item-input">
+                                    <input type = "text" name = "username" placeholder = "Enter the username">
+                                 </div>
+                              </div>
+                           </li>
+                           
+                           <li class = "item-content">
+                              <div class = "item-inner">
+                                 <div class = "item-title label">Password</div>
+                                 <div class = "item-input">
+                                    <input type = "password" name = "password" placeholder = "Enter the password">
+                                 </div>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                     
+                     <div class = "list-block">
+                        <ul>
+                           <li><a href = "#" class = "item-link list-button">Log In</a></li>
+                        </ul>
+                        
+                     </div>
+                  </form>
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      

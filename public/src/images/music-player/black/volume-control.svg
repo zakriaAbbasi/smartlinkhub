@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="21px" viewBox="0 0 24 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>volume control</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Blocks-&amp;-Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons/volume-control/black" transform="translate(-11.000000, -12.000000)">
+            <g id="volume-control">
+                <rect id="frame" x="0" y="0" width="45" height="45"></rect>
+                <g id="shapes" transform="translate(11.000000, 12.000000)" stroke="#1F111C">
+                    <path d="M11.8514739,19.0036271 L11.8514739,2.55674582 L8.88066607,5.01178842 C8.27709465,5.51057314 7.28462557,6.00344821 6.52888861,6.17983976 L4.23119153,6.71612996 C2.76407274,7.05856041 1.5,8.65369069 1.5,10.1599786 L1.5,11.9580286 C1.5,13.4361496 2.74494269,14.9232684 4.19695595,15.1838497 L6.43799773,15.5860316 C7.21920941,15.7262295 8.23464497,16.1800177 8.86072234,16.6687879 L11.8514739,19.0036271 Z" id="Combined-Shape" stroke-width="3"></path>
+                    <path d="M16.6719577,14.7242933 C17.4910091,13.6460074 17.9814116,12.27416 17.9814116,10.7806142 C17.9814116,9.29690432 17.497447,7.93329515 16.6880966,6.85827664" id="Oval-Copy-3" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M19.957672,18.0468055 C21.4648071,16.0626535 22.3671958,13.5383196 22.3671958,10.7900487 C22.3671958,8.05987677 21.4766535,5.55070198 19.9873692,3.57256236" id="Oval-Copy-4" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
