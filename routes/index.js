@@ -21,6 +21,10 @@ router.get('/', function(req, res, next){
   res.render('home');
 });
 
+router.get('/test', function(req, res, next){
+  res.render('login');
+});
+
 router.post('/signup', function(req, res ){
   if (!req.body.email || !req.body.password || !req.body.name || !req.body.type) {
     res.json({success: false, msg: 'Please provide all the credentials'});
