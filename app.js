@@ -9,9 +9,20 @@ const passport = require('./config/passport');
 const busboy = require('connect-busboy');
 const busboyBodyParser = require('busboy-body-parser');
 
-
 const app = express();
 const PORT = process.env.PORT;
+
+
+var exphbs = hbs.create({
+    // Specify helpers which are only registered on this instance.
+    helpers: {
+        userinfo: function () {
+            console.log('here', req.user);
+            if(!req.user){ return 'Login'}
+            else{return req.user.email}
+        },
+    }
+});
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -22,15 +33,9 @@ app.engine( 'hbs', hbs( {
     defaultLayout: __dirname + '/views/layouts/main.hbs',
     partialsDir: __dirname + '/views/partials',
     layoutsDir: __dirname + '/views/layouts'
-  } ) );
+} ) );
   
   app.set( 'view engine', 'hbs' );
-
-hbs.registerHelper('userinfo', function() { 
-    if(!req.user){return 'login';}
-    else{ return req.user}
-  });
-
 
 app.use(express.static("public"));
 app.use(busboy()); 
