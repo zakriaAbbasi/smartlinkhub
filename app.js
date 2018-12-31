@@ -26,9 +26,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(busboyBodyParser());
 app.use(express.static("public"));
-app.use(busboy()); 
-app.use(flash());
-
+app.use(busboy());
 
 app.use(session({
     key: process.env.KEY,
