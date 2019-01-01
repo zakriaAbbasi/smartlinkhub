@@ -4,6 +4,7 @@ const path = require('path');
 const uuid = require('uuid/v4')
 require('dotenv').config();
 const exphbs = require('express-handlebars');
+const flash = require('express-flash');
 const session      = require('express-session');
 const passport = require('./config/passport');
 const busboy = require('connect-busboy');
@@ -11,7 +12,7 @@ const busboyBodyParser = require('busboy-body-parser');
 
 const app = express();
 const PORT = process.env.PORT;
-var flash = require('connect-flash');
+
 var hbsHelpers = exphbs.create({
     helpers: require("./config/handlebars").helpers,
     defaultLayout: 'main',
@@ -20,15 +21,6 @@ var hbsHelpers = exphbs.create({
 
 app.engine('.hbs', hbsHelpers.engine);
 app.set('view engine', '.hbs');
-
-
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
-app.use(busboyBodyParser());
-app.use(express.static("public"));
-app.use(busboy()); 
-app.use(flash());
-
 
 app.use(session({
     key: process.env.KEY,
@@ -39,6 +31,13 @@ app.use(session({
         expires: 6000000000000000,
     }
 }));
+app.use(flash());
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+app.use(busboyBodyParser());
+app.use(express.static("public"));
+app.use(busboy());
 
 
 

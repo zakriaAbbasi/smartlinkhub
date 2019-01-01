@@ -1,9 +1,18 @@
 var register = function(Handlebars) {
     var helpers = {
     userinfo: function(req) {
-        console.log('here', req.user);
         if(!req.user){return 'Login'}
-        else{return req.user.email};
+        else{return 'Signed in as:'+req.user.email};
+    },
+    ifuser: function(req) {
+        console.log('hereiis');
+        if(req.user){console.log('true')};
+        return (req.user) ? options.fn(this) : options.inverse(this);
+    },
+    ifnotuser: function(req) {
+        console.log('hereiis');
+        if(!req.user){console.log('false')};
+        return (!req.user) ? options.fn(this) : options.inverse(this);
     }
 };
 
