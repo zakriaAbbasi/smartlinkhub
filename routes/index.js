@@ -18,16 +18,21 @@ const isAuthenticated = require('../config/isAuthenticated');
 
 
 router.get('/', function(req, res, next){
-  res.render('index');
+  var us = req.user;
+  console.log(us);
+  if(!us){res.render('index', {user: null, text: 'Login'});}
+  else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username});}
 });
 
 router.get('/login', function(req, res, next){
-  res.render('login', {layout: 'login'});
+  res.render('login', {layout: 'abc'} );
+});
+router.get('/test', function(req, res, next){
+  res.render('admin');
 });
 
-
 router.get('/signup', function(req, res, next){
-  res.render('signup', {layout: 'login'});
+  res.render('signup', {layout: 'abc'});
 });
 
 
@@ -53,11 +58,18 @@ router.post('/signup', function(req, res ){
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err,user, info) {
-    if( user == false) {res.json(info.message)}
+    if( user == false)
+    {
+      req.flash('info', info.message);
+      res.redirect('/login');
+   }
     else{
       req.logIn(user, function (err) {
-      if (err) { return next(err); }
-      return res.send(req.user);
+      if (err) { req.flash('info', 'Error logging in');
+      res.redirect('/login'); }
+      else{
+        res.redirect('/');
+      }
   });
 };
 })

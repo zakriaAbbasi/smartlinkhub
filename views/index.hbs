@@ -13,7 +13,7 @@
                 <div class="inner">
                   <button class="settings">Settings</button>
                   <div class="user-avatar">
-                    <img alt="UserAvatar" src="../src/images/artist/1sz2.jpg" class="avatar photo" width="100%" height="auto">
+                    <img alt="UserAvatar" src="/src/images/artist/1sz2.jpg" class="avatar photo" width="100%" height="auto">
                     <b class="fn"><a data-sound="tap" class="m-sound-audio item-link close-panel" href="profile.html">Melissa</a></b>
                   </div>
                   <div class="categories view-right">
@@ -77,10 +77,16 @@
                 <header>
                   <div class="main-grids safe-area">
                     <div class="inner">
-                      <h2>Browse</h2>
-                      <a href="profile.html"><button class="icon user-icon"></button></a>
-                      <button class="icon menu-icon open-panel"></button>
-                      <button class="search-icon" essential-search="hide"></button>
+                      {{!-- <h2>Browse</h2> --}}
+                      {{#if user }}
+                      <button class="button button-fill button-big">{{text}}</button>
+                      {{else}}
+                      <form action="/login">
+                      <button class="button button-fill button-big">{{text}}</button>
+                      </form>
+                      {{/if}}
+                      {{!-- <button class="icon menu-icon open-panel"></button> --}}
+                      {{!-- <button class="search-icon" essential-search="hide"></button> --}}
                     </div>
                   </div>
                 </header>
