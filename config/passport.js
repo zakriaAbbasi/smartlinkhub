@@ -31,7 +31,6 @@ passport.use(new LocalStrategy(
     user_instance.findOne({
         email: email
     }).then(function(dbUser) {
-      console.log('we are here');
       // If there's no user with the given email
       if (dbUser == null) {
          return done(null,false, {message: "Incorrect email."});
@@ -42,7 +41,6 @@ passport.use(new LocalStrategy(
         // Password did not match
         if (!isMatch) {return done(null,false, {message:'invalid Password'}); }  
         else {return done(null, dbUser)
-        
         }
     });
   }
