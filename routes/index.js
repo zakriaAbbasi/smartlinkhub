@@ -19,7 +19,6 @@ const isAuthenticated = require('../config/isAuthenticated');
 
 router.get('/', function(req, res, next){
   var us = req.user;
-  console.log(us);
   if(!us){res.render('index', {user: null, text: 'Login'});}
   else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username});}
 });
@@ -37,10 +36,11 @@ router.get('/signup', function(req, res, next){
 
 
 router.post('/signup', function(req, res ){
-  console.log(req.body);
   if (!req.body.email || !req.body.password || !req.body.name || !req.body.type) {
-    res.render('signup', { messages: req.flash('please provide all the credentials') });
-  } else {
+    req.flash('info', 'Please Provide all the credentials');
+    res.redirect('/signup');
+  }
+   else {
     var newUser = new usermodel({
       username:req.body.name, email: req.body.email, password: req.body.password,
       usertype: req.body.type
@@ -48,10 +48,14 @@ router.post('/signup', function(req, res ){
     // save the user
     newUser.save(function(err) {
       if (err) {
-        res.render('signup', { messages: req.flash('This email has already been used') });
+        //console.log(err);
+        req.flash('info', 'This email has already been used');
+        res.redirect('/signup');
       }
-      res.render('home', { messages: req.flash('succesfully created new user') });
-      
+      else{
+      req.flash('info', 'Success');
+      res.redirect('/login');
+      }
     });
   }
 });
