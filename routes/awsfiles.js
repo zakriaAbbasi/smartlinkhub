@@ -8,10 +8,19 @@ var filemanager = require('easy-file-manager')
       //isAuthenticated,
 //Route to upload file to AWS bucket
 router.post('/upload', function(req, res)  {
-  // console.log(req.files);
-  // console.log(req.body);
+   if(!req.files.file1 || !req.files.file2 || !req.body.artist){
+    req.flash('info', 'Please Provide all the credentials');
+    res.redirect('/uploadfile');
+   }
+   else
+   {
+   console.log(req.files);
+   console.log(req.body);
   filemanager.upload('/public/mp3images',req.files.file2.name,req.files.file2.data,function(err){
-      if (err) console.log(err);
+     if(err){
+      req.flash('info', 'cannot upload image');
+      res.redirect('/uploadfile');
+     }
   });
       var mp3 = new songsModel({fileName:req.files.file1.name,
       avatar: req.files.file2.name,
@@ -33,14 +42,17 @@ router.post('/upload', function(req, res)  {
        Body: mp3file.data,
       };
       s3bucket.upload(params, function (err, data,) {
-       if (err) {
-       res.send(err);
+        if (err) {
+        req.flash('info', 'cannot upload song');
+        res.redirect('/uploadfile');
        }
        else{
-       res.send(data);
+        req.flash('info', 'Upload successfull');
+        res.redirect('/uploadfile');
        }
       });
     });
+  }
 });
 
 //isAuthenticated,
