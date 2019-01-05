@@ -27,11 +27,15 @@ router.get('/login', function(req, res, next){
   res.render('login', {layout: 'abc'} );
 });
 router.get('/test', function(req, res, next){
-  res.render('admin');
+  res.render('admin' , {layout: 'admin'});
 });
 
 router.get('/signup', function(req, res, next){
   res.render('signup', {layout: 'abc'});
+});
+
+router.get('/uploadfile', function(req, res, next){
+  res.render('uploadfile', {layout: 'uploadfile'});
 });
 
 
