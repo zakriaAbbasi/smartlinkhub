@@ -1,20 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-
 const isAuthenticated = require('../config/isAuthenticated');
-//const fs = require('fs');
+const songsModel = require('../models/songs');
 const AWS = require('aws-sdk');
-const Busboy = require('busboy');
+var filemanager = require('easy-file-manager')
 
+      //isAuthenticated,
 //Route to upload file to AWS bucket
-router.post('/upload', isAuthenticated,   function(req, res) { 
-    const busboy = new Busboy({ headers: req.headers });
-   // The file upload has completed
-    busboy.on('finish', function() {
-    console.log('Upload finished');
-    const file = req.files.file;
-    
+router.post('/upload', function(req, res)  {
+  // console.log(req.files);
+  // console.log(req.body);
+  filemanager.upload('/public/mp3images',req.files.file2.name,req.files.file2.data,function(err){
+      if (err) console.log(err);
+  });
+      var mp3 = new songsModel({fileName:req.files.file1.name,
+      avatar: req.files.file2.name,
+      artist: req.body.artist,
+    });
+    mp3.save(); 
+
+    const mp3file = req.files.file1; 
     //upload to Aws bucket
      let s3bucket = new AWS.S3({
       accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -24,18 +29,18 @@ router.post('/upload', isAuthenticated,   function(req, res) {
     s3bucket.createBucket(function () {
       var params = {
        Bucket: process.env.AWS_BUCKET,
-       Key: file.name,
-       Body: file.data,
+       Key: mp3file.name,
+       Body: mp3file.data,
       };
       s3bucket.upload(params, function (err, data,) {
        if (err) {
        res.send(err);
        }
+       else{
        res.send(data);
+       }
       });
     });
-    });
-req.pipe(busboy);
 });
 
 //isAuthenticated,
