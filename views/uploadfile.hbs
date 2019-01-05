@@ -1,28 +1,149 @@
-    <main role="main" class="container">
 
-      <h1>Upload your Songs </h1>
+    
+  
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="../index.html">Songs Directory</a>
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg">
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold">Jessica </span>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+              </div>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+              </a>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-settings-gear-65"></i>
+                <span>Settings</span>
+              </a>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-calendar-grid-58"></i>
+                <span>Activity</span>
+              </a>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-support-16"></i>
+                <span>Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#!" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-7"></div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <!-- Table -->
       <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <!-- Our markup, the important part here! -->
-          <div id="drag-and-drop-zone" class="dm-uploader p-5">
-            <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop files here</h3>
-            <div class="btn btn-primary btn-block mb-5">
-                <span>Open the file Browser</span>
-                <input type="file" title='Click to add Files' />
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0">Songs Table</h3>
             </div>
-          </div><!-- /uploader -->
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush ">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">Songs</th>
+                    <th scope="col"> Submit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center"></div>
+                    </th>
+                    <td>
+                    <!-- Upload File -->
+                        <main role="main" class="container">
+                          <h1>Upload your Songs </h1>
+                          <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                              <!-- Our markup, the important part here! -->
+                              <div id="drag-and-drop-zone" class="dm-uploader p-5">
+                                <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop files here</h3>
+                                <div class="btn btn-primary btn-block mb-5">
+                                    <span>Open the file Browser</span>
+                                    <input type="file" title='Click to add Files' />
+                                </div>
+                              </div><!-- /uploader -->
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <div class="card h-100">
+                                <div class="card-header">
+                                  File List
+                                </div>
+                                <ul class="list-unstyled p-2 d-flex flex-column col" id="files">
+                                  <li class="text-muted text-center empty">No files uploaded.</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div><!-- /file list -->
+                        </main> <!-- /container -->
+                    </td>
+                    <td>
+                      <input class="btn btn-primary" type="submit" value="Submit">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer py-4">
+              <nav aria-label="...">
+              </nav>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="card h-100">
-            <div class="card-header">
-              File List
-            </div>
-            <ul class="list-unstyled p-2 d-flex flex-column col" id="files">
-              <li class="text-muted text-center empty">No files uploaded.</li>
+      </div>
+
+  
+          <!-- Footer -->
+      <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+          <div class="col-xl-6">
+            <div class="copyright text-center text-xl-left text-muted">
+              &copy; 2019   <a href="https://developmethis.com" class="font-weight-bold ml-1" target="_blank">DMT - Tech Sol</a>
+            All rights reserved</div>
+          </div>
+          <div class="col-xl-6">
+            <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+              </li>
             </ul>
           </div>
         </div>
-      </div><!-- /file list -->
-      
-     
-    </main> <!-- /container -->
+      </footer>
+    </div>
+  </div>
+
