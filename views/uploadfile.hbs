@@ -1,66 +1,28 @@
-<h1> Admin Side </h1>
-<!--<button type="button" class="btn btn-primary btn-lg">Large button</button>
-<input  type="button" class="btn btn-primary" value="submit">
+    <main role="main" class="container">
 
-<div class="container">
-  <div class="row">
-     <div class="col-sm-1">1</div>
-     <div class="col-sm-1">1</div>
-     <div class="col-sm-8">
-        <div class="container">
-            <form action="myform.cgi">
-                <input  type="file" class="btn btn-primary" name="fileupload" value="fileupload" id="fileupload">
-                <label for="fileupload"> Select a file to upload</label>
-                <input type="submit" value="submit">
-            </form>
-		</div>
-     </div>
-     <div class="col-sm-1">111111111</div>
-    <div class="col-sm-1">1</div>
-  </div>
-</div>
--->
-<!-- Each "cells" row should be wrapped with div class="row" -->
-
-<div class="row ">
-    <!-- Each "cell" has col-[width in percents] class -->
-  <div class="col">1</div>
-  <div class="col">
-    <div class="content-block-title">
-      <h4> Select a file to upload</h4>
-      <form action="myform.cgi" > 
-        <input type="file" name="fileupload" value="fileupload" id="fileupload">
-        <br><br><input type="submit" value="submit" class="button button-round button-fill button-raised button-fill"> 
-      </form>
-    </div>
-  </div>
-  <div class="col">3</div>
-  <div class="col">4</div>
-</div>
-
-<div class="row">
-  <div class="col">
-    <div class="data-table">
-  <table>
-    <thead>
-      <tr>
-        <th class="label-cell">Desert (100g serving)</th>
-        <th class="numeric-cell">Calories</th>
-        ...
-        <th class="tablet-only">Comment</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="label-cell">Frozen yogurt</td>
-        <td class="numeric-cell">159</td>
-        ...
-        <td class="tablet-only">I like it!</td>
-      </tr>
-      ...
-    </tbody>
-  </table>
-</div>
-  </div>
-   
-</div>
+      <h1>Upload your Songs </h1>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <!-- Our markup, the important part here! -->
+          <div id="drag-and-drop-zone" class="dm-uploader p-5">
+            <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop files here</h3>
+            <div class="btn btn-primary btn-block mb-5">
+                <span>Open the file Browser</span>
+                <input type="file" title='Click to add Files' />
+            </div>
+          </div><!-- /uploader -->
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="card h-100">
+            <div class="card-header">
+              File List
+            </div>
+            <ul class="list-unstyled p-2 d-flex flex-column col" id="files">
+              <li class="text-muted text-center empty">No files uploaded.</li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /file list -->
+      
+     
+    </main> <!-- /container -->

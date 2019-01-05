@@ -34,6 +34,10 @@ router.get('/signup', function(req, res, next){
   res.render('signup', {layout: 'abc'});
 });
 
+router.get('/uploadfile', function(req, res, next){
+  res.render('uploadfile', {layout: 'uploadfile'});
+});
+
 
 router.post('/signup', function(req, res ){
   if (!req.body.email || !req.body.password || !req.body.name || !req.body.type) {
