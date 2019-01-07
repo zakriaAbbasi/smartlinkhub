@@ -13,14 +13,21 @@ const mongoose = require('mongoose');
 
 const passport = require('../config/passport');
 const usermodel = require('../models/user');
+const songModel = require('../models/songs');
 const isAuthenticated = require('../config/isAuthenticated');
 
 
 
 router.get('/', function(req, res, next){
   var us = req.user;
-  if(!us){res.render('index', {user: null, text: 'Login'});}
-  else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username});}
+  songModel.find().then(latest => {
+    console.log(latest);
+    if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
+    else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username, latestSongs: latest});}       
+  }).catch(err => {
+    req.flash('info', 'Error Fetching data from server');
+    res.redirect('/');
+      });
 });
 
 router.get('/login', function(req, res, next){
@@ -31,7 +38,7 @@ router.get('/admin' ,isAuthenticated, function(req, res, next){
   res.render('admin' , {layout: 'admin'});
 });
 
-router.get('/signup', function(req, res, next){
+router.get('/signup', isAuthenticated, function(req, res, next){
   res.render('signup', {layout: 'abc'});
 });
 
