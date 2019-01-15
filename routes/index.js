@@ -37,7 +37,7 @@ router.get('/admin' ,isAuthenticated, function(req, res, next){
   res.render('admin' , {layout: 'admin'});
 });
 
-router.get('/signup', isAuthenticated, function(req, res, next){
+router.get('/signup', function(req, res, next){
   res.render('signup', {layout: 'abc'});
 });
 
