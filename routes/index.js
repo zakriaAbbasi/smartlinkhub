@@ -21,7 +21,7 @@ const isAuthenticated = require('../config/isAuthenticated');
 router.get('/', function(req, res, next){
   var us = req.user;
   songModel.find().then(latest => {
-    console.log(latest);
+
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
     else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username, latestSongs: latest});}       
   }).catch(err => {
@@ -34,7 +34,6 @@ router.get('/login', function(req, res, next){
   res.render('login', {layout: 'abc'} );
 });
 router.get('/admin' ,isAuthenticated, function(req, res, next){
-   console.log(req.user);
   res.render('admin' , {layout: 'admin'});
 });
 

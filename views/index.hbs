@@ -1,5 +1,5 @@
 ﻿<body>
-  {{#if messages.info }}
+ {{#if messages.info }}
    <div class="alert alert-danger">{{messages.info}}</div>
 {{/if}}
   <div class="container"> 
@@ -102,8 +102,8 @@
 
                       {{#each latestSongs}}
                       <div class="swiper-slide the-song" slide-style="style1" avatar="62sz2" album-cover="62sz6">
-                      <a href="#" src="https://s3.us-east-2.amazonaws.com/smarthubmp3-2/Dilri+Lutti.mp3"></a>
-                      <div class="slide slide-1">
+                      <a href="#" data-src="http://localhost:8000/mp3/download/?id={{fileName}}"  title= "{{fileName}}" id= {{@index}} ></a>
+                      <div class="slide slide-1" id= {{@index}}>
                       <div class="img-inner-wrapper">
                       <img src={{{avatar}}} width="100%" height="auto">
                       <h2>{{fileName}}</h2>

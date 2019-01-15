@@ -58,26 +58,28 @@ router.post('/upload', function(req, res)  {
 //isAuthenticated,
 //Route to download file from AWS bucket
 router.get('/download',    function(req, res) { 
-  //access to Aws bucket
-   let s3bucket = new AWS.S3({
+  //console.log(req.body.key);
+  //access to Aws bucket 
+  console.log('here',req.query.id);
+  let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     Bucket: process.env.AWS_BUCKET
   });
   var params = {
     Bucket: process.env.AWS_BUCKET,
-    Key:'Maroon 5 - Girls Like You ft. Cardi B.mp3',
+    Key: req.query.id,
    };
-  s3bucket.getObject(params, function (err, data) {
-    if (err) {
-        console.log(err);
-    } else {
-        res.send(data.Body);
-        console.log(data); 
-    }
-
-})
+   var stream = s3bucket.getObject(params).createReadStream();
+   // forward errors
+   stream.on('error', function error(err) {
+    console.log('error streaming this song ', err);
+    });
+    stream.on('end', () => {
+      console.log('Served by Amazon S3: ' + params.Key);
   });
-
+  //Pipe the s3 object to the response
+  stream.pipe(res);
+});
 
 module.exports = router;
