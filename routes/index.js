@@ -71,7 +71,7 @@ router.post('/signup', function(req, res ){
 });
 
 router.post('/login', function(req, res, next) {
-  if(req.body.email == 'admin' && req.body.password == 'dmt'){
+  if(req.body.email == 'admin@dmt.com' && req.body.password == 'dmt'){
     var user ={ username: 'admin'};
     req.logIn(user, function (err) {
       if (err) { req.flash('info', 'Error logging in');

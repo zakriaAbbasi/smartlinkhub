@@ -9,7 +9,7 @@ const passport = require('./config/passport');
 const busboyBodyParser = require('busboy-body-parser');
 
 const app = express();
-const PORT = process.env.PORT;
+//const PORT = 8000;
 
 
 var hbsHelpers = exphbs.create({
@@ -51,6 +51,6 @@ app.use('/', indexRouter);
 app.use('/mp3', filesRouter);
 
 // set the app to listen on the port
-app.listen(PORT, () => {
-    console.log(`Server running on port: ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server running on port: ${PORT}`);
+// });

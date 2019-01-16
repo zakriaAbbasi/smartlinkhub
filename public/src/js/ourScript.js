@@ -1,3 +1,3 @@
 $(function() {
-   // alert('everything loaded');
+   //a alert('everything loaded');
   });
