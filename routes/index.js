@@ -3,13 +3,13 @@ const router = express.Router();
 const path = require('path');
 //Middleware to connect to database
 const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost:27017/Smartlink',{ useNewUrlParser: true,useCreateIndex: true});
-// // Get Mongoose to use the global promise library
-// mongoose.Promise = global.Promise;
-// //Get the default connection
-// const db = mongoose.connection;
-// //Bind connection to error event (to get notification of connection errors)
-// (db.on('error', console.error.bind(console, 'MongoDB connection error:')));
+mongoose.connect('mongodb://localhost:27017/Smartlink',{ useNewUrlParser: true, useCreateIndex: true});
+// Get Mongoose to use the global promise library
+mongoose.Promise = global.Promise;
+//Get the default connection
+const db = mongoose.connection;
+//Bind connection to error event (to get notification of connection errors)
+(db.on('error', console.error.bind(console, 'MongoDB connection error:')));
 
 const passport = require('../config/passport');
 const usermodel = require('../models/user');
@@ -41,7 +41,7 @@ router.get('/signup', function(req, res, next){
   res.render('signup', {layout: 'abc'});
 });
 
-router.get('/uploadfile',  function(req, res, next){
+router.get('/uploadfile', isAuthenticated,  function(req, res, next){
   res.render('uploadfile', {layout: 'abc'});
 });
 
