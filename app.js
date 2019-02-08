@@ -9,7 +9,19 @@ const passport = require('./config/passport');
 const busboyBodyParser = require('busboy-body-parser');
 
 const app = express();
-//const PORT = 8000;
+const PORT = process.env.PORT || 8000;
+
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/Smartlink',{useCreateIndex: true, useNewUrlParser: true});
+// Get Mongoose to use the global promise library
+mongoose.Promise = global.Promise;
+//Get the default connection
+const db = mongoose.connection;
+//Bind connection to error event (to get notification of connection errors)
+(db.on('error', console.error.bind(console, 'MongoDB connection error:')));
+
+
 
 
 var hbsHelpers = exphbs.create({
@@ -51,6 +63,6 @@ app.use('/', indexRouter);
 app.use('/mp3', filesRouter);
 
 // set the app to listen on the port
-// app.listen(PORT, () => {
-//     console.log(`Server running on port: ${PORT}`);
-// });
+app.listen(PORT, () => {
+    console.log(`Server running on port: ${PORT}`);
+});

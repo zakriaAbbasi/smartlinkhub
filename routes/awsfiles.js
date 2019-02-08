@@ -14,8 +14,6 @@ router.post('/upload', function(req, res)  {
    }
    else
    {
-   console.log(req.files);
-   console.log(req.body);
   filemanager.upload('/public/mp3images',req.files.file2.name,req.files.file2.data,function(err){
      if(err){
       req.flash('info', 'cannot upload image');
@@ -35,15 +33,18 @@ router.post('/upload', function(req, res)  {
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       Bucket: process.env.AWS_BUCKET
     });
+    console.log( process.env.AWS_ACCESS_KEY, "and", process.env.AWS_SECRET_ACCESS_KEY , "and", process.env.AWS_BUCKET );
     s3bucket.createBucket(function () {
       var params = {
-       Bucket: process.env.AWS_BUCKET,
-       Key: mp3file.name,
-       Body: mp3file.data,
+        Bucket: process.env.AWS_BUCKET,
+        Key: mp3file.name,
+        Body: mp3file.data,
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       };
       s3bucket.upload(params, function (err, data,) {
         if (err) {
-        req.flash('info', 'cannot upload song');
+        req.flash('info', 'cannot upload song, Please try again later :(');
         res.redirect('/uploadfile');
        }
        else{

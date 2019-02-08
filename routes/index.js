@@ -1,15 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-//Middleware to connect to database
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/Smartlink',{ useNewUrlParser: true, useCreateIndex: true});
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-//Get the default connection
-const db = mongoose.connection;
-//Bind connection to error event (to get notification of connection errors)
-(db.on('error', console.error.bind(console, 'MongoDB connection error:')));
+
 
 const passport = require('../config/passport');
 const usermodel = require('../models/user');
@@ -21,7 +13,7 @@ const isAuthenticated = require('../config/isAuthenticated');
 router.get('/', function(req, res, next){
   var us = req.user;
   songModel.find().then(latest => {
-
+    latest= latest.reverse();    
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
     else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username, latestSongs: latest});}       
   }).catch(err => {
