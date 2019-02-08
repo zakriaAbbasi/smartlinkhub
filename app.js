@@ -11,7 +11,7 @@ const busboyBodyParser = require('busboy-body-parser');
 const app = express();
 const PORT = 3000;
 
-//mongodb://dmt-:Pakistan12345@ds227185.mlab.com:27185/smartlink
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://dmt-:Pakistan12345@ds227185.mlab.com:27185/smartlink');
 // Get Mongoose to use the global promise library
@@ -64,5 +64,5 @@ app.use('/mp3', filesRouter);
 
 // set the app to listen on the port
 app.listen(PORT, () => {
-    console.log(`Server running on port: ${PORT}`);
+    console.log(`Server running on port : ${PORT}`);
 });
