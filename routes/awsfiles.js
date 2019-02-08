@@ -5,7 +5,7 @@ const songsModel = require('../models/songs');
 const AWS = require('aws-sdk');
 var filemanager = require('easy-file-manager')
 
-      //isAuthenticated,
+
 //Route to upload file to AWS bucket
 router.post('/upload', function(req, res)  {
    if(!req.files.file1 || !req.files.file2 || !req.body.artist){

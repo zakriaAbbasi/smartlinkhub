@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-
-
 const passport = require('../config/passport');
+
+
+
 const usermodel = require('../models/user');
 const songModel = require('../models/songs');
 const isAuthenticated = require('../config/isAuthenticated');
@@ -14,6 +14,7 @@ router.get('/', function(req, res, next){
   var us = req.user;
   songModel.find().then(latest => {
     latest= latest.reverse();    
+    console.log(latest);
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
     else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username, latestSongs: latest});}       
   }).catch(err => {

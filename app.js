@@ -4,16 +4,16 @@ const path = require('path');
 require('dotenv').config();
 const exphbs = require('express-handlebars');
 const flash = require('express-flash');
-const session      = require('express-session');
+const session = require('express-session');
 const passport = require('./config/passport');
 const busboyBodyParser = require('busboy-body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = 3000;
 
-
+//mongodb://dmt-:Pakistan12345@ds227185.mlab.com:27185/smartlink
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/Smartlink',{useCreateIndex: true, useNewUrlParser: true});
+mongoose.connect('mongodb://dmt-:Pakistan12345@ds227185.mlab.com:27185/smartlink');
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
 //Get the default connection
