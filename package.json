@@ -22,6 +22,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
+    "i": "^0.3.6",
     "mkdirp": "^0.5.1",
     "mongoose": "^5.3.16",
     "nodemon": "^1.18.8",

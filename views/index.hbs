@@ -80,14 +80,27 @@
                 <header>
                   <div class="main-grids safe-area">
                     <div class="inner">
-                      {{!-- <h2>Browse</h2> --}}
+                      <div style="width:800px;">
+                        <div style="float:left"> 
                       {{#if user }}
                       <button class="button button-fill button-big">{{text}}</button>
                       {{else}}
                       <form action="/login">
                       <button class="button button-fill button-big">{{text}}</button>
+                      </form> 
+                      {{/if}} 
+                      </div> 
+                     <div style="float: left">
+                       <div style="margin-left:20px" >
+                      {{#if user }}
+                      <form action="/uploadfile">
+                      <button class="button button-fill button-big">Upload</button>
                       </form>
-                      {{/if}}
+                       {{/if}}
+                      </div>
+                      </div>
+                  </div>
+                      {{!-- <h2>Browse</h2> --}}
                       {{!-- <button class="icon menu-icon open-panel"></button> --}}
                       {{!-- <button class="search-icon" essential-search="hide"></button> --}}
                     </div>

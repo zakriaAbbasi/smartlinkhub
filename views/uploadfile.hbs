@@ -1,7 +1,7 @@
 <body>
 {{#if messages.info }}
    <div class="alert alert-danger">{{messages.info}}</div>
-{{/if}}
+ {{/if}}  
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card" style="height: 500px; width:600px ">
@@ -20,7 +20,7 @@
 					</div>
           <div class="btn btn-primary btn-block mb-5">
             <span>Open the file Browser</span>
-           <input type="file" name= 'file1' accept=".mp3,audio/*" />
+           <input type="file" name= 'file1' id="file1" accept=".mp3,audio/*" />
            </div>	
           
            <div class="row align-items-center remember">
@@ -42,8 +42,13 @@
 						<input type="checkbox">Remember Me
 					</div> --}}
 					<div class="form-group">
-						<input type="submit" value="Upload" class="btn float-right login_btn">
-					</div>
+						<input type="submit" value="Upload" class="btn float-right login_btn" onclick="activebar()">
+					</div> <br> <br> <br>
+					<div id="bar" class="progress" style="visibility: hidden">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width:80%">
+                          80% Uploading...
+						</div>
+						</div>
 				</form>
 			</div>
 			{{!-- <div class="card-footer">

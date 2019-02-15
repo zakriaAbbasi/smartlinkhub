@@ -19,7 +19,6 @@ var register = function(Handlebars) {
         //return "/mp3images/"+file;
         streamFile(file);
     },
-
 };
 
 if (Handlebars && typeof Handlebars.registerHelper === "function") {
@@ -54,5 +53,6 @@ function streamFile(key) {
     //Pipe the s3 object to the response
     return stream.pipe();    
 }
+
 module.exports.register = register;
 module.exports.helpers = register(null); 

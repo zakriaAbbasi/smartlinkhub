@@ -7,7 +7,7 @@ const passport = require('../config/passport');
 const usermodel = require('../models/user');
 const songModel = require('../models/songs');
 const isAuthenticated = require('../config/isAuthenticated');
-
+const isAuth = require('../config/isAuth');
 
 
 router.get('/', function(req, res, next){
@@ -16,7 +16,7 @@ router.get('/', function(req, res, next){
     latest= latest.reverse();    
     console.log(latest);
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
-    else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username, latestSongs: latest});}       
+    else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest});}       
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
     res.redirect('/');
@@ -34,7 +34,7 @@ router.get('/signup', function(req, res, next){
   res.render('signup', {layout: 'abc'});
 });
 
-router.get('/uploadfile', isAuthenticated,  function(req, res, next){
+router.get('/uploadfile', isAuth,  function(req, res, next){
   res.render('uploadfile', {layout: 'abc'});
 });
 
@@ -65,7 +65,7 @@ router.post('/signup', function(req, res ){
 
 router.post('/login', function(req, res, next) {
   if(req.body.email == 'admin@dmt.com' && req.body.password == 'dmt'){
-    var user ={ username: 'admin'};
+    var user ={ username: 'admin', usertype: 'admin'};
     req.logIn(user, function (err) {
       if (err) { req.flash('info', 'Error logging in');
       res.redirect('/login'); }
