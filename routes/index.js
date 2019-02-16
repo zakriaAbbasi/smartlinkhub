@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('../config/passport');
-
-
-
 const usermodel = require('../models/user');
 const songModel = require('../models/songs');
 const isAuthenticated = require('../config/isAuthenticated');
@@ -16,7 +13,14 @@ router.get('/', function(req, res, next){
     latest= latest.reverse();    
     console.log(latest);
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
-    else{res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest});}       
+    else if(us && us.usertype == "listener")
+    {
+      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest});
+    }
+    else{
+      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest});
+    } 
+       
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
     res.redirect('/');

@@ -7,7 +7,6 @@ const flash = require('express-flash');
 const session = require('express-session');
 const passport = require('./config/passport');
 const busboyBodyParser = require('busboy-body-parser');
-
 const app = express();
 const PORT = 3000;
 
@@ -23,10 +22,11 @@ const db = mongoose.connection;
 
 
 var hbsHelpers = exphbs.create({
-    helpers: require("./config/handlebars").helpers,
+    helpers: require("./config/handlebars").helpers ,
     defaultLayout: 'main',
     extname: '.hbs'
 });
+
 
 app.engine('.hbs', hbsHelpers.engine);
 app.set('view engine', '.hbs');

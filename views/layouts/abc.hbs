@@ -19,11 +19,34 @@
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-      function activebar() {
-        document.getElementById("bar").style.visibility = "visible";
-      }
-    </script>
-    
-	
+    <script>
+
+function _(el) {
+  return document.getElementById(el);
+}
+
+function uploadfile() {
+   
+_("bar").style.visibility = "visible";
+  var file = _("file1").files[0];
+ var formdata = new FormData();
+ formdata.append("file1", file);
+ var ajax = new XMLHttpRequest();
+ ajax.upload.addEventListener("progress", progressHandler, false);
+ //ajax.addEventListener("load", completeHandler, false);
+ //ajax.addEventListener("error", errorHandler, false);
+ //ajax.addEventListener("abort", abortHandler, false);
+ ajax.open("POST", "file_upload_parser.php");
+ ajax.send(formdata);
+}
+
+function progressHandler(event) {
+    _("bar").style.visibility = "visible";
+  var p = (event.loaded / event.total) *100;
+  _("progressbar").value = Math.round(p);
+  _("progressbar").innerHTML = Math.round(p)+" % uploaded...";
+
+}
+
+</script>
 </html>

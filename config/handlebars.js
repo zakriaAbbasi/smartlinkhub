@@ -28,8 +28,8 @@ if (Handlebars && typeof Handlebars.registerHelper === "function") {
 } else {
     return helpers;
 }
-
 };
+
 function streamFile(key) { 
     console.log('nowwww', key);
     //access to Aws bucket
