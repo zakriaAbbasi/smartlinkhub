@@ -14,7 +14,7 @@
 				</div> --}}
 			</div>
 			<div class="card-body">
-				<form action="/mp3/upload" id="upload_form" method="post" enctype="multipart/form-data">
+				<form action="/mp3/upload" id="upload_form" method="post" enctype="multipart/form-data" onsubmit="myfun()">
            <div class="row align-items-center remember">
 					 Select you mp3 file:
 					</div>
@@ -30,7 +30,6 @@
             <span>Open the file Browser</span>
            <input type="file" name= 'file2' accept="image/*" />
            </div>	
-
    <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -42,15 +41,16 @@
 						<input type="checkbox">Remember Me
 					</div> --}}
 					<div class="form-group">
-						<input type="submit" value="Upload" class="btn float-right login_btn" onclick="uploadfile()">
+						<input id="upload-btn" type="submit" value="Upload" class="btn float-right login_btn" onclick="uploadfile()">
 					</div> <br> <br> <br>
-					<div class="progress" id="bar" style="visibility: hidden">
-					<div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" value="0" max="100" style="width:10%">
-                       
+					<div class="progress" id="bar" style="visibility: hidden"> 
+					<div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" value="0" max="100" style="width:0%">
+                    <center>Uploading...</center>
 					</div>
 						</div>
 				</form>
 			</div>
+			
 			{{!-- <div class="card-footer">
 				<div class="d-flex justify-content-center links">
 					Don't have an account?<a href="/signup">Sign Up</a>
