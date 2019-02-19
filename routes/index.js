@@ -11,7 +11,6 @@ router.get('/', function(req, res, next){
   var us = req.user;
   songModel.find().then(latest => {
     latest= latest.reverse();    
-    console.log(latest);
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
     else if(us && us.usertype == "listener")
     {

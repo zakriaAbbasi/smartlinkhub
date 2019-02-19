@@ -4,16 +4,16 @@ const LocalStrategy = require("passport-local").Strategy;
 var bcrypt = require('bcrypt-nodejs');
 
 
-//Middleware to connect to database
-const mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost:27017/Smartlink',{ useNewUrlParser: true,useCreateIndex: true});
-mongoose.connect('mongodb://faizi:faizi@cluster0-shard-00-00-aquse.mongodb.net:27017,cluster0-shard-00-01-aquse.mongodb.net:27017,cluster0-shard-00-02-aquse.mongodb.net:27017/MusicApp?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true');
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-//Get the default connection
-const db = mongoose.connection;
-//Bind connection to error event (to get notification of connection errors)
-(db.on('error', console.error.bind(console, 'MongoDB connection error:')));
+// //Middleware to connect to database
+// const mongoose = require('mongoose');
+// //mongoose.connect('mongodb://localhost:27017/Smartlink',{ useNewUrlParser: true,useCreateIndex: true});
+// mongoose.connect('');
+// // Get Mongoose to use the global promise library
+// mongoose.Promise = global.Promise;
+// //Get the default connection
+// const db = mongoose.connection;
+// //Bind connection to error event (to get notification of connection errors)
+// (db.on('error', console.error.bind(console, 'MongoDB connection error:')));
 
 
 
