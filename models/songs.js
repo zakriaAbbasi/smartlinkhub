@@ -7,6 +7,7 @@ var songSchema = new mongoose.Schema({
   avatar: {type: String},
   artist: {type: String},
   timesPlayed: {type: Number},
+  uploadedby: {type: String},
 });
 
 

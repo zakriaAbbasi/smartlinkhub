@@ -38,7 +38,7 @@ router.get('/signup', function(req, res, next){
 });
 
 router.get('/uploadfile', isAuth,  function(req, res, next){
-  res.render('uploadfile', {layout: 'abc'});
+  res.render('uploadfile', {layout: 'abc', uploadedby: req.user.username});
 });
 
 router.post('/signup', function(req, res ){
@@ -73,7 +73,7 @@ router.post('/login', function(req, res, next) {
       if (err) { req.flash('info', 'Error logging in');
       res.redirect('/login'); }
       else{
-        res.redirect('/admin');
+        res.redirect('/artist');
       }
   });
 }
@@ -97,10 +97,50 @@ else{
   (req, res, next);
 }
 });
-
-//isAuthenticated,
 router.post('/members', isAuthenticated,  function(req, res) {
   res.send('Authenticated members page'); 
+});
+
+router.get('/artist',isAuthenticated, function(req,res,next){
+  usermodel.find(
+    { usertype: "artist"}
+  )
+  .select('username usertype')
+  .then(artist => {    
+    res.render('artist', {layout: 'admin', artistList: artist}); 
+  }).catch(err => {
+    req.flash('info', 'Error Fetching data from server');
+    res.redirect('/');
+      });
+});
+
+router.get('/songs/:artist',isAuthenticated, function(req,res,next){
+  songModel.find({ 
+    uploadedby: req.params.artist
+  }
+  )
+  .select('_id fileName avatar artist uploadedby')
+  .then(artist => {    
+    res.render('songs', {layout: 'admin', artistList: artist}); 
+  }).catch(err => {
+    req.flash('info', 'Error Fetching data from server');
+    res.redirect('/');
+      });
+});
+
+router.get('/delete/:id',isAuthenticated, function(req,res,next){
+  songModel.findOneAndDelete({
+    _id: req.params.id
+})
+.then(song => {
+    if (song) {
+      req.flash('info', 'Deleted successfully');
+      //res.redirect('/songs/');
+    }
+}).catch(err => {
+    req.flash('info', 'Error Fetching data from server');
+    //res.redirect('/songs/');
+      });
 });
 
 module.exports = router;

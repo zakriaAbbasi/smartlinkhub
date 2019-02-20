@@ -37,6 +37,7 @@ _("bar").style.visibility = "visible";
  {
   var p = (event.loaded / event.total) * 100;
   $('#progressbar').attr('value',p).css('width',p+'%');
+
 });
  ajax.open("POST", "/mp3/upload");
  ajax.send(formdata);

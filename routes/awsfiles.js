@@ -23,9 +23,9 @@ router.post('/upload', function(req, res)  {
       var mp3 = new songsModel({fileName:req.files.file1.name,
       avatar: '/mp3images/'+req.files.file2.name,
       artist: req.body.artist,
+      uploadedby: req.body.uploadedby,
     });
     mp3.save(); 
-
     const mp3file = req.files.file1; 
     //upload to Aws bucket
      let s3bucket = new AWS.S3({
