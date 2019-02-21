@@ -31,7 +31,8 @@
                     <th scope="col">File Name</th>
                     <th scope="col">Avatar</th>
                     <th scope="col">Artist</th>
-                    <th scope="col">Uploaded by</th>
+                    <th scope="col">No. of times played</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -60,12 +61,26 @@
                     </td>
                     <td>
                         <div class="media-body">
-                          <span class="mb-0 text-sm"> {{uploadedby}}</span>
+                          <span class="mb-0 text-sm"> 0</span>
                         </div>
                     </td>
                     <td>
-                    <a href="/delete/{{_id}}" class="btn btn-danger" style="background-color:#EC7063">
-                      <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                      <form>
+                        <input type="hidden" name="uploadedby" value={{_id}} />
+                         <label class="radio-inline">
+                           <input type="radio" name="optradio" value="Popular" onclick="check(this.value,uploadedby.value)"> Popular
+                         </label> &nbsp&nbsp&nbsp
+                         <label class="radio-inline">
+                             <input type="radio" name="optradio" value="Favourite" onclick="check(this.value,uploadedby.value)"> Favourite
+                        </label>
+                      </form>
+                    </td>
+                    <td>
+                    <form>
+                        <input type="hidden" name="uploadedby" value={{_id}} />
+                    <button class="btn btn-danger fa fa-trash-o fa-lg" style="background-color:#EC7063" onclick="deleteRow(uploadedby.value)">
+                    </button>
+                    </form>
                     </td>
                   </tr>
                   {{/each}}

@@ -119,7 +119,7 @@ router.get('/songs/:artist',isAuthenticated, function(req,res,next){
     uploadedby: req.params.artist
   }
   )
-  .select('_id fileName avatar artist uploadedby')
+  .select('_id fileName avatar artist timesPlayed uploadedby')
   .then(artist => {    
     res.render('songs', {layout: 'admin', artistList: artist}); 
   }).catch(err => {
@@ -128,19 +128,32 @@ router.get('/songs/:artist',isAuthenticated, function(req,res,next){
       });
 });
 
-router.get('/delete/:id',isAuthenticated, function(req,res,next){
+router.post('/delete/:id',isAuthenticated, function(req,res,next){
   songModel.findOneAndDelete({
     _id: req.params.id
 })
 .then(song => {
     if (song) {
       req.flash('info', 'Deleted successfully');
-      //res.redirect('/songs/');
+      
     }
 }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
-    //res.redirect('/songs/');
       });
 });
+
+router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
+  const id = req.params.id;
+  const value = req.params.opt;
+  songModel.update({ _id: id}, { category: value})
+  .then(song => {  
+    if (song) {
+      req.flash('info', 'Updated successfully');  
+    }
+}).catch(err => {
+    req.flash('info', 'Error Fetching data from server');
+      });
+});
+
 
 module.exports = router;

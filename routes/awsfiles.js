@@ -24,6 +24,8 @@ router.post('/upload', function(req, res)  {
       avatar: '/mp3images/'+req.files.file2.name,
       artist: req.body.artist,
       uploadedby: req.body.uploadedby,
+      timesPlayed: 0,
+      category: 'recent',
     });
     mp3.save(); 
     const mp3file = req.files.file1; 

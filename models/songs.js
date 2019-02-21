@@ -8,6 +8,7 @@ var songSchema = new mongoose.Schema({
   artist: {type: String},
   timesPlayed: {type: Number},
   uploadedby: {type: String},
+  category: {type: String, default: 'recent'},
 });
 
 
