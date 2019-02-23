@@ -10,20 +10,34 @@ const isAuth = require('../config/isAuth');
 router.get('/', function(req, res, next){
   var us = req.user;
   songModel.find().then(latest => {
-    latest= latest.reverse();    
-    if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest});}
+    latest= latest.reverse(); 
+    songModel.find( { category: "Popular"} )
+  .then(popular => {
+    popular= popular.reverse();    
+    console.log(popular);
+    if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular});}
     else if(us && us.usertype == "listener")
     {
-      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest});
+      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular});
     }
     else{
-      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest});
+      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular});
     } 
        
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
     res.redirect('/');
       });
+    })
+});
+
+router.get('/', function(req, res, next){
+  songModel.find( { category: "popular"} )
+  .then(popular => {
+    popular= popular.reverse();    
+    res.render('index', {popularSongs: popular});
+    console.log(popular);
+  });
 });
 
 router.get('/login', function(req, res, next){
@@ -125,6 +139,20 @@ router.get('/songs/:artist',isAuthenticated, function(req,res,next){
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
     res.redirect('/');
+      });
+});
+
+router.post('/deleteArtist/:id',isAuthenticated, function(req,res,next){
+  usermodel.findOneAndDelete({
+    _id: req.params.id
+})
+.then(user => {
+    if (user) {
+      req.flash('info', 'Deleted successfully');
+      
+    }
+}).catch(err => {
+    req.flash('info', 'Error Fetching data from server');
       });
 });
 

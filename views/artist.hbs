@@ -31,7 +31,7 @@
                     <th scope="col">Artist Name</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -47,6 +47,14 @@
                         </div>
                       </div>
                     </th>
+                    <td></td><td></td>
+                    <td>
+                      <form>
+                    <input type="hidden" name="artist" value={{_id}} />
+                    <button class="btn btn-danger fa fa-trash-o fa-lg" style="background-color:#EC7063" onclick="deleteArtist(artist.value)">
+                    </button>
+                    </form>
+                  </td>
                   </tr>
                   {{/each}}
                 </tbody>

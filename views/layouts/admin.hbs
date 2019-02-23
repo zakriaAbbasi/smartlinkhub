@@ -37,6 +37,14 @@
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.0.0"></script>
   <script>
+    function deleteArtist(id) {
+      var xhttp = new XMLHttpRequest();
+      var url = '/deleteArtist/'+id;
+      xhttp.open('POST',url);
+      xhttp.send(); 
+    }
+  </script>
+  <script>
     function check(value, id) {
       var xhttp = new XMLHttpRequest();
       var url = '/category/'+id+'/'+value;
