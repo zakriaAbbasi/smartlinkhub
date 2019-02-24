@@ -55,6 +55,17 @@ router.get('/uploadfile', isAuth,  function(req, res, next){
   res.render('uploadfile', {layout: 'abc', uploadedby: req.user.username});
 });
 
+router.get('/playlist',  function(req, res, next){
+  res.render('playlist');
+});
+
+router.get('/playlist2',  function(req, res, next){
+  res.render('playlist2');
+});
+router.get('/playlist3',  function(req, res, next){
+  res.render('playlist3');
+});
+
 router.post('/signup', function(req, res ){
   if (!req.body.email || !req.body.password || !req.body.name || !req.body.type) {
     req.flash('info', 'Please Provide all the credentials');
