@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://dmt-:Pakistan12345@ds227185.mlab.com:27185/smartlink');
+mongoose.connect('mongodb://dmt-:Pakistan12345@ds227185.mlab.com:27185/smartlink', {useNewUrlParser:true, useCreateIndex:true});
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
 //Get the default connection
