@@ -5,6 +5,7 @@ const usermodel = require('../models/user');
 const songModel = require('../models/songs');
 const isAuthenticated = require('../config/isAuthenticated');
 const isAuth = require('../config/isAuth');
+const playlistModel = require('../models/playlist');
 
 
 router.get('/', function(req, res, next){
@@ -14,7 +15,6 @@ router.get('/', function(req, res, next){
     songModel.find( { category: "Popular"} )
   .then(popular => {
     popular= popular.reverse();    
-    console.log(popular);
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular});}
     else if(us && us.usertype == "listener")
     {
@@ -29,6 +29,26 @@ router.get('/', function(req, res, next){
     res.redirect('/');
       });
     })
+});
+
+router.get('/addtoplaylist/:user', function(req, res, next){
+  var playlist = new playlistModel({
+   user: req.params.user,
+   songs: req.params.user
+  });
+  playlist.save(function(err) {
+    if (err) {
+      req.flash('info', 'Failed to add song');
+      res.redirect('/');
+    }
+    else {
+      console.log(playlist);
+    }
+  });
+});
+
+router.get('/login', function(req, res, next){
+  res.render('login', {layout: 'abc'} );
 });
 
 router.get('/', function(req, res, next){
@@ -57,13 +77,6 @@ router.get('/uploadfile', isAuth,  function(req, res, next){
 
 router.get('/playlist',  function(req, res, next){
   res.render('playlist');
-});
-
-router.get('/playlist2',  function(req, res, next){
-  res.render('playlist2');
-});
-router.get('/playlist3',  function(req, res, next){
-  res.render('playlist3');
 });
 
 router.post('/signup', function(req, res ){

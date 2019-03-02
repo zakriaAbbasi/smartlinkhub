@@ -3,7 +3,8 @@ const router = express.Router();
 const isAuthenticated = require('../config/isAuthenticated');
 const songsModel = require('../models/songs');
 const AWS = require('aws-sdk');
-var filemanager = require('easy-file-manager')
+var filemanager = require('easy-file-manager');
+const path = require("path");
 
 
 //Route to upload file to AWS bucket
@@ -20,13 +21,22 @@ router.post('/upload', function(req, res)  {
       res.redirect('/uploadfile');
      }
   });
+  filemanager.upload('/public/src/images/artist',req.files.file2.name,req.files.file2.data,function(err){
+    if(err){
+     req.flash('info', 'cannot upload image');
+     res.redirect('/uploadfile');
+    }
+ });
+  
       var mp3 = new songsModel({fileName:req.files.file1.name,
       avatar: '/mp3images/'+req.files.file2.name,
+      cover: path.parse(req.files.file2.name).name,
       artist: req.body.artist,
       uploadedby: req.body.uploadedby,
       timesPlayed: 0,
       category: 'recent',
     });
+    console.log(mp3);
     mp3.save(); 
     const mp3file = req.files.file1; 
     //upload to Aws bucket
