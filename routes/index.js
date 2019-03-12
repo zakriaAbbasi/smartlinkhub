@@ -14,14 +14,26 @@ router.get('/', function(req, res, next){
     latest= latest.reverse(); 
     songModel.find( { category: "Popular"} )
   .then(popular => {
-    popular= popular.reverse();    
+    popular= popular.reverse(); 
     if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular});}
     else if(us && us.usertype == "listener")
     {
-      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular});
+      playlistModel.find({user: req.user._id})
+      .populate('songs')
+      .then(song => {
+         song = song.map(song => song.songs)
+         console.log(song[0]);
+      res.render('index', {playlist: song[0], uid: us._id, user: us.username, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular});
+      });
     }
     else{
-      res.render('index', {user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular});
+      playlistModel.find({user: req.user._id})
+      .populate('songs')
+      .then(song => {
+        song = song.map(song => song.songs)
+         console.log(song[0]);
+      res.render('index', {playlist: song[0], uid: us._id, user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular});
+    });
     } 
        
   }).catch(err => {
@@ -29,23 +41,60 @@ router.get('/', function(req, res, next){
     res.redirect('/');
       });
     })
+ 
 });
 
-router.get('/addtoplaylist/:user', function(req, res, next){
-  var playlist = new playlistModel({
-   user: req.params.user,
-   songs: req.params.user
-  });
-  playlist.save(function(err) {
-    if (err) {
-      req.flash('info', 'Failed to add song');
-      res.redirect('/');
+router.post('/addtoplaylist/:id/:user',isAuthenticated, function(req, res, next){
+  playlistModel.findOne(
+    {user: req.params.user},
+    (err,playlist) => {
+      if(playlist == null) {
+        var newPlaylist = new playlistModel({
+          user: req.params.user,
+          songs: req.params.id
+        });
+        newPlaylist.save(function(err){
+          if (err) {
+            req.flash('info', 'Failed to add song');
+            res.redirect('/');
+          }
+        });
+        usermodel.update(
+          { _id: req.params.user },
+          { playlist: newPlaylist._id }
+        )
+      }
+      else {
+        updatePlaylist(req.params.user,req.params.id);
+      }
     }
-    else {
-      console.log(playlist);
-    }
-  });
+  );
 });
+
+function updatePlaylist(user,song) {
+  playlistModel.update(
+    { user: user },
+    { $push: { songs: song}}
+  )
+  .then(playlist =>{
+    if(playlist){
+      //console.log(playlist);
+    }
+  });
+}
+
+router.post('/deleteSong/:id/:user',isAuthenticated, function(req, res, next){
+  console.log("hello");
+  playlistModel.update(
+    { user: req.params.user },
+    { $pull: { songs: req.params.id}}
+  )
+  .then(playlist =>{
+    if(playlist){
+      //console.log(playlist);
+    }
+  });
+})
 
 router.get('/login', function(req, res, next){
   res.render('login', {layout: 'abc'} );
@@ -75,8 +124,8 @@ router.get('/uploadfile', isAuth,  function(req, res, next){
   res.render('uploadfile', {layout: 'abc', uploadedby: req.user.username});
 });
 
-router.get('/playlist',  function(req, res, next){
-  res.render('playlist');
+router.get('/profile',  function(req, res, next){
+  res.render('profile');
 });
 
 router.post('/signup', function(req, res ){

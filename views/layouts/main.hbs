@@ -38,14 +38,28 @@
 
     <script type="text/javascript" src="/src/js/ourScript.js"></script>
     <script>
-      function abc() {
-        var title = document.getElementById("title").innerHTML;
-        var author = document.getElementById("author").innerHTML;
-        var xhttp = new XMLHttpRequest();
-      var url = '/addtoplaylist/'+value;
-      xhttp.open('GET',url);
-      xhttp.send(); 
+      function sendid(value) {
+        document.getElementById("song_id").value = value;
       }
     </script>
+    <script>
+      function addtoplaylist(value) {
+        var id = document.getElementById("song_id").value;
+        var xhttp = new XMLHttpRequest();
+        var url = '/addtoplaylist/'+id+'/'+value;
+        xhttp.open('POST',url);
+        xhttp.send(); 
+      }
+    </script>
+    <script>
+      function removefromplaylist(value) {
+        var id = document.getElementById("song_id").value;
+        var xhttp = new XMLHttpRequest();
+        var url = '/deleteSong/'+id+'/'+value;
+        xhttp.open('POST',url);
+        xhttp.send(); 
+      }
+    </script>
+    
 </html>
 
