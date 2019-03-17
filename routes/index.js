@@ -15,15 +15,17 @@ router.get('/', function(req, res, next){
     songModel.find( { category: "Popular"} )
   .then(popular => {
     popular= popular.reverse(); 
-    if(!us){res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular});}
+    songModel.find( { category: "Favourite"} )
+  .then(fav => {
+    fav = fav.reverse(); 
+    if(!us) {res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular, favSongs: fav});}
     else if(us && us.usertype == "listener")
     {
       playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
          song = song.map(song => song.songs)
-         console.log(song[0]);
-      res.render('index', {playlist: song[0], uid: us._id, user: us.username, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular});
+      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: us.image, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular, favSongs: fav});
       });
     }
     else{
@@ -31,8 +33,7 @@ router.get('/', function(req, res, next){
       .populate('songs')
       .then(song => {
         song = song.map(song => song.songs)
-         console.log(song[0]);
-      res.render('index', {playlist: song[0], uid: us._id, user: us.username, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular});
+      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: us.image, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular, favSongs: fav});
     });
     } 
        
@@ -40,6 +41,7 @@ router.get('/', function(req, res, next){
     req.flash('info', 'Error Fetching data from server');
     res.redirect('/');
       });
+    })
     })
  
 });
@@ -125,7 +127,12 @@ router.get('/uploadfile', isAuth,  function(req, res, next){
 });
 
 router.get('/profile',  function(req, res, next){
-  res.render('profile');
+  playlistModel.find({user: req.user._id})
+      .populate('songs')
+      .then(song => {
+         song = song.map(song => song.songs)
+  res.render('profile',{playlist: song[0], user: req.user.username, user_id: req.user._id, uimage: req.user.image });
+});
 });
 
 router.post('/signup', function(req, res ){

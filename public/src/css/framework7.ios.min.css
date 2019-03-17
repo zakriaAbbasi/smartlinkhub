@@ -2936,6 +2936,13 @@ input[type=submit].button,input[type=button].button{
     background:#007aff;
     border-color:transparent
 }
+#addimage input[type=file] {
+    font-size: 60px;
+    position: absolute;
+    left: 3;
+    top: 0;
+    opacity: 0;
+}
 .button.button-fill.active-state,html:not(.watch-active-state) .button.button-fill:active{
     opacity:.8
 }

@@ -8,7 +8,7 @@
           <a href="#" class="link back"><button class="back-icon"></button></a>
           <a href="profile.html"><button class="icon user-icon"></button></a>
           <div class="album-cover"><img src="../src/images/artist/1sz6.jpg" class="album cover" alt="cover" width="100%" height="100%"></div> 
-          <div class="title-author"><h2 class="title">Users Name</h2></div>
+          <div class="title-author"><h2 class="title">{{user}}</h2></div>
           <button class="icon menu-icon open-panel"></button>
           <button class="search-icon" essential-search="show"></button>
           <button class="options-icon"></button>
@@ -24,16 +24,22 @@
       <section class="profile-avatar-user">
         <div class="main-grids safe-area">
           <div class="inner">
-            <img alt="Avatar User" src="../src/images/artist/1sz5.jpg" width="100%" height="auto">
+            <img alt="Avatar User" src={{{uimage}}} width="100%" height="auto">
             <div class="user-country">
-              <cite class="user">Users Name</cite>
-              <p class="country">Italy</p>
+              <h2 style="color:snow">{{user}}</h2>
+             {{!-- <p class="country">Italy</p> --}}
+             <form action="/mp3/uploadImage/{{user_id}}" method="post" enctype="multipart/form-data">
+              <div id="addimage"> 
+             <button class="button button-fill button-big">Add image</button>
+             <input type="file" id="file1" name="file1" />
+             </div>
+             </form>
             </div>
           </div>
         </div>
-      </section>
+      </section> <br> <br> <br>
 
-      <section class="profile-follow-info">
+  {{!--    <section class="profile-follow-info">
         <div class="main-grids safe-area">
           <div class="inner">
             <div class="followers"><div class="number">211</div><p>Followers</p></div>
@@ -41,7 +47,7 @@
             <button class="following">follow</button>
           </div>
         </div>
-      </section>
+      </section> --}}
 
       <section class="section-titles" section-type="standard" see-all-style="style2" section-icon-style="playlists_white" section-title-style="left">
         <header>
@@ -54,28 +60,24 @@
           </div>
         </header>
       </section>
-      <section class="best-playlists-swiper-container checkPlaylist">
-        <div class="swiper-container swiper-padding-left square-swiper playlist-swiper best-playlists-swiper-container no-fastclick">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide the-playlist" album-cover="35sz6"><div class="slide slide-1"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/35sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">112 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="35sz2" album-cover="35sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">128.708</p></div>
-            <div class="swiper-slide the-playlist" album-cover="34sz6"><div class="slide slide-2"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/34sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">94 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="34sz2" album-cover="34sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">110.475</p></div>
-            <div class="swiper-slide the-playlist" album-cover="29sz6"><div class="slide slide-3"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/29sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">240 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="29sz2" album-cover="29sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">71.330</p></div>
-            <div class="swiper-slide the-playlist" album-cover="82sz6"><div class="slide slide-4"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/82sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">88 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="82sz2" album-cover="82sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">64.921</p></div>
-            <div class="swiper-slide the-playlist" album-cover="83sz6"><div class="slide slide-5"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/83sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">220 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="83sz2" album-cover="83sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">113.778</p></div>
-            <div class="swiper-slide the-playlist" album-cover="85sz6"><div class="slide slide-6"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/85sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">410 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="85sz2" album-cover="85sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">220.885</p></div>
-            <div class="swiper-slide the-playlist" album-cover="86sz6"><div class="slide slide-7"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/86sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">50 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="86sz2" album-cover="86sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">90.643</p></div>
-            <div class="swiper-slide the-playlist" album-cover="87sz6"><div class="slide slide-8"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/87sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">85 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="87sz2" album-cover="87sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">420.922</p></div>
-            <div class="swiper-slide the-playlist" album-cover="88sz6"><div class="slide slide-9"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/88sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">311 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="88sz2" album-cover="88sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">44.500</p></div>
-            <div class="swiper-slide the-playlist" album-cover="89sz6"><div class="slide slide-10"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/89sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">344 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="89sz2" album-cover="90sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">99.448</p></div>
-            <div class="swiper-slide the-playlist" album-cover="90sz6"><div class="slide slide-11"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/90sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">77 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="90sz2" album-cover="90sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">380.661</p></div>
-            <div class="swiper-slide the-playlist" album-cover="91sz6"><div class="slide slide-12"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/91sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">284 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="91sz2" album-cover="91sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">160.266</p></div>
-            <div class="swiper-slide the-playlist" album-cover="92sz6"><div class="slide slide-13"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/92sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">55 Songs</div></div></a></div><h2>Title Here</h2><cite class="author" avatar="92sz2" album-cover="92sz5"><a href="artist-profile.html">Author</a></cite><p class="playlist-followers">33.900</p></div>
-            <div class="swiper-slide"></div>
-          </div>
-        </div>
-      </section>
+      <section class="most-played-swiper-container checkPlaylist">
+                  <div class="swiper-container swiper-padding-left square-swiper playlist-swiper most-played-swiper playlist-song no-fastclick">
 
-      <section class="section-titles" section-type="standard" see-all-style="no_see-all" section-icon-style="favourites_white" section-title-style="left">
+                    <div class="swiper-wrapper" swiper-label="hide">
+                      {{#each playlist}}
+                      <div class="swiper-slide the-song" avatar={{{cover}}} album-cover={{{cover}}}>
+                        <a href="#" data-src="https://smartlinkhub.herokuapp.com/mp3/download/?id={{fileName}}"  title= "{{fileName}}" id= {{@index}}></a>
+                        <div class="slide slide-1" id= {{@index}}>
+                        <div class="img-play"><img src={{{avatar}}} width="100%" height="150"></div></div><div class="box-type">Song</div>
+                        <h2>{{fileName}}</h2>
+                        <cite class="author" avatar={{cover}}><a href="artist-profile.html" checkClick="checkClick">{{artist}}</a></cite></div>
+                      {{/each}}
+                      <div class="swiper-slide"></div>
+                    </div>
+                  </div>
+                </section>
+
+ {{!--     <section class="section-titles" section-type="standard" see-all-style="no_see-all" section-icon-style="favourites_white" section-title-style="left">
         <header>
           <div class="main-grids safe-area">
             <div class="inner">
@@ -199,7 +201,7 @@
             <div class="swiper-slide"></div>
           </div>
         </div>
-      </section>
+      </section>  --}} 
 
     </div>
   </div>

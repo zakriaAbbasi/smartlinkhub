@@ -26,8 +26,8 @@
   //**
   themeColor = $('body').attr('theme-color','rose'); // red, purple, blue, green, yellow, rose
   PlayerOpenStyle = 0;  // 0 Open big player then small player - 1 Open small player then big player
-  userProfileName = "Melissa";
-  userProfileSurname = "Rivera";
+  userProfileName = "";
+  userProfileSurname = "";
   userProfileAvatar = "1"; //number of .jpg
   userProfileCountry = "Italy";
   //**
@@ -876,21 +876,21 @@
           playlist_album_avatar = $(this).attr("avatar"),
           playlist_price = $(this).find(".price-label").text(),
           playlist_price_replace = playlist_price.replace('Buy ','$ '),
-          playlist_src = "../src/images/artist/";
+          playlist_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
       setTimeout(function(){
         $('.page .big-player-queue-container .title-author h2, .page .headers .title-author h2, .section-titles[section-type="playlists-large"] h2').text(playlist_title);
         $('.page .big-player-queue-container cite, .page .headers cite, .section-titles[section-type="playlists-large"] cite').text(playlist_author);
         $('.page.charts .headers cite').text('Update Today');
-        $('.page .big-player-queue-container .album-cover img, .page .album-cover-blur img, .page .headers .album-cover img').attr("src", playlist_src + playlist_album_cover + ".jpg");
+        $('.page .big-player-queue-container .album-cover img, .page .album-cover-blur img, .page .headers .album-cover img').attr("src", playlist_src + playlist_album_cover);
         $('.page .title-author cite').attr('avatar', playlist_album_avatar);
         $('.page .headers .title-author cite').attr('album-cover', playlist_album_cover);
         $('.page .headers .buy-button b').text(playlist_price_replace);
 
         // Controlla il nome dell'utente nella pagina profilo utente
         $('.page.profile .headers .title-author h2').text(userProfileName +" "+ userProfileSurname);
-        $('.page.profile .headers .album-cover img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");
-        $('.page.profile .album-cover-blur img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");   
+       $('.page.profile .headers .album-cover img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");
+       $('.page.profile .album-cover-blur img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");   
       }, 200);
 
     });
@@ -903,14 +903,14 @@
       var author_author = $(this).text(),
           author_album_cover = $(this).attr("album-cover"),
           author_avatar = $(this).attr("avatar"),
-          author_src = "../src/images/artist/";
+          author_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
       setTimeout(function(){
         $('.artist-profile .profile-avatar-user cite').text(author_author);
-        $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_album_cover + ".jpg");
-        $('.artist-profile .album-cover-blur img').attr("src", author_src + author_album_cover + ".jpg");
-        $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_avatar + ".jpg");
-        $('.artist-profile .headers[header-type="back"][header-style="style3"] .album-cover img').attr("src", author_src + author_avatar + ".jpg");
+      //  $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_album_cover );
+        $('.artist-profile .album-cover-blur img').attr("src", author_src + author_album_cover);
+        $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_avatar);
+        $('.artist-profile .headers[header-type="back"][header-style="style3"] .album-cover img').attr("src", author_src + author_avatar);
         $('.artist-profile .headers[header-type="back"][header-style="style3"] .title-author h2').text(author_author);
 
         /* Randomize Followers Numbers */
@@ -930,14 +930,14 @@
       var author_author = $(this).find('cite').text(),
           author_album_cover = $(this).find('cite').attr("album-cover"),
           author_avatar = $(this).find('cite').attr("avatar"),
-          author_src = "../src/images/artist/";
+          author_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
       setTimeout(function(){
         $('.artist-profile .profile-avatar-user cite').text(author_author);
-        $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_album_cover + ".jpg");
-        $('.artist-profile .album-cover-blur img').attr("src", author_src + author_album_cover + ".jpg");
-        $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_avatar + ".jpg");
-        $('.artist-profile .headers[header-type="back"][header-style="style3"] .album-cover img').attr("src", author_src + author_avatar + ".jpg");
+      //  $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_album_cover);
+        $('.artist-profile .album-cover-blur img').attr("src", author_src + author_album_cover);
+      //  $('.artist-profile .profile-avatar-user img').attr("src", author_src + author_avatar );
+        $('.artist-profile .headers[header-type="back"][header-style="style3"] .album-cover img').attr("src", author_src + author_avatar);
         $('.artist-profile .headers[header-type="back"][header-style="style3"] .title-author h2').text(author_author);
 
         /* Randomize Followers Numbers */
@@ -1098,7 +1098,7 @@
   }
   bbflycheckPrice();
 
-  $('.panel.sidebar .user-avatar img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");
+//  $('.panel.sidebar .user-avatar img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");
   $('.panel.sidebar .user-avatar b a').text(userProfileName);
   $('.total-cards-vertical .card-container .card-input-contain .input.name-card div').text(userProfileName +" "+ userProfileSurname);
 
@@ -1119,11 +1119,11 @@
                   big_player_author = next.find("cite").text(),
                   big_player_avatar = next.attr('avatar'),
                   big_player_album_cover = next.attr('album-cover'),
-                  big_player_avatar_src = "../src/images/artist/";
+                  big_player_avatar_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
-              $(".player-audio-min .avatar-author img").attr("src", big_player_avatar_src + big_player_avatar + ".jpg");
-              $(".player-audio-min .album-cover img").attr("src", big_player_avatar_src + big_player_album_cover + ".jpg");
-              $(".player-audio-min .album-cover-blur img").attr("src", big_player_avatar_src + big_player_album_cover + ".jpg");
+              $(".player-audio-min .avatar-author img").attr("src", big_player_avatar_src + big_player_avatar);
+              $(".player-audio-min .album-cover img").attr("src", big_player_avatar_src + big_player_album_cover );
+              $(".player-audio-min .album-cover-blur img").attr("src", big_player_avatar_src + big_player_album_cover );
               $(".player-audio-min .title-author h2").text(big_player_title);
               $(".player-audio-min .title-author cite").text(big_player_author);
 
@@ -1194,16 +1194,16 @@
           mini_player_author = randomSong.find("cite").text(),
           mini_player_avatar = randomSong.attr("avatar"),
           mini_album_cover = randomSong.attr("album-cover"),
-          mini_player_avatar_src = "../src/images/artist/";
+          mini_player_avatar_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
       $('.play').addClass('active');
       $('.mini-player-song').addClass('playing');
       $(".the-song").removeClass('current');
       randomSong.addClass('current');
 
-      $(".player-attribute .avatar-author img").attr("src", mini_player_avatar_src + mini_player_avatar + ".jpg");
-      $(".player-attribute .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover + ".jpg");
-      $(".player-attribute .album-cover-blur img").attr("src", mini_player_avatar_src + mini_album_cover + ".jpg");
+      $(".player-attribute .avatar-author img").attr("src", mini_player_avatar_src + mini_player_avatar);
+      $(".player-attribute .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover );
+      $(".player-attribute .album-cover-blur img").attr("src", mini_player_avatar_src + mini_album_cover);
       $(".player-attribute .title-author h2").text(mini_player_title);
       $(".player-attribute .title-author cite").text(mini_player_author);
 
@@ -1289,9 +1289,9 @@ for (var i = 0; i < li.length; i++) {
         var mini_player_title = $(this).find("h2").text(),
             mini_player_author = $(this).find("cite").text(),
             mini_album_cover = $(this).attr("album-cover"),
-            mini_player_avatar_src = "../src/images/artist/";
+            mini_player_avatar_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
-        $(".options-container-overlay.music-player-add-to .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover + ".jpg");
+        $(".options-container-overlay.music-player-add-to .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover);
         $(".options-container-overlay.music-player-add-to .title-author h2").text(mini_player_title);
         $(".options-container-overlay.music-player-add-to .title-author cite").text(mini_player_author);
 
@@ -1339,16 +1339,16 @@ for (var i = 0; i < li.length; i++) {
             mini_player_author = $(this).find("cite").text(),
             mini_player_avatar = $(this).attr("avatar"),
             mini_album_cover = $(this).attr("album-cover"),
-            mini_player_avatar_src = "../src/images/artist/";
+            mini_player_avatar_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
         $('.play').addClass('active');
         $('.mini-player-song').addClass('playing');
         $(".the-song").removeClass('current');
         $(this).addClass('current');
 
-        $(".player-attribute .avatar-author img").attr("src", mini_player_avatar_src + mini_player_avatar + ".jpg");
-        $(".player-attribute .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover + ".jpg");
-        $(".player-attribute .album-cover-blur img").attr("src", mini_player_avatar_src + mini_album_cover + ".jpg");
+        $(".player-attribute .avatar-author img").attr("src", mini_player_avatar_src + mini_player_avatar );
+        $(".player-attribute .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover);
+        $(".player-attribute .album-cover-blur img").attr("src", mini_player_avatar_src + mini_album_cover);
         $(".player-attribute .title-author h2").text(mini_player_title);
         $(".player-attribute .title-author cite").text(mini_player_author);
 
@@ -1602,9 +1602,9 @@ for (var i = 0; i < li.length; i++) {
       var mini_player_title = theVideo.find("h2").text(),
           mini_player_author = theVideo.find("cite").text(),
           mini_album_cover = theVideo.attr("album-cover"),
-          mini_player_avatar_src = "../src/images/artist/";
+          mini_player_avatar_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
-      $(".options-container-overlay.music-player-add-to .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover + ".jpg");
+      $(".options-container-overlay.music-player-add-to .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover);
       $(".options-container-overlay.music-player-add-to .title-author h2, .options-container-overlay.video-player-options .title-author h2").text(mini_player_title);
       $(".options-container-overlay.music-player-add-to .title-author cite, .options-container-overlay.video-player-options .title-author cite").text(mini_player_author);
 
@@ -1665,9 +1665,9 @@ for (var i = 0; i < li.length; i++) {
         var mini_player_title = $(this).find("h2").text(),
             mini_player_author = $(this).find("cite").text(),
             mini_album_cover = $(this).attr("album-cover"),
-            mini_player_avatar_src = "../src/images/artist/";
+            mini_player_avatar_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
-        $(".options-container-overlay.music-player-add-to .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover + ".jpg");
+        $(".options-container-overlay.music-player-add-to .album-cover img").attr("src", mini_player_avatar_src + mini_album_cover);
         $(".options-container-overlay.music-player-add-to .title-author h2, .options-container-overlay.video-player-options .title-author h2").text(mini_player_title);
         $(".options-container-overlay.music-player-add-to .title-author cite, .options-container-overlay.video-player-options .title-author cite").text(mini_player_author);
 
@@ -1929,11 +1929,11 @@ playlistTitle.css({ 'opacity': 0 });
 
       setTimeout(function(){
         $('.page.profile .headers .title-author h2').text(userAuthor);
-        $('.page.profile .headers .album-cover img').attr("src", userAvatarSrc + userAvatar + ".jpg");
-        $('.page.profile .album-cover-blur img').attr("src", userAvatarSrc + userAvatar + ".jpg");  
+        $('.page.profile .headers .album-cover img').attr("src", userAvatarSrc + userAvatar );
+        $('.page.profile .album-cover-blur img').attr("src", userAvatarSrc + userAvatar);  
         $(".profile-follow-info .followers .number").text(randomNumberFollowers);
         $(".profile-follow-info .following .number").text(randomNumberFollowing);
-        $(".profile-avatar-user img").attr("src", userAvatarSrc + userAvatar + ".jpg");
+      //  $(".profile-avatar-user img").attr("src", userAvatarSrc + userAvatar );
         $(".profile-avatar-user .user-country cite").text(userAuthor);
         $(".profile-avatar-user .user-country .country").text(userCountry);
       }, 200);
@@ -2293,7 +2293,7 @@ playlistTitle.css({ 'opacity': 0 });
             checkNews_shares = $(this).find(".shares").text(),
             checkNews_avatar = $(this).find("h2").attr('avatar'),
             checkNews_img =  $(this).find(".author-info img").attr("src"),
-            checkNews_src = "../src/images/artist/";
+            checkNews_src = "https://smartlinkhubavatars.s3.amazonaws.com/";
 
         setTimeout(function(){
           $('.single-news-info img').attr("src", checkNews_img);
@@ -2304,11 +2304,11 @@ playlistTitle.css({ 'opacity': 0 });
           $('.video-like .like').text(checkNews_like);
           $('.video-add-to p').text(checkNews_shares);
           $('.author-listener cite').text(checkNews_author);     
-          $('.author-listener img').attr("src", checkNews_src + checkNews_avatar + ".jpg");    
+          $('.author-listener img').attr("src", checkNews_src + checkNews_avatar);    
 
           $('.music-player-share .title-author h2').text(checkNews_title);
           $('.music-player-share .title-author cite').text(checkNews_date);
-          $('.music-player-share .album-cover img').attr("src", checkNews_src + checkNews_avatar + ".jpg");
+          $('.music-player-share .album-cover img').attr("src", checkNews_src + checkNews_avatar);
         }, 200);
       }
     });
@@ -2469,9 +2469,9 @@ playlistTitle.css({ 'opacity': 0 });
           $('.profile .headers .title-author h2').text(userProfileName +" "+ userProfileSurname);
           $('.profile .user-country cite').text(userProfileName +" "+ userProfileSurname);
           $('.profile .user-country .country').text(userProfileCountry);
-          $('.profile-avatar-user img').attr("src", playlist_src + userProfileAvatar + "sz5.jpg");
+       //   $('.profile-avatar-user img').attr("src", playlist_src + userProfileAvatar + "sz5.jpg");
           $('.profile .headers .album-cover img').attr("src", playlist_src + userProfileAvatar + "sz2.jpg");
-          $('.profile .album-cover-blur img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");
+        //  $('.profile .album-cover-blur img').attr("src", playlist_src + userProfileAvatar + "sz6.jpg");
         }
       }, 300);
     }
@@ -2557,7 +2557,7 @@ playlistTitle.css({ 'opacity': 0 });
 
   // Inizialize Functions
   bbflyOpacity();
-  bbflyStatusBar();
+  //bbflyStatusBar();
   bbflyStatusBarBgBlur();
   bbflyEssentialSearch();
   bbflySeeAllPage();

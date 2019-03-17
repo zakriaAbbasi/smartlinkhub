@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const songsModel = require('../models/songs');
+const usermodel = require('../models/user');
 const AWS = require('aws-sdk');
 var filemanager = require('easy-file-manager');
-const path = require("path");
 
 router.post('/upload', function(req, res)  {
   if(!req.files.file1 || !req.files.file2 || !req.body.artist){
@@ -25,16 +25,10 @@ router.post('/upload', function(req, res)  {
            res.redirect('/uploadfile');
           }
           else{
-            filemanager.upload('/public/src/images/artist',req.files.file2.name,req.files.file2.data,function(err){
-              if(err){
-               req.flash('info', 'cannot upload image');
-               res.redirect('/uploadfile');
-              }
-           });
            var mp3 = new songsModel({fileName:req.files.file1.name,
                    avatar: req.body.imgurl,
                    artist: req.body.artist,
-                   cover: path.parse(req.files.file1.name).name,
+                   cover: req.files.file2.name,
                    uploadedby: req.body.uploadedby,
                    timesPlayed: 0,
                    category: 'recent',
@@ -61,6 +55,7 @@ router.get('/download',function(req, res) {
   songsModel.findOneAndUpdate({'fileName':req.query.id}, {$inc : {timesPlayed:1}},{useFindAndModify: false}, (err)=>{
      if(err){console.log('Error updating song')}
    })
+   
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -131,4 +126,31 @@ function AwsMp3(file, callback){
           });
         });
 }
+
+router.post('/uploadImage/:id', function(req, res)  {
+  if(!req.files.file1){
+   req.flash('info', 'Please Provide all the credentials');
+   res.redirect('/profile');
+  }
+  else
+  {
+    AwsImage(req.files.file1, (err, data)=>{
+      if(err=== true){
+       req.flash('info', 'cannot upload image, Please try again later :(');
+       res.redirect('/profile');
+      }
+      else{
+        req.body.imgurl = data;
+        usermodel.update({_id: req.params.id}, {image: req.body.imgurl })
+        .then(user => {
+          if(!user) {
+            req.flash('info', 'cannot upload image, Please try again later :(');
+            res.redirect('/profile');
+          }
+        });
+      }
+    })     
+  }
+});
+  
 module.exports = router;
