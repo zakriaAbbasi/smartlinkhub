@@ -3,7 +3,7 @@ const router = express.Router();
 const songsModel = require('../models/songs');
 const usermodel = require('../models/user');
 const AWS = require('aws-sdk');
-var filemanager = require('easy-file-manager');
+// var filemanager = require('easy-file-manager');
 
 router.post('/upload', function(req, res)  {
   if(!req.files.file1 || !req.files.file2 || !req.body.artist){
