@@ -21,19 +21,33 @@ router.get('/', function(req, res, next){
     if(!us) {res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular, favSongs: fav});}
     else if(us && us.usertype == "listener")
     {
+      if(req.user.image == null) {
+        uimage = "../src/images/artist/user.png";
+      }
+      else 
+      {
+        uimage = us.image;
+      }
       playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
          song = song.map(song => song.songs)
-      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: us.image, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular, favSongs: fav});
+      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular, favSongs: fav});
       });
     }
     else{
+      if(req.user.image == null) {
+        uimage = "../src/images/artist/user.png";
+      }
+      else 
+      {
+        uimage = us.image;
+      }
       playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
         song = song.map(song => song.songs)
-      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: us.image, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular, favSongs: fav});
+      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular, favSongs: fav});
     });
     } 
        
@@ -127,11 +141,18 @@ router.get('/uploadfile', isAuth,  function(req, res, next){
 });
 
 router.get('/profile',  function(req, res, next){
+  if(req.user.image == null) {
+    image = "../src/images/artist/user.png";
+  }
+  else 
+  {
+    image = req.user.image;
+  }
   playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
          song = song.map(song => song.songs)
-  res.render('profile',{playlist: song[0], user: req.user.username, user_id: req.user._id, uimage: req.user.image });
+  res.render('profile',{playlist: song[0], user: req.user.username, user_id: req.user._id, uimage: image });
 });
 });
 
