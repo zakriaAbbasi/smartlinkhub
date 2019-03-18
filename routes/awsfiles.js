@@ -141,16 +141,18 @@ router.post('/uploadImage/:id', function(req, res)  {
       }
       else{
         req.body.imgurl = data;
-        usermodel.update({_id: req.params.id}, {image: req.body.imgurl })
+        usermodel.updateOne({_id: req.params.id}, {image: req.body.imgurl })
         .then(user => {
           if(!user) {
             req.flash('info', 'cannot upload image, Please try again later :(');
             res.redirect('/profile');
           }
         });
+
       }
     })     
   }
+  res.redirect('/');
 });
   
 module.exports = router;
