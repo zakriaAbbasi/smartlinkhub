@@ -83,14 +83,20 @@
                       <div style="width:98%">
                         <div style="float:right"> 
                       {{#if user }}
-                   <a href="/profile"><img src={{{image}}} width="80" height="80" style="border-radius: 50%"></a> 
-  
+                      {{#if notadmin }}
+                      <a href="/profile"><img src={{{image}}} width="80" height="80" style="border-radius: 50%"></a> 
+                      {{else}}
+                      <form action="/artist">
+                      <button class="button button-fill button-big">View Artist</button>
+                      </form>
+                      {{/if}}
                       {{else}}
                       <form action="/login">
                       <button class="button button-fill button-big">Login</button>
                       </form> 
                       {{/if}} 
                       </div> 
+
                      <div style="float: left">
                        <div style="margin-left:20px" >
                       {{#if utype}}
@@ -144,6 +150,7 @@
                 </section>
 
                 {{#if user}}
+                {{#if notadmin}}
                 <section class="section-titles" section-type="standard" see-all-style="style1" section-icon-style="note_1" section-title-style="left">
                   <header>
                     <div class="main-grids safe-area">
@@ -171,7 +178,9 @@
                   </div>
                 </section>
                 {{/if}}
+                {{/if}}
 
+                {{#if user}}
                 <section class="section-titles" section-type="standard" see-all-style="style1" section-icon-style="note_1" section-title-style="left">
                   <header>
                     <div class="main-grids safe-area">
@@ -183,6 +192,7 @@
                     </div>
                   </header>
                 </section>
+              
                 <section class="most-played-swiper-container checkPlaylist">
                   <div class="swiper-container swiper-padding-left square-swiper playlist-swiper most-played-swiper playlist-song no-fastclick">
 
@@ -339,6 +349,7 @@
                     </div>
                   </div>
                 </section>
+                {{/if}}
 
           {{!--      <section class="section-titles" section-type="standard" see-all-style="style1" section-icon-style="best" section-title-style="left">
                   <header>

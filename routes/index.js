@@ -10,26 +10,31 @@ const playlistModel = require('../models/playlist');
 
 router.get('/', function(req, res, next){
   var us = req.user;
-  songModel.find().then(latest => {
-    latest= latest.reverse(); 
-  songModel.find( { category: "Popular"} ).then(popular => {
-    popular= popular.reverse(); 
-  songModel.find( { category: "Favourite"} ).then(fav => {
-    fav = fav.reverse();
-  songModel.find().sort({"timesPlayed": -1}).then(songList => {
-    if(!us) {res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
+  if(!us) 
+  {
+    songModel.find().sort({"_id": -1}).limit(5).then(latest =>{
+    res.render('index', {user: null, text: 'Login' , latestSongs: latest});
+  });
+}
     else {
+    songModel.find().then(latest => {
+      latest= latest.reverse(); 
+    songModel.find( { category: "Popular"} ).then(popular => {
+      popular= popular.reverse(); 
+    songModel.find( { category: "Favourite"} ).then(fav => {
+      fav = fav.reverse();
+    songModel.find().sort({"timesPlayed": -1}).then(songList => {
+    
       if(req.user.image == null) { uimage = "../src/images/artist/user.png"; }
       else  { uimage = us.image; }
-
       playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
         song = song.map(song => song.songs)
-        if(us && us.usertype == "listener") {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
-        else {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-    });
-    }    
+        if(us && us.usertype == "listener") {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
+        else if (us && us.usertype == "artist") {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+        else {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+    });   
   });
     
   }).catch(err => {
@@ -38,6 +43,7 @@ router.get('/', function(req, res, next){
       });
     })
     })
+  }
 });
 
 router.post('/addtoplaylist/:id/:user',isAuthenticated, function(req, res, next){
@@ -168,7 +174,7 @@ router.post('/login', function(req, res, next) {
       if (err) { req.flash('info', 'Error logging in');
       res.redirect('/login'); }
       else{
-        res.redirect('/artist');
+        res.redirect('/');
       }
   });
 }
