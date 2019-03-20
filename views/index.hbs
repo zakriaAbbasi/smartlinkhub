@@ -75,12 +75,12 @@
             <div class="scrollable-content">
 
               <div class="dominant-color dominant-color-1"></div>
-
+               
               <section class="headers" header-type="standard" header-style="style1" header-icon-style="user" header-title-style="left">
-                <header>
+                <header class="container-fluid">
                   <div class="main-grids safe-area">
                     <div class="inner">
-                      <div style="width:1300px;">
+                      <div style="width:98%">
                         <div style="float:right"> 
                       {{#if user }}
                    <a href="/profile"><img src={{{image}}} width="80" height="80" style="border-radius: 50%"></a> 
@@ -105,9 +105,11 @@
                       {{!-- <button class="icon menu-icon open-panel"></button> --}}
                       {{!-- <button class="search-icon" essential-search="hide"></button> --}}
                     </div>
-                  </div>
+                     </div>
                 </header>
               </section>
+              
+              
               {{!-- latest Uploaded songs --}}
 
               <section class="playlist-container bottom-padding">
@@ -134,7 +136,7 @@
                       <img src={{{avatar}}} width="100%" height="210">
                       <h2>{{fileName}}</h2>
                       <cite class="author">
-                      <a href="/profile" checkClick="checkClick">{{artist}}</a>
+                      <a href="#" checkClick="checkClick">{{artist}}</a>
                       </cite></div></div></div>
                       {{/each}}
                     </div>
@@ -185,13 +187,14 @@
                   <div class="swiper-container swiper-padding-left square-swiper playlist-swiper most-played-swiper playlist-song no-fastclick">
 
                     <div class="swiper-wrapper" swiper-label="hide">
-                      <div class="swiper-slide the-song first" avatar="10sz2" album-cover="10sz6"><a href="#" data-src="../src/music/song5.mp3"></a><div class="slide slide-2"><div class="img-play"><img src="../src/images/artist/10sz5.jpg" width="100%" height="auto"></div></div><div class="box-type">Song</div><h2>Man of Dust</h2><cite class="author" avatar="10sz2" album-cover="10sz5"><a href="artist-profile.html" checkClick="checkClick">Taiyon</a></cite></div>
-                      <div class="swiper-slide the-song" avatar="11sz2" album-cover="11sz6"><a href="#" data-src="../src/music/song6.mp3"></a><div class="slide slide-3"><div class="img-play"><img src="../src/images/artist/11sz5.jpg" width="100%" height="auto"></div></div><div class="box-type">Song</div><h2>Don't Recall</h2><cite class="author" avatar="11sz2" album-cover="11sz5"><a href="artist-profile.html" checkClick="checkClick">Kard</a></cite></div>
-                      <div class="swiper-slide the-song" avatar="12sz2" album-cover="12sz6"><a href="#" data-src="../src/music/song7.mp3"></a><div class="slide slide-4"><div class="img-play"><img src="../src/images/artist/12sz5.jpg" width="100%" height="auto"></div></div><div class="box-type">Song</div><h2>Streams</h2><cite class="author" avatar="12sz2" album-cover="12sz5"><a href="artist-profile.html" checkClick="checkClick">Emma</a></cite></div>
-                      <div class="swiper-slide the-song" avatar="13sz2" album-cover="13sz6"><a href="#" data-src="../src/music/song8.mp3"></a><div class="slide slide-5"><div class="img-play"><img src="../src/images/artist/13sz5.jpg" width="100%" height="auto"></div></div><div class="box-type">Song</div><h2>Uncovered</h2><cite class="author" avatar="13sz2" album-cover="13sz5"><a href="artist-profile.html" checkClick="checkClick">Arianne</a></cite></div>
-                      <div class="swiper-slide the-song" avatar="14sz2" album-cover="14sz6"><a href="#" data-src="../src/music/song9.mp3"></a><div class="slide slide-6"><div class="img-play"><img src="../src/images/artist/14sz5.jpg" width="100%" height="auto"></div></div><div class="box-type">Song</div><h2>You Here With Me</h2><cite class="author" avatar="14sz2" album-cover="14sz5"><a href="artist-profile.html" checkClick="checkClick">Hailie</a></cite></div>
-                      <div class="swiper-slide the-song" avatar="15sz2" album-cover="15sz6"><a href="#" data-src="../src/music/song10.mp3"></a><div class="slide slide-7"><div class="img-play"><img src="../src/images/artist/15sz5.jpg" width="100%" height="auto"></div></div><div class="box-type">Song</div><h2>Feel Something</h2><cite class="author" avatar="15sz2" album-cover="15sz5"><a href="artist-profile.html" checkClick="checkClick">Renmi Goh</a></cite></div>
-                      <div class="swiper-slide the-song" avatar="16sz2" album-cover="16sz6"><a href="#" data-src="../src/music/song11.mp3"></a><div class="slide slide-8"><div class="img-play"><img src="../src/images/artist/16sz5.jpg" width="100%" height="auto"></div></div><div class="box-type">Song</div><h2>Still Alive</h2><cite class="author" avatar="16sz2" album-cover="16sz5"><a href="artist-profile.html" checkClick="checkClick">Isabelle</a></cite></div>
+                      {{#each mostPlayed}}
+                      <div class="swiper-slide the-song" avatar={{{cover}}} album-cover={{{cover}}} onclick="sendid('{{_id}}')">
+                       <a href="#" data-src="https://smartlinkhub.herokuapp.com/mp3/download/?id={{fileName}}"  title= "{{fileName}}" id= {{@index}}></a>
+                      <div class="slide slide-2" id= {{@index}}>
+                      <div class="img-play"><img src={{{avatar}}} width="100%" height="150"></div></div><div class="box-type">Song</div>
+                      <h2>{{fileName}}</h2>
+                      <cite class="author" avatar="10sz2" album-cover="10sz5"><a href="artist-profile.html" checkClick="checkClick">{{artist}}</a></cite></div>
+                      {{/each}}
                       <div class="swiper-slide"></div>
                     </div>
                   </div>

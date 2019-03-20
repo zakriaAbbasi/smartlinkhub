@@ -128,7 +128,8 @@ function AwsMp3(file, callback){
 }
 
 router.post('/uploadImage/:id', function(req, res)  {
-  if(!req.files.file1){
+  if(!req.files.file1)
+  {
    req.flash('info', 'Please Provide all the credentials');
    res.redirect('/profile');
   }
@@ -147,12 +148,15 @@ router.post('/uploadImage/:id', function(req, res)  {
             req.flash('info', 'cannot upload image, Please try again later :(');
             res.redirect('/profile');
           }
+          else {
+            res.redirect('/');
+          }
         });
 
       }
     })     
   }
-  res.redirect('/');
+
 });
   
 module.exports = router;

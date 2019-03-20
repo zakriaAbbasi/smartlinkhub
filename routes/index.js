@@ -12,52 +12,32 @@ router.get('/', function(req, res, next){
   var us = req.user;
   songModel.find().then(latest => {
     latest= latest.reverse(); 
-    songModel.find( { category: "Popular"} )
-  .then(popular => {
+  songModel.find( { category: "Popular"} ).then(popular => {
     popular= popular.reverse(); 
-    songModel.find( { category: "Favourite"} )
-  .then(fav => {
-    fav = fav.reverse(); 
-    if(!us) {res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular, favSongs: fav});}
-    else if(us && us.usertype == "listener")
-    {
-      if(req.user.image == null) {
-        uimage = "../src/images/artist/user.png";
-      }
-      else 
-      {
-        uimage = us.image;
-      }
-      playlistModel.find({user: req.user._id})
-      .populate('songs')
-      .then(song => {
-         song = song.map(song => song.songs)
-      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular, favSongs: fav});
-      });
-    }
-    else{
-      if(req.user.image == null) {
-        uimage = "../src/images/artist/user.png";
-      }
-      else 
-      {
-        uimage = us.image;
-      }
+  songModel.find( { category: "Favourite"} ).then(fav => {
+    fav = fav.reverse();
+  songModel.find().sort({"timesPlayed": -1}).then(songList => {
+    if(!us) {res.render('index', {user: null, text: 'Login' , latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
+    else {
+      if(req.user.image == null) { uimage = "../src/images/artist/user.png"; }
+      else  { uimage = us.image; }
+
       playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
         song = song.map(song => song.songs)
-      res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular, favSongs: fav});
+        if(us && us.usertype == "listener") {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
+        else {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, text: 'Signed in as: '+us.username, utype: us.usertype ,latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
     });
-    } 
-       
+    }    
+  });
+    
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
     res.redirect('/');
       });
     })
     })
- 
 });
 
 router.post('/addtoplaylist/:id/:user',isAuthenticated, function(req, res, next){

@@ -1297,8 +1297,8 @@ for (var i = 0; i < li.length; i++) {
 
       }else{
         /* Choose music player style (random) */
-        var minNumber = 1,
-            maxNumber = 3,
+        var minNumber = 2,
+            maxNumber = 2,
             randomNumber = randomNumberFromRange(minNumber, maxNumber);
         //function randomNumberFromRange(min,max){return Math.floor(Math.random()*(max-min+1)+min);}
         if(randomNumber == 1) {
