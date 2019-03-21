@@ -31,10 +31,16 @@ router.get('/', function(req, res, next){
       .populate('songs')
       .then(song => {
         song = song.map(song => song.songs)
-        if(us && us.usertype == "listener") {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
-        else if (us && us.usertype == "artist") {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-        else {res.render('index', {playlist: song[0], uid: us._id, user: us.username,image: uimage,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-    });   
+      usermodel.find({_id: us._id})
+        .populate('recent')
+        .then(recentPlayed => {
+          recentPlayed = recentPlayed.map(recentPlayed => recentPlayed.recent)
+          recentPlayed[0] = recentPlayed[0].reverse();
+        if(us && us.usertype == "listener") {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
+        else if (us && us.usertype == "artist") {res.render('index', {recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+        else {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: uimage,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+      });
+      });   
   });
     
   }).catch(err => {
@@ -86,7 +92,6 @@ function updatePlaylist(user,song) {
 }
 
 router.post('/deleteSong/:id/:user',isAuthenticated, function(req, res, next){
-  console.log("hello");
   playlistModel.update(
     { user: req.params.user },
     { $pull: { songs: req.params.id}}
@@ -97,6 +102,18 @@ router.post('/deleteSong/:id/:user',isAuthenticated, function(req, res, next){
     }
   });
 })
+
+router.post('/addtoRecent/:user/:song',isAuthenticated, function(req, res, next){
+  usermodel.update(
+    { _id: req.params.user },
+    { $push: {recent: {$each:[req.params.song],$slice:-6}}}
+  )
+  .then(song => {
+    if(!song) {
+      res.redirect('/');
+    }
+  })
+});
 
 router.get('/login', function(req, res, next){
   res.render('login', {layout: 'abc'} );

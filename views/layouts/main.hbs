@@ -42,6 +42,12 @@
     <script>
       function sendid(value) {
         document.getElementById("song_id").value = value;
+        var user = document.getElementById("userid").value;
+        alert(user);
+        var xhttp = new XMLHttpRequest();
+        var url = '/addtoRecent/'+user+'/'+value;
+        xhttp.open('POST',url);
+        xhttp.send(); 
       }
     </script>
     <script>

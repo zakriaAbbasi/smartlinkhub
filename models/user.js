@@ -10,6 +10,7 @@ var UserSchema = new mongoose.Schema({
   password: {type: String,required: true},
   usertype: {type : String, default: 'user', required: true},
   playlist: [{type: mongoose.Schema.Types.ObjectId, ref: 'Playlist'}],
+  recent: [{type: mongoose.Schema.Types.ObjectId, ref: 'Song'}]
 });
 
 // Execute before each user.save() call
