@@ -40,7 +40,7 @@ router.post('/upload', function(req, res)  {
                     }    
                     else{
                      req.flash('info', 'Successfully uploaded');
-                     res.redirect('/uploadfile');
+                     res.redirect('/');
                     }    
                  });
           }     
