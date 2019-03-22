@@ -24,9 +24,8 @@ router.get('/', function(req, res, next){
     songModel.find( { category: "Favourite"} ).then(fav => {
       fav = fav.reverse();
     songModel.find().sort({"timesPlayed": -1}).then(songList => {
+    usermodel.find({usertype: "artist"}).then(artist => {
     
-      if(req.user.image == null) { uimage = "../src/images/artist/user.png"; }
-      else  { uimage = us.image; }
       playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
@@ -36,13 +35,13 @@ router.get('/', function(req, res, next){
         .then(recentPlayed => {
           recentPlayed = recentPlayed.map(recentPlayed => recentPlayed.recent)
           recentPlayed[0] = recentPlayed[0].reverse();
-        if(us && us.usertype == "listener") {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
-        else if (us && us.usertype == "artist") {res.render('index', {recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-        else {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: uimage,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+        if(us && us.usertype == "listener") {res.render('index', {artistList: artist, recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
+        else if (us && us.usertype == "artist") {res.render('index', {artistList: artist,recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+        else {res.render('index', {artistList: artist,recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
       });
       });   
   });
-    
+});
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
     res.redirect('/');
@@ -144,19 +143,23 @@ router.get('/uploadfile', isAuth,  function(req, res, next){
 });
 
 router.get('/profile',  function(req, res, next){
-  if(req.user.image == null) {
-    image = "../src/images/artist/user.png";
-  }
-  else 
-  {
-    image = req.user.image;
-  }
   playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
          song = song.map(song => song.songs)
-  res.render('profile',{playlist: song[0], user: req.user.username, user_id: req.user._id, uimage: image });
+  res.render('profile',{playlist: song[0], user: req.user.username, user_id: req.user._id, uimage: req.user.image });
+})
 });
+
+router.get('/artistProfile/:id',  function(req, res, next){
+  usermodel.findOne( {_id: req.params.id}).then(us => {
+  playlistModel.find({user: us._id})
+    .populate('songs')
+    .then(song => {
+       song = song.map(song => song.songs)
+  res.render('artistProfile',{playlist: song[0],user: us.username, uimage: us.image});
+  })
+  });
 });
 
 router.post('/signup', function(req, res ){
@@ -167,7 +170,8 @@ router.post('/signup', function(req, res ){
    else {
     var newUser = new usermodel({
       username:req.body.name, email: req.body.email, password: req.body.password,
-      usertype: req.body.type
+      usertype: req.body.type,
+      image: "../src/images/artist/user.png"
     });
     // save the user
     newUser.save(function(err) {
