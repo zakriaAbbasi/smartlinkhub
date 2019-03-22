@@ -3650,7 +3650,7 @@ body[device-size="iphoneX"] .player-audio-min.big.active[music-player-style="sty
 .player-audio-min.big[music-player-style="style2"] .player-command .heart.active svg.heart-icon {-webkit-animation: fullHeart .5s; animation: fullHeart .5s;}
 .player-audio-min.big[music-player-style="style2"] .player-command .heart.active svg.heart-icon g {fill: var(--theme-color, #f5138e);}
 
-.player-command .command {width: 80%; text-align: center; float: left}
+.player-command .command {width: 100%; text-align: center; float: left}
 .player-command .prev.first,
 .player-command .next.last {opacity: .38}
 

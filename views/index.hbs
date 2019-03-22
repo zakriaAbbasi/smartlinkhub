@@ -140,7 +140,7 @@
                       <div class="slide slide-1" id= {{@index}}>
                       <div class="img-inner-wrapper">
                       <img src={{{avatar}}} width="100%" height="210">
-                      <h2>{{fileName}}</h2>
+                      <h2 class="trunc">{{fileName}}</h2>
                       <cite class="author">
                       <a href="#" checkClick="checkClick">{{artist}}</a>
                       </cite></div></div></div>
@@ -618,7 +618,7 @@
                             <cite class="author" avatar="2sz2" album-cover="2sz5"><a href="artist-profile.html" checkClick="checkClick">Lisa</a></cite>
                           </div>
                           <h2>Now Playing</h2>
-                          <button class="share-icon"></button>
+                         {{!--   <button class="share-icon"></button> --}}
                           <button class="addto-icon"></button>
                        {{!--   <button class="options-icon"></button> --}}
                        {{!--  <button class="buy-button song-price" checkSongPrice="checkSongPrice" checkclick="checkClick"><b checkSongPrice="checkSongPrice" checkclick="checkClick">$ 12,99</b><span checkSongPrice="checkSongPrice" checkclick="checkClick">Buy</span></button> --}} 
@@ -688,7 +688,7 @@
                         </div>
 
                         <div class="menu-options options-icon">
-                          <svg width="5px" height="21px" viewBox="0 0 4 18"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-12.000000, -5.000000)"><rect id="frame" x="0" y="0" width="28" height="28"></rect><path d="M14,9 C12.8954305,9 12,8.1045695 12,7 C12,5.8954305 12.8954305,5 14,5 C15.1045695,5 16,5.8954305 16,7 C16,8.1045695 15.1045695,9 14,9 Z M14,16 C12.8954305,16 12,15.1045695 12,14 C12,12.8954305 12.8954305,12 14,12 C15.1045695,12 16,12.8954305 16,14 C16,15.1045695 15.1045695,16 14,16 Z M14,23 C12.8954305,23 12,22.1045695 12,21 C12,19.8954305 12.8954305,19 14,19 C15.1045695,19 16,19.8954305 16,21 C16,22.1045695 15.1045695,23 14,23 Z" fill="#FFF"></path></g></g></svg>
+                      <svg width="5px" height="21px" viewBox="0 0 4 18"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-12.000000, -5.000000)"><rect id="frame" x="0" y="0" width="28" height="28"></rect><path d="M14,9 C12.8954305,9 12,8.1045695 12,7 C12,5.8954305 12.8954305,5 14,5 C15.1045695,5 16,5.8954305 16,7 C16,8.1045695 15.1045695,9 14,9 Z M14,16 C12.8954305,16 12,15.1045695 12,14 C12,12.8954305 12.8954305,12 14,12 C15.1045695,12 16,12.8954305 16,14 C16,15.1045695 15.1045695,16 14,16 Z M14,23 C12.8954305,23 12,22.1045695 12,21 C12,19.8954305 12.8954305,19 14,19 C15.1045695,19 16,19.8954305 16,21 C16,22.1045695 15.1045695,23 14,23 Z" fill="#FFF"></path></g></g></svg> 
                         </div>
 
                         <div class="scrubber-command scrubber-options">
@@ -719,7 +719,7 @@
                                       <p class="loading"></p>
                                       <p class="error"></p>
                                     </div>
-                                    <button class="mini-next next"></button>
+                                    <button class="mini-next next"></button> 
                                   </div>
                                 </div>
                                 <div class="error-message"></div>
@@ -735,11 +735,11 @@
                                     <cite class="author" avatar="11sz2" album-cover="11sz6">Lisa</cite>
                                   </div>
                                   <div class="volume-content">
-                                    <svg width="24px" height="21px" viewBox="0 0 24 21"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-11.000000, -12.000000)"><rect x="0" y="0" width="45" height="45"></rect><g transform="translate(11.000000, 12.000000)" stroke="#FFFFFF"><path d="M11.8514739,19.0036271 L11.8514739,2.55674582 L8.88066607,5.01178842 C8.27709465,5.51057314 7.28462557,6.00344821 6.52888861,6.17983976 L4.23119153,6.71612996 C2.76407274,7.05856041 1.5,8.65369069 1.5,10.1599786 L1.5,11.9580286 C1.5,13.4361496 2.74494269,14.9232684 4.19695595,15.1838497 L6.43799773,15.5860316 C7.21920941,15.7262295 8.23464497,16.1800177 8.86072234,16.6687879 L11.8514739,19.0036271 Z" stroke-width="3"></path><path d="M16.6719577,14.7242933 C17.4910091,13.6460074 17.9814116,12.27416 17.9814116,10.7806142 C17.9814116,9.29690432 17.497447,7.93329515 16.6880966,6.85827664" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.957672,18.0468055 C21.4648071,16.0626535 22.3671958,13.5383196 22.3671958,10.7900487 C22.3671958,8.05987677 21.4766535,5.55070198 19.9873692,3.57256236" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></svg>
+                                  <svg width="24px" height="21px" viewBox="0 0 24 21"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-11.000000, -12.000000)"><rect x="0" y="0" width="45" height="45"></rect><g transform="translate(11.000000, 12.000000)" stroke="#FFFFFF"><path d="M11.8514739,19.0036271 L11.8514739,2.55674582 L8.88066607,5.01178842 C8.27709465,5.51057314 7.28462557,6.00344821 6.52888861,6.17983976 L4.23119153,6.71612996 C2.76407274,7.05856041 1.5,8.65369069 1.5,10.1599786 L1.5,11.9580286 C1.5,13.4361496 2.74494269,14.9232684 4.19695595,15.1838497 L6.43799773,15.5860316 C7.21920941,15.7262295 8.23464497,16.1800177 8.86072234,16.6687879 L11.8514739,19.0036271 Z" stroke-width="3"></path><path d="M16.6719577,14.7242933 C17.4910091,13.6460074 17.9814116,12.27416 17.9814116,10.7806142 C17.9814116,9.29690432 17.497447,7.93329515 16.6880966,6.85827664" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.957672,18.0468055 C21.4648071,16.0626535 22.3671958,13.5383196 22.3671958,10.7900487 C22.3671958,8.05987677 21.4766535,5.55070198 19.9873692,3.57256236" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></svg> 
                                     <div class="volume no-fastclick"><span class="volumeBar no-fastclick"></span></div>
                                   </div>
                                   <div class="player-command">
-                                    <div class="list"><div class="icon"></div><button class="share-icon"></button></div>
+                                   <div class="list"> {{!-- <div class="icon"></div> --}} <button class="share-icon"></button>  </div>
                                     <div class="command">
                                       <p class="prev"></p>
                                       <p class="playPause play"></p>
@@ -802,7 +802,7 @@
                                     </div>
                                   </div>
                                 </section>
-                              </div>
+                              </div> 
                             </div>
                           </div>
                         </div>

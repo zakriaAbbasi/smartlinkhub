@@ -34,25 +34,16 @@ router.get('/', function(req, res, next){
         .populate('recent')
         .then(recentPlayed => {
           recentPlayed = recentPlayed.map(recentPlayed => recentPlayed.recent)
-<<<<<<< HEAD
-          recentPlayed[0] = recentPlayed[0].reverse();
-        if(us && us.usertype == "listener") {res.render('index', {artistList: artist, recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
-        else if (us && us.usertype == "artist") {res.render('index', {artistList: artist,recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-        else {res.render('index', {artistList: artist,recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-      });
-      });   
-=======
           if(recentPlayed[0]){recentPlayed[0] = recentPlayed[0].reverse();}
-         if(us && us.usertype == "listener") {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
-         else if (us && us.usertype == "artist") {res.render('index', {recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: uimage, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-         else {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: uimage,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+         if(us && us.usertype == "listener") {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
+         else if (us && us.usertype == "artist") {res.render('index', {recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+         else {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
       }).catch(err => {
            console.log(err);
           });
       }).catch(err => {
         console.log(err);
           });   
->>>>>>> de98c6d0ee90b93e408201fbf5a94860c8798605
   });
 });
   }).catch(err => {
