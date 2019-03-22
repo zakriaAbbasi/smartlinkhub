@@ -96,7 +96,12 @@
                       </form> 
                       {{/if}} 
                       </div> 
-
+                      <div style="float: left">
+                     {{#if user}} 
+                      <form action="/logout">
+                      <button class="button button-fill button-big">Logout</button>
+                      </form> 
+                      {{/if}} </div>
                      <div style="float: left">
                        <div style="margin-left:20px" >
                       {{#if utype}}
@@ -329,19 +334,12 @@
                 <section class="best-playlists-swiper-container checkPlaylist">
                   <div class="swiper-container swiper-padding-left square-swiper playlist-swiper best-playlists-swiper-container no-fastclick">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide the-playlist" album-cover="79sz6"><div class="slide slide-1"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/79sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">112 Songs</div></div></a></div><h2>Pop Acoustic</h2><cite class="author" avatar="79sz2" album-cover="79sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">128.708</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="80sz6"><div class="slide slide-2"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/80sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">94 Songs</div></div></a></div><h2>Relax in Acustic</h2><cite class="author" avatar="80sz2" album-cover="80sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">110.475</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="81sz6"><div class="slide slide-3"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/81sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">240 Songs</div></div></a></div><h2>Time Machine</h2><cite class="author" avatar="81sz2" album-cover="81sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">71.330</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="82sz6"><div class="slide slide-4"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/82sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">88 Songs</div></div></a></div><h2>Sweet Beach</h2><cite class="author" avatar="82sz2" album-cover="82sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">64.921</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="83sz6"><div class="slide slide-5"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/83sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">220 Songs</div></div></a></div><h2>Just Soul</h2><cite class="author" avatar="83sz2" album-cover="83sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">113.778</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="85sz6"><div class="slide slide-6"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/85sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">410 Songs</div></div></a></div><h2>The Rock Show</h2><cite class="author" avatar="85sz2" album-cover="85sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">220.885</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="86sz6"><div class="slide slide-7"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/86sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">50 Songs</div></div></a></div><h2>Best Covers</h2><cite class="author" avatar="86sz2" album-cover="86sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">90.643</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="87sz6"><div class="slide slide-8"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/87sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">85 Songs</div></div></a></div><h2>Essential Indie</h2><cite class="author" avatar="87sz2" album-cover="87sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">420.922</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="88sz6"><div class="slide slide-9"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/88sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">311 Songs</div></div></a></div><h2>Italo Disco</h2><cite class="author" avatar="88sz2" album-cover="88sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">44.500</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="89sz6"><div class="slide slide-10"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/89sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">344 Songs</div></div></a></div><h2>I Love My 90's</h2><cite class="author" avatar="89sz2" album-cover="90sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">99.448</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="90sz6"><div class="slide slide-11"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/90sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">77 Songs</div></div></a></div><h2>Training Time</h2><cite class="author" avatar="90sz2" album-cover="90sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">380.661</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="91sz6"><div class="slide slide-12"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/91sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">284 Songs</div></div></a></div><h2>Alternative</h2><cite class="author" avatar="91sz2" album-cover="91sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">160.266</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="92sz6"><div class="slide slide-13"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/92sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">55 Songs</div></div></a></div><h2>Sign in the Car</h2><cite class="author" avatar="92sz2" album-cover="92sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">33.900</p></div>
+                      {{#each playlistUser}}
+                      <div class="swiper-slide the-playlist" album-cover="79sz6">
+                      <div class="slide slide-1"> 
+                      <a href="/artistProfile/{{_id}}"><div class="img-play"><img src={{image}} width="130" height="130"><div class="blur"></div></div></a></div><h2 style="opacity: .52">Creator</h2><cite class="author" avatar="79sz2" album-cover="79sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers" style="opacity: 1">{{username}}</p></div>
+                      {{/each}}
+                      
                       <div class="swiper-slide"></div>
                     </div>
                   </div>

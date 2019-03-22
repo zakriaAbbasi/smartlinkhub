@@ -25,7 +25,7 @@ router.get('/', function(req, res, next){
       fav = fav.reverse();
     songModel.find().sort({"timesPlayed": -1}).then(songList => {
     usermodel.find({usertype: "artist"}).then(artist => {
-    
+    usermodel.find({ playlist: { $exists: true, $ne: [] } }).then(users =>{
       playlistModel.find({user: req.user._id})
       .populate('songs')
       .then(song => {
@@ -35,9 +35,9 @@ router.get('/', function(req, res, next){
         .then(recentPlayed => {
           recentPlayed = recentPlayed.map(recentPlayed => recentPlayed.recent)
           if(recentPlayed[0]){recentPlayed[0] = recentPlayed[0].reverse();}
-         if(us && us.usertype == "listener") {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList});}
-         else if (us && us.usertype == "artist") {res.render('index', {recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
-         else {res.render('index', {recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList}); }
+         if(us && us.usertype == "listener") {res.render('index', {playlistUser: users, recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: null, notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList, artistList: artist});}
+         else if (us && us.usertype == "artist") {res.render('index', {playlistUser: users,recentlyPlayed: recentPlayed[0],playlist: song[0], uid: us._id, user: us.username,image: us.image, utype: us.usertype , notadmin: us.usertype, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList, artistList: artist}); }
+         else {res.render('index', {playlistUser: users, recentlyPlayed: recentPlayed[0], playlist: song[0], uid: us._id, user: us.username,image: us.image,  utype: us.usertype , notadmin: null, latestSongs: latest, popularSongs: popular, favSongs: fav, mostPlayed: songList, artistList: artist}); }
       }).catch(err => {
            console.log(err);
           });
@@ -45,6 +45,7 @@ router.get('/', function(req, res, next){
         console.log(err);
           });   
   });
+});
 });
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
@@ -79,7 +80,9 @@ router.post('/addtoplaylist/:id/:user',isAuthenticated, function(req, res, next)
         usermodel.update(
           { _id: req.params.user },
           { playlist: newPlaylist._id }
-        )
+        ).then(us => {
+          //console.log(us);
+        })
       }
       else {
         updatePlaylist(req.params.user,req.params.id);
