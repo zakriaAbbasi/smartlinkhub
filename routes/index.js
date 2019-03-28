@@ -19,9 +19,9 @@ router.get('/', function(req, res, next){
     else {
     songModel.find().then(latest => {
       latest= latest.reverse(); 
-    songModel.find( { category: "Popular"} ).then(popular => {
+    songModel.find( { category: "popular"} ).then(popular => {
       popular= popular.reverse(); 
-    songModel.find( { category: "Favourite"} ).then(fav => {
+    songModel.find( { category: "favourite"} ).then(fav => {
       fav = fav.reverse();
     songModel.find().sort({"timesPlayed": -1}).then(songList => {
     usermodel.find({usertype: "artist"}).then(artist => {
@@ -254,8 +254,8 @@ router.get('/songs/:artist',isAuthenticated, function(req,res,next){
     uploadedby: req.params.artist
   }
   )
-  .select('_id fileName avatar artist timesPlayed uploadedby')
-  .then(artist => {    
+  .select('_id fileName avatar artist timesPlayed uploadedby category')
+  .then(artist => { 
     res.render('songs', {layout: 'admin', artistList: artist}); 
   }).catch(err => {
     req.flash('info', 'Error Fetching data from server');
@@ -293,15 +293,63 @@ router.post('/delete/:id',isAuthenticated, function(req,res,next){
 
 router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
   const id = req.params.id;
-  const value = req.params.opt;
-  songModel.update({ _id: id}, { category: value})
-  .then(song => {  
-    if (song) {
-      req.flash('info', 'Updated successfully');  
-    }
-}).catch(err => {
-    req.flash('info', 'Error Fetching data from server');
+  const category = req.params.opt;
+  if(category == 'pop&fav') {
+  songModel.update(
+    {_id: id},
+    { $addToSet: {category: ["popular","favourite"]}}
+  ).then()
+  .catch(err => {
+    req.flash('info', 'Error while updating data');
+    res.redirect('/');
       });
+    }
+    if(category == 'pop') {
+      songModel.update(
+        {_id: id},
+        { $addToSet: {category: "popular"}}
+      ).then()
+      .catch(err => {
+        req.flash('info', 'Error while updating data');
+        res.redirect('/');
+          });
+      songModel.update(
+        {_id: id},
+        { $pull: {category: "favourite"}}
+      ).then()
+      .catch(err => {
+        req.flash('info', 'Error while updating data');
+        res.redirect('/');
+          });
+    }
+    if(category == 'fav') {
+      songModel.update(
+        {_id: id},
+        { $pull: {category: "popular"}}
+      ).then()
+      .catch(err => {
+        req.flash('info', 'Error while updating data');
+        res.redirect('/');
+          });
+      songModel.update(
+        {_id: id},
+        { $addToSet: {category: "favourite"}}
+      ).then()
+      .catch(err => {
+        req.flash('info', 'Error while updating data');
+        res.redirect('/');
+          });
+    }
+    if(category == 'none') {
+      songModel.update(
+        {_id: id},
+        { $pullAll: {category: ["popular", "favourite"]}}
+      ).then()
+      .catch(err => {
+        req.flash('info', 'Error while updating data');
+        res.redirect('/');
+          });
+    }
 });
 
 

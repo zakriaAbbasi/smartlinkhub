@@ -31,7 +31,7 @@ router.post('/upload', function(req, res)  {
                    cover: req.files.file2.name,
                    uploadedby: req.body.uploadedby,
                    timesPlayed: 0,
-                   category: 'recent',
+                   category: [],
                  });
                  mp3.save(err=>{
                    if(err){

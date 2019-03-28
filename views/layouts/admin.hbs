@@ -21,7 +21,7 @@
   <!-- Argon CSS -->
   <link type="text/css" href="/assets/css/argon.css?v=1.0.0" rel="stylesheet">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">)
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
 <body>
@@ -45,11 +45,31 @@
     }
   </script>
   <script>
-    function check(value, id) {
-      var xhttp = new XMLHttpRequest();
-      var url = '/category/'+id+'/'+value;
-      xhttp.open('GET',url);
-      xhttp.send(); 
+    function submitCategory() {
+     var table = document.getElementById("song_tab");
+     var rowCount = table.rows.length;
+     for(var i=0;i<rowCount-1;i++) {
+      $ ('#form'+i).submit();
+     }
+    }
+   </script>
+   <script>
+    function xyz(id, pop, fav) {
+    var xhttp = new XMLHttpRequest();
+    if(pop == true && fav == true) {
+     var url = '/category/'+id+'/pop&fav';
+    }
+    if(pop == true && fav == false) {
+     var url = '/category/'+id+'/pop';
+    }
+    if(pop == false && fav == true) {
+     var url = '/category/'+id+'/fav';
+    }
+    if(pop == false && fav == false) {
+     var url = '/category/'+id+'/none';
+    }
+    xhttp.open('GET',url);
+    xhttp.send(); 
     }
    </script>
   <script>
@@ -58,6 +78,11 @@
       var url = '/delete/'+id;
       xhttp.open('POST',url);
       xhttp.send(); 
+    }
+  </script>
+  <script>
+    function activate() {
+      document.getElementById("save").disabled = false;
     }
   </script>
 </body>

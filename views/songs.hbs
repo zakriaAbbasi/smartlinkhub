@@ -2,7 +2,7 @@
     
   
   <!-- Main content -->
-  <div class="main-content">
+  <div class="main-content" style="margin-top: -24.1px">
     <!-- Top navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
@@ -25,7 +25,7 @@
               <h3 class="mb-0">Songs</h3>
             </div>
             <div class="table-responsive">
-              <table class="table align-items-center table-flush ">
+              <table class="table align-items-center table-flush " id="song_tab">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">File Name</th>
@@ -65,20 +65,20 @@
                         </div>
                     </td>
                     <td>
-                      <form>
-                        <input type="hidden" name="uploadedby" value={{_id}} />
-                         <label class="radio-inline">
-                           <input type="radio" name="optradio" value="Popular" onclick="check(this.value,uploadedby.value)"> Popular
+                      <form id='form{{@index}}' onsubmit="xyz( '{{_id}}', pop.checked,fav.checked)">
+                        <input type="hidden" id="song-id" name="song-id" value={{_id}}>
+                         <label class="checkbox-inline">
+                           <input type="checkbox" name="pop" id="pop" value="Popular" onclick="activate()"> Popular
                          </label> &nbsp&nbsp&nbsp
-                         <label class="radio-inline">
-                             <input type="radio" name="optradio" value="Favourite" onclick="check(this.value,uploadedby.value)"> Favourite
+                         <label class="checkbox-inline">
+                             <input type="checkbox" name="fav" id="fav" value="Favourite" onclick="activate()" > Favourite
                         </label>
-                      </form>
+                 </form>
                     </td>
                     <td>
                     <form>
-                        <input type="hidden" name="uploadedby" value={{_id}} />
-                    <button class="btn btn-danger fa fa-trash-o fa-lg" style="background-color:#EC7063" onclick="deleteRow(uploadedby.value)">
+                    <input type="hidden" name="uploadedby" id="uploadedby" value={{_id}} />
+                    <button class="btn btn-danger far fa-trash-alt fa-lg" style="background-color:#EC7063" onclick="deleteRow(uploadedby.value)">
                     </button>
                     </form>
                     </td>
@@ -86,6 +86,11 @@
                   {{/each}}
                 </tbody>
               </table>
+              <br>
+              <div style="float: right; width:12%">
+              <button id="save" class="btn btn-success" style="background-color:rgb(120, 106, 214); border:rgb(120, 106, 214)" onclick="submitCategory()" disabled>Save</button>
+              </div>
+              <br> <br> <br>
             </div>
             <div class="card-footer py-4">
               <nav aria-label="...">

@@ -150,6 +150,7 @@
                       <a href="#" checkClick="checkClick">{{artist}}</a>
                       </cite></div></div></div>
                       {{/each}} 
+                       <div class="swiper-slide"></div>
                     </div>
                   </div>
                 </section>
@@ -233,7 +234,7 @@
                       <div class="swiper-slide the-song" avatar={{{cover}}} album-cover={{{cover}}} onclick="sendid('{{_id}}')">
                       <a href="#" data-src="https://smartlinkhub.herokuapp.com/mp3/download/?id={{fileName}}"  title= "{{fileName}}" id= {{@index}} ></a>
                       <div class="slide slide-1" id= {{@index}}>
-                      <div class="img-play"><img src={{{avatar}}} width="100%" height="160"></div></div><div class="box-type">Song</div>
+                      <div class="img-play"><img src={{{avatar}}} width="100%" height="150"></div></div><div class="box-type">Song</div>
                       <h2>{{fileName}}</h2>
                       <cite class="author" avatar="14sz2" album-cover="14sz5"><a href="artist-profile.html" checkClick="checkClick">{{artist}}</a></cite></div>
                       {{/each}}
@@ -260,7 +261,7 @@
                             <div class="swiper-slide the-song" avatar={{{cover}}} album-cover={{{cover}}} onclick="sendid('{{_id}}')">
                             <a href="#" data-src="https://smartlinkhub.herokuapp.com/mp3/download/?id={{fileName}}"  title= "{{fileName}}" id= {{@index}}></a>
                             <div class="slide slide-1" id= {{@index}}>
-                            <div class="img-play"><img src={{{avatar}}} width="100%" height="160"></div></div>
+                            <div class="img-play"><img src={{{avatar}}} width="100%" height="150"></div></div>
                             <h2>{{fileName}}</h2>
                             <cite class="author" avatar="23sz2" album-cover="23sz5"><a href="artist-profile.html" checkClick="checkClick">{{artist}}</a></cite></div>
                             {{/each}}
