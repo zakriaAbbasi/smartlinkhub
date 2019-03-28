@@ -1,0 +1,74 @@
+<div id="profile-1" data-page="profile" class="page nope profile profile-1 special-scroll ">
+  <div class="album-cover-blur"><img src="../src/images/artist/1sz6.jpg" class="album cover" alt="cover" width="100%" height="100%"></div>
+
+  <section class="headers" header-type="back" header-style="style3" header-icon-style="user">
+    <header>
+      <div class="main-grids safe-area">
+        <div class="inner">
+          <a href="#" class="link back"><button class="back-icon"></button></a>
+          <a href="profile.html"><button class="icon user-icon"></button></a>
+          <div class="album-cover"><img src="../src/images/artist/1sz6.jpg" class="album cover" alt="cover" width="100%" height="100%"></div> 
+          <div class="title-author"><h2 class="title">{{user}}</h2></div>
+          <button class="icon menu-icon open-panel"></button>
+          <button class="search-icon" essential-search="show"></button>
+          <button class="options-icon"></button>
+          <button class="buy-button song-price" checksongprice="checkSongPrice" checkclick="checkClick"><b checksongprice="checkSongPrice" checkclick="checkClick">$ 0,00</b><span checksongprice="checkSongPrice" checkclick="checkClick" class="">Buy</span></button>
+        </div>
+      </div>
+    </header>
+  </section>
+
+  <div class="scrollable-content ">
+    <div class="bottom-padding special-scroll-tab active">
+
+      <section class="profile-avatar-user">
+        <div class="main-grids safe-area">
+          <div class="inner">
+            <img alt="Avatar User" src={{{uimage}}} width="100%" height="auto">
+            <div class="user-country">
+              <h2 style="color:snow">{{user}}</h2>
+            </div>
+          </div>
+        </div>
+      </section> <br> <br> <br>
+
+  {{!--    <section class="profile-follow-info">
+        <div class="main-grids safe-area">
+          <div class="inner">
+            <div class="followers"><div class="number">211</div><p>Followers</p></div>
+            <div class="following"><div class="number">480</div><p>Following</p></div>
+            <button class="following">follow</button>
+          </div>
+        </div>
+      </section> --}}
+
+      <section class="section-titles" section-type="standard" see-all-style="style2" section-icon-style="playlists_white" section-title-style="left">
+        <header>
+          <div class="main-grids safe-area">
+            <div class="inner">
+              <div class="icon"></div>
+              <h2 class="">Own Playlists</h2>
+              <div class="see-all"><p><a href="see-all.html" checkclick="checkClick">Play All</a></p></div>
+            </div>
+          </div>
+        </header>
+      </section>
+      <section class="most-played-swiper-container checkPlaylist">
+                  <div class="swiper-container swiper-padding-left square-swiper playlist-swiper most-played-swiper playlist-song no-fastclick">
+
+                    <div class="swiper-wrapper" swiper-label="hide">
+                      {{#each playlist}}
+                      <div class="swiper-slide the-song" avatar={{{cover}}} album-cover={{{cover}}}>
+                        <a href="#" data-src="https://smartlinkhub.herokuapp.com/mp3/download/?id={{fileName}}"  title= "{{fileName}}" id= {{@index}}></a>
+                        <div class="slide slide-1" id= {{@index}}>
+                        <div class="img-play"><img src={{{avatar}}} width="100%" height="150"></div></div><div class="box-type">Song</div>
+                        <h2>{{fileName}}</h2>
+                        <cite class="author" avatar={{cover}}><a href="artist-profile.html" checkClick="checkClick">{{artist}}</a></cite></div>
+                      {{/each}}
+                      <div class="swiper-slide"></div>
+                    </div>
+                  </div>
+                </section>
+    </div>
+  </div>
+</div>

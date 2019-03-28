@@ -7063,3 +7063,11 @@ html.ios-gt-8 .notifications .item-subtitle{
 .disabled .disabled,.disabled [disabled],[disabled] .disabled,[disabled] [disabled]{
     opacity:1
 }
+
+.trunc {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 50px;
+    display: inline-block;
+    overflow: hidden;
+}

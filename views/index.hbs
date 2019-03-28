@@ -96,7 +96,12 @@
                       </form> 
                       {{/if}} 
                       </div> 
-
+                      <div style="float: left">
+                     {{#if user}} 
+                      <form action="/logout">
+                      <button class="button button-fill button-big">Logout</button>
+                      </form> 
+                      {{/if}} </div>
                      <div style="float: left">
                        <div style="margin-left:20px" >
                       {{#if utype}}
@@ -140,7 +145,7 @@
                       <div class="slide slide-1" id= {{@index}}>
                       <div class="img-inner-wrapper">
                       <img src={{{avatar}}} width="100%" height="210">
-                      <h2>{{fileName}}</h>
+                      <h2 class="trunc">{{fileName}}</h2>
                       <cite class="author">
                       <a href="#" checkClick="checkClick">{{artist}}</a>
                       </cite>
@@ -283,7 +288,11 @@
                       {{#each recentlyPlayed}}
                       <div class="the-song first slide slide-1" avatar={{{cover}}} album-cover={{{cover}}} onclick="sendid('{{_id}}')">
                       <a href="#" data-src="https://smartlinkhub.herokuapp.com/mp3/download/?id={{fileName}}"  title= "{{fileName}}" id= {{@index}} ></a>
-                      <div class="delete-track"><svg checkclick="checkClick" width="22" height="22" viewBox="0 0 22 22"><path checkClick="checkClick" fill="#FFF" fill-rule="evenodd" d="M11 22C4.925 22 0 17.075 0 11S4.925 0 11 0s11 4.925 11 11-4.925 11-11 11zM5.704 11c0 .68.544 1.222 1.215 1.222h8.162c.675 0 1.215-.547 1.215-1.222 0-.68-.544-1.222-1.215-1.222H6.92c-.675 0-1.215.547-1.215 1.222z"/></svg></div><div class="author-like-wrapper"><p class="rank">1</p><div class="author-avatar"><img alt="Author" src={{{avatar}}} width="100%" height="auto"></div><div class="author-like"><div class="song-title-author"><h2 class="title">{{fileName}}</h2><cite class="author" avatar="46sz2" album-cover="46sz6"><a href="artist-profile.html" checkClick="checkClick">{{artist}}</a></cite></div><div class="song-info-options-container"><div class="like-container"><span class="heart-icon active"><svg checkClick="checkClick" width="16px" height="15px" viewBox="0 0 16 15"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(1.000000, 1.000000)"><g transform="translate(-2.000000, -3.000000)"><rect x="0" y="0" width="18" height="18"></rect><path checkClick="checkClick" d="M9,5.70689931 C9.71495864,3.78248227 10.8248268,3 12.0625,3 C14.2373039,3 16,4.97331321 16,7.40764925 C16,12.4491242 9,15.3414179 9,15.3414179 C9,15.3414179 2,12.4491242 2,7.40764925 C2,4.97331321 3.76269608,3 5.9375,3 C7.1751732,3 8.38818359,3.78248227 9,5.70689931 Z" id="shapes" stroke="#FFFFFF" stroke-width="1.7"></path></g></g></g></svg></span><span checkClick="checkClick" class="like">1.505</span></div><span checkClick="checkClick" class="song-time">3.20</span><span checkClick="checkClick" class="song-price" checkSongPrice="checkSongPrice" checkclick="checkClick"><b checkSongPrice="checkSongPrice" checkclick="checkClick">$ 0.99</b></span><span checkClick="checkClick" class="song-plus"></span></div></div><div class="divider"></div></div></div>
+            {{!--         <div class="delete-track"><svg checkclick="checkClick" width="22" height="22" viewBox="0 0 22 22"><path checkClick="checkClick" fill="#FFF" fill-rule="evenodd" d="M11 22C4.925 22 0 17.075 0 11S4.925 0 11 0s11 4.925 11 11-4.925 11-11 11zM5.704 11c0 .68.544 1.222 1.215 1.222h8.162c.675 0 1.215-.547 1.215-1.222 0-.68-.544-1.222-1.215-1.222H6.92c-.675 0-1.215.547-1.215 1.222z"/></svg></div> --}}
+                    <div class="author-like-wrapper"><p class="rank">1</p> 
+                      <div class="author-avatar"><img alt="Author" src={{{avatar}}} width="100%" height="auto"></div><div class="author-like"><div class="song-title-author">
+                      <h2 class="title">{{fileName}}</h2><cite class="author" avatar="46sz2" album-cover="46sz6"><a href="artist-profile.html" checkClick="checkClick">{{artist}}</a></cite></div> </div> </div> </div>
+                 {{!--     <div class="song-info-options-container"><div class="like-container"><span class="heart-icon active"><svg checkClick="checkClick" width="16px" height="15px" viewBox="0 0 16 15"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(1.000000, 1.000000)"><g transform="translate(-2.000000, -3.000000)"><rect x="0" y="0" width="18" height="18"></rect><path checkClick="checkClick" d="M9,5.70689931 C9.71495864,3.78248227 10.8248268,3 12.0625,3 C14.2373039,3 16,4.97331321 16,7.40764925 C16,12.4491242 9,15.3414179 9,15.3414179 C9,15.3414179 2,12.4491242 2,7.40764925 C2,4.97331321 3.76269608,3 5.9375,3 C7.1751732,3 8.38818359,3.78248227 9,5.70689931 Z" id="shapes" stroke="#FFFFFF" stroke-width="1.7"></path></g></g></g></svg></span><span checkClick="checkClick" class="like">1.505</span></div><span checkClick="checkClick" class="song-time">3.20</span><span checkClick="checkClick" class="song-price" checkSongPrice="checkSongPrice" checkclick="checkClick"><b checkSongPrice="checkSongPrice" checkclick="checkClick">$ 0.99</b></span><span checkClick="checkClick" class="song-plus"></span></div></div><div class="divider"></div></div></div> --}}
                       {{/each}}
                     </div>
                   </div>
@@ -303,16 +312,10 @@
                 <section class="favourite-artists-container checkPlaylist">
                   <div class="swiper-container swiper-padding-left favourite-artist-swiper no-fastclick">
                     <div class="swiper-wrapper" swiper-style="style1">
-                      <div class="swiper-slide"><div class="circle-number"> <div class="inner">12</div></div><a href="artist-profile.html"><div class="slide favourite-artist-1" album-cover="42sz6" avatar="42sz2"><img src="../src/images/artist/42sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="42sz6" avatar="42sz2">Taeyon</cite></div></a></div>
-                      <div class="swiper-slide"><a href="artist-profile.html"><div class="slide favourite-artist-2" album-cover="66sz6" avatar="66sz2"><img src="../src/images/artist/66sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="66sz6" avatar="66sz2">Ringo Shiina</cite></div></a></div>
-                      <div class="swiper-slide"><div class="circle-number"><div class="inner">8</div></div><a href="artist-profile.html"><div class="slide favourite-artist-3" album-cover="55sz6" avatar="55sz2"><img src="../src/images/artist/55sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="55sz6" avatar="55sz2">Mielposi</cite></div></a></div>
-                      <div class="swiper-slide"><a href="artist-profile.html"><div class="slide favourite-artist-4" album-cover="56sz6" avatar="56sz2"><img src="../src/images/artist/56sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="56sz6" avatar="56sz2">Drake</cite></div></a></div>
-                      <div class="swiper-slide"><a href="artist-profile.html"><div class="slide favourite-artist-5" album-cover="36sz6" avatar="36sz2"><img src="../src/images/artist/36sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="36sz6" avatar="36sz2">Campanella</cite></div></a></div>
-                      <div class="swiper-slide"><div class="circle-number"><div class="inner">33</div></div><a href="artist-profile.html"><div class="slide favourite-artist-6" album-cover="57sz6" avatar="57sz2"><img src="../src/images/artist/57sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="57sz6" avatar="57sz2">Aimer</cite></div></a></div>
-                      <div class="swiper-slide"><div class="circle-number"><div class="inner">17</div></div><a href="artist-profile.html"><div class="slide favourite-artist-7" album-cover="58sz6" avatar="58sz2"><img src="../src/images/artist/58sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="58sz6" avatar="58sz2">Crush</cite></div></a></div>
-                      <div class="swiper-slide"><a href="artist-profile.html"><div class="slide favourite-artist-8" album-cover="59sz6" avatar="59sz2"><img src="../src/images/artist/59sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="59sz6" avatar="59sz2">Jodie</cite></div></a></div>
-                      <div class="swiper-slide"><div class="circle-number"><div class="inner">5</div></div><a href="artist-profile.html"><div class="slide favourite-artist-9" album-cover="21sz6" avatar="21sz2"><img src="../src/images/artist/21sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="21sz6" avatar="21sz2">Cassarah</cite></div></a></div>
-                      <div class="swiper-slide"><a href="artist-profile.html"><div class="slide favourite-artist-9" album-cover="60sz6" avatar="60sz2"><img src="../src/images/artist/60sz5.jpg" width="100%" height="auto"><cite class="author" album-cover="60sz6" avatar="60sz2">Frederic</cite></div></a></div>
+                      {{#each artistList}}
+                      <div class="swiper-slide"><a href="/artistProfile/{{_id}}"><div class="slide favourite-artist-2" album-cover="66sz6" avatar="66sz2">
+                      <img src={{image}} width="70" height="70"><cite class="author" album-cover="66sz6" avatar="66sz2">Ringo Shiina</cite></div></a></div>
+                      {{/each}}
                       <div class="swiper-slide"></div>
                     </div>
                   </div>
@@ -332,19 +335,12 @@
                 <section class="best-playlists-swiper-container checkPlaylist">
                   <div class="swiper-container swiper-padding-left square-swiper playlist-swiper best-playlists-swiper-container no-fastclick">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide the-playlist" album-cover="79sz6"><div class="slide slide-1"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/79sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">112 Songs</div></div></a></div><h2>Pop Acoustic</h2><cite class="author" avatar="79sz2" album-cover="79sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">128.708</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="80sz6"><div class="slide slide-2"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/80sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">94 Songs</div></div></a></div><h2>Relax in Acustic</h2><cite class="author" avatar="80sz2" album-cover="80sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">110.475</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="81sz6"><div class="slide slide-3"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/81sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">240 Songs</div></div></a></div><h2>Time Machine</h2><cite class="author" avatar="81sz2" album-cover="81sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">71.330</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="82sz6"><div class="slide slide-4"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/82sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">88 Songs</div></div></a></div><h2>Sweet Beach</h2><cite class="author" avatar="82sz2" album-cover="82sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">64.921</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="83sz6"><div class="slide slide-5"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/83sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">220 Songs</div></div></a></div><h2>Just Soul</h2><cite class="author" avatar="83sz2" album-cover="83sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">113.778</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="85sz6"><div class="slide slide-6"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/85sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">410 Songs</div></div></a></div><h2>The Rock Show</h2><cite class="author" avatar="85sz2" album-cover="85sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">220.885</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="86sz6"><div class="slide slide-7"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/86sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">50 Songs</div></div></a></div><h2>Best Covers</h2><cite class="author" avatar="86sz2" album-cover="86sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">90.643</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="87sz6"><div class="slide slide-8"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/87sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">85 Songs</div></div></a></div><h2>Essential Indie</h2><cite class="author" avatar="87sz2" album-cover="87sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">420.922</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="88sz6"><div class="slide slide-9"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/88sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">311 Songs</div></div></a></div><h2>Italo Disco</h2><cite class="author" avatar="88sz2" album-cover="88sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">44.500</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="89sz6"><div class="slide slide-10"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/89sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">344 Songs</div></div></a></div><h2>I Love My 90's</h2><cite class="author" avatar="89sz2" album-cover="90sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">99.448</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="90sz6"><div class="slide slide-11"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/90sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">77 Songs</div></div></a></div><h2>Training Time</h2><cite class="author" avatar="90sz2" album-cover="90sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">380.661</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="91sz6"><div class="slide slide-12"><a href="playlist-v2.html"><div class="img-play"><img src="../src/images/artist/91sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">284 Songs</div></div></a></div><h2>Alternative</h2><cite class="author" avatar="91sz2" album-cover="91sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">160.266</p></div>
-                      <div class="swiper-slide the-playlist" album-cover="92sz6"><div class="slide slide-13"><a href="playlist.html"><div class="img-play"><img src="../src/images/artist/92sz5.jpg" width="100%" height="auto"><div class="blur"></div><div class="playlist-song-number">55 Songs</div></div></a></div><h2>Sign in the Car</h2><cite class="author" avatar="92sz2" album-cover="92sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers">33.900</p></div>
+                      {{#each playlistUser}}
+                      <div class="swiper-slide the-playlist" album-cover="79sz6">
+                      <div class="slide slide-1"> 
+                      <a href="/artistProfile/{{_id}}"><div class="img-play"><img src={{image}} width="130" height="130"><div class="blur"></div></div></a></div><h2 style="opacity: .52">Creator</h2><cite class="author" avatar="79sz2" album-cover="79sz5"><a href="artist-profile.html">Musicapp</a></cite><p class="playlist-followers" style="opacity: 1">{{username}}</p></div>
+                      {{/each}}
+                      
                       <div class="swiper-slide"></div>
                     </div>
                   </div>
@@ -621,7 +617,7 @@
                             <cite class="author" avatar="2sz2" album-cover="2sz5"><a href="artist-profile.html" checkClick="checkClick">Lisa</a></cite>
                           </div>
                           <h2>Now Playing</h2>
-                          <button class="share-icon"></button>
+                         {{!--   <button class="share-icon"></button> --}}
                           <button class="addto-icon"></button>
                        {{!--   <button class="options-icon"></button> --}}
                        {{!--  <button class="buy-button song-price" checkSongPrice="checkSongPrice" checkclick="checkClick"><b checkSongPrice="checkSongPrice" checkclick="checkClick">$ 12,99</b><span checkSongPrice="checkSongPrice" checkclick="checkClick">Buy</span></button> --}} 
@@ -685,13 +681,13 @@
                         <div class="container-album-cover big-player">
                           <div class="main-grids grid-cover">                             
                             <div class="album-cover"><img src="../src/images/artist/2sz6.jpg" class="album cover" alt="cover" width="100%" height="100%">
-                              <div class="like-container"><span checkclick="checkClick" class="heart-icon "><div class="blur"></div><svg checkclick="checkClick" width="22px" height="19px" viewBox="0 0 17 15"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-7.000000, -9.000000)" fill="#8A7F87"><g><path checkclick="checkClick" d="M15.4200001,12.3674936 C16.2709429,10.2381896 17.615006,9 19.1037501,9 C21.7197286,9 23.8400002,11.3731073 23.8400002,14.3006408 C23.8400002,20.3635207 15.4200001,23.8417942 15.4200001,23.8417942 C15.4200001,23.8417942 7,20.3635207 7,14.3006408 C7,11.3731073 9.12027159,9 11.73625,9 C13.2249941,9 14.5685344,10.1493509 15.4200001,12.3674936 Z"></path></g></g></g></svg></span></div>
+                      {{!--         <div class="like-container"><span checkclick="checkClick" class="heart-icon "><div class="blur"></div><svg checkclick="checkClick" width="22px" height="19px" viewBox="0 0 17 15"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-7.000000, -9.000000)" fill="#8A7F87"><g><path checkclick="checkClick" d="M15.4200001,12.3674936 C16.2709429,10.2381896 17.615006,9 19.1037501,9 C21.7197286,9 23.8400002,11.3731073 23.8400002,14.3006408 C23.8400002,20.3635207 15.4200001,23.8417942 15.4200001,23.8417942 C15.4200001,23.8417942 7,20.3635207 7,14.3006408 C7,11.3731073 9.12027159,9 11.73625,9 C13.2249941,9 14.5685344,10.1493509 15.4200001,12.3674936 Z"></path></g></g></g></svg></span></div> --}}
                             </div>
                           </div>
                         </div>
 
                         <div class="menu-options options-icon">
-                          <svg width="5px" height="21px" viewBox="0 0 4 18"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-12.000000, -5.000000)"><rect id="frame" x="0" y="0" width="28" height="28"></rect><path d="M14,9 C12.8954305,9 12,8.1045695 12,7 C12,5.8954305 12.8954305,5 14,5 C15.1045695,5 16,5.8954305 16,7 C16,8.1045695 15.1045695,9 14,9 Z M14,16 C12.8954305,16 12,15.1045695 12,14 C12,12.8954305 12.8954305,12 14,12 C15.1045695,12 16,12.8954305 16,14 C16,15.1045695 15.1045695,16 14,16 Z M14,23 C12.8954305,23 12,22.1045695 12,21 C12,19.8954305 12.8954305,19 14,19 C15.1045695,19 16,19.8954305 16,21 C16,22.1045695 15.1045695,23 14,23 Z" fill="#FFF"></path></g></g></svg>
+                      <svg width="5px" height="21px" viewBox="0 0 4 18"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-12.000000, -5.000000)"><rect id="frame" x="0" y="0" width="28" height="28"></rect><path d="M14,9 C12.8954305,9 12,8.1045695 12,7 C12,5.8954305 12.8954305,5 14,5 C15.1045695,5 16,5.8954305 16,7 C16,8.1045695 15.1045695,9 14,9 Z M14,16 C12.8954305,16 12,15.1045695 12,14 C12,12.8954305 12.8954305,12 14,12 C15.1045695,12 16,12.8954305 16,14 C16,15.1045695 15.1045695,16 14,16 Z M14,23 C12.8954305,23 12,22.1045695 12,21 C12,19.8954305 12.8954305,19 14,19 C15.1045695,19 16,19.8954305 16,21 C16,22.1045695 15.1045695,23 14,23 Z" fill="#FFF"></path></g></g></svg> 
                         </div>
 
                         <div class="scrubber-command scrubber-options">
@@ -722,7 +718,7 @@
                                       <p class="loading"></p>
                                       <p class="error"></p>
                                     </div>
-                                    <button class="mini-next next"></button>
+                                    <button class="mini-next next"></button> 
                                   </div>
                                 </div>
                                 <div class="error-message"></div>
@@ -738,24 +734,24 @@
                                     <cite class="author" avatar="11sz2" album-cover="11sz6">Lisa</cite>
                                   </div>
                                   <div class="volume-content">
-                                    <svg width="24px" height="21px" viewBox="0 0 24 21"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-11.000000, -12.000000)"><rect x="0" y="0" width="45" height="45"></rect><g transform="translate(11.000000, 12.000000)" stroke="#FFFFFF"><path d="M11.8514739,19.0036271 L11.8514739,2.55674582 L8.88066607,5.01178842 C8.27709465,5.51057314 7.28462557,6.00344821 6.52888861,6.17983976 L4.23119153,6.71612996 C2.76407274,7.05856041 1.5,8.65369069 1.5,10.1599786 L1.5,11.9580286 C1.5,13.4361496 2.74494269,14.9232684 4.19695595,15.1838497 L6.43799773,15.5860316 C7.21920941,15.7262295 8.23464497,16.1800177 8.86072234,16.6687879 L11.8514739,19.0036271 Z" stroke-width="3"></path><path d="M16.6719577,14.7242933 C17.4910091,13.6460074 17.9814116,12.27416 17.9814116,10.7806142 C17.9814116,9.29690432 17.497447,7.93329515 16.6880966,6.85827664" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.957672,18.0468055 C21.4648071,16.0626535 22.3671958,13.5383196 22.3671958,10.7900487 C22.3671958,8.05987677 21.4766535,5.55070198 19.9873692,3.57256236" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></svg>
+                                  <svg width="24px" height="21px" viewBox="0 0 24 21"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-11.000000, -12.000000)"><rect x="0" y="0" width="45" height="45"></rect><g transform="translate(11.000000, 12.000000)" stroke="#FFFFFF"><path d="M11.8514739,19.0036271 L11.8514739,2.55674582 L8.88066607,5.01178842 C8.27709465,5.51057314 7.28462557,6.00344821 6.52888861,6.17983976 L4.23119153,6.71612996 C2.76407274,7.05856041 1.5,8.65369069 1.5,10.1599786 L1.5,11.9580286 C1.5,13.4361496 2.74494269,14.9232684 4.19695595,15.1838497 L6.43799773,15.5860316 C7.21920941,15.7262295 8.23464497,16.1800177 8.86072234,16.6687879 L11.8514739,19.0036271 Z" stroke-width="3"></path><path d="M16.6719577,14.7242933 C17.4910091,13.6460074 17.9814116,12.27416 17.9814116,10.7806142 C17.9814116,9.29690432 17.497447,7.93329515 16.6880966,6.85827664" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.957672,18.0468055 C21.4648071,16.0626535 22.3671958,13.5383196 22.3671958,10.7900487 C22.3671958,8.05987677 21.4766535,5.55070198 19.9873692,3.57256236" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></svg> 
                                     <div class="volume no-fastclick"><span class="volumeBar no-fastclick"></span></div>
                                   </div>
                                   <div class="player-command">
-                                    <div class="list"><div class="icon"></div><button class="share-icon"></button></div>
+                                   <div class="list"> {{!-- <div class="icon"></div> --}} <button class="share-icon"></button>  </div>
                                     <div class="command">
                                       <p class="prev"></p>
                                       <p class="playPause play"></p>
                                       <p class="next"></p>
                                     </div>
-                                    <div class="heart-audio">
+                               {{!--      <div class="heart-audio">
                                       <div class="heart">
                                         <div class="icon">
                                           <svg class="audio-icon" width="24px" height="21px" viewBox="0 0 24 21"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-11.000000, -12.000000)"><rect x="0" y="0" width="45" height="45"></rect><g transform="translate(11.000000, 12.000000)" stroke="#FFFFFF"><path d="M11.8514739,19.0036271 L11.8514739,2.55674582 L8.88066607,5.01178842 C8.27709465,5.51057314 7.28462557,6.00344821 6.52888861,6.17983976 L4.23119153,6.71612996 C2.76407274,7.05856041 1.5,8.65369069 1.5,10.1599786 L1.5,11.9580286 C1.5,13.4361496 2.74494269,14.9232684 4.19695595,15.1838497 L6.43799773,15.5860316 C7.21920941,15.7262295 8.23464497,16.1800177 8.86072234,16.6687879 L11.8514739,19.0036271 Z" stroke-width="3"></path><path d="M16.6719577,14.7242933 C17.4910091,13.6460074 17.9814116,12.27416 17.9814116,10.7806142 C17.9814116,9.29690432 17.497447,7.93329515 16.6880966,6.85827664" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.957672,18.0468055 C21.4648071,16.0626535 22.3671958,13.5383196 22.3671958,10.7900487 C22.3671958,8.05987677 21.4766535,5.55070198 19.9873692,3.57256236" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></svg>
                                           <svg class="heart-icon" checkclick="checkClick" width="21px" height="18px" viewBox="0 0 17 15"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-7.000000, -9.000000)" fill="#FFF"><path checkclick="checkClick" d="M15.4200001,12.3674936 C16.2709429,10.2381896 17.615006,9 19.1037501,9 C21.7197286,9 23.8400002,11.3731073 23.8400002,14.3006408 C23.8400002,20.3635207 15.4200001,23.8417942 15.4200001,23.8417942 C15.4200001,23.8417942 7,20.3635207 7,14.3006408 C7,11.3731073 9.12027159,9 11.73625,9 C13.2249941,9 14.5685344,10.1493509 15.4200001,12.3674936 Z"></path></g></g></svg>
                                         </div>
                                       </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="clear"></div>
                                   </div>
                                   <!--<div class="error-message"></div>-->
@@ -805,7 +801,7 @@
                                     </div>
                                   </div>
                                 </section>
-                              </div>
+                              </div> 
                             </div>
                           </div>
                         </div>

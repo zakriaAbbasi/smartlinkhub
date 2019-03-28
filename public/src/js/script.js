@@ -1167,7 +1167,7 @@
       if(randomNumber == 3) {
         $('.player-audio-min').attr('music-player-style','style3');
         $('.player-audio-min .headers[header-type="music-player"]').attr('header-style','style1');
-        $('.player-command .list .icon, .home-indicator-container, .player-audio-min, .album-cover-blur, .container-album-cover, .up-next-option, .player-audio-min.big, .scrubber-command.scrubber-options').removeClass('active');
+        $('.player-command .list .icon , .home-indicator-container, .player-audio-min, .album-cover-blur, .container-album-cover, .up-next-option, .player-audio-min.big, .scrubber-command.scrubber-options').removeClass('active');
       }
       /* Choose music player style (random) */
       var randomSong = $(".page-on-center .playlist-song .the-song:nth-child("+ randomNum +")");

@@ -58,6 +58,10 @@ const filesRouter = require('./routes/awsfiles');
 // routes for the app
 app.use('/', indexRouter);
 app.use('/mp3', filesRouter);
+app.get('/logout', function(req,res){
+    req.logout();
+    res.redirect('/');
+});
 
 // set the app to listen on the port
 app.listen(PORT, () => {
