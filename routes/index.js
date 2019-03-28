@@ -295,7 +295,7 @@ router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
   const id = req.params.id;
   const category = req.params.opt;
   if(category == 'pop&fav') {
-  songModel.update(
+  songModel.updateOne(
     {_id: id},
     { $addToSet: {category: ["popular","favourite"]}}
   ).then()
@@ -305,7 +305,7 @@ router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
       });
     }
     if(category == 'pop') {
-      songModel.update(
+      songModel.updateOne(
         {_id: id},
         { $addToSet: {category: "popular"}}
       ).then()
@@ -313,7 +313,7 @@ router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
         req.flash('info', 'Error while updating data');
         res.redirect('/');
           });
-      songModel.update(
+      songModel.updateOne(
         {_id: id},
         { $pull: {category: "favourite"}}
       ).then()
@@ -323,7 +323,7 @@ router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
           });
     }
     if(category == 'fav') {
-      songModel.update(
+      songModel.updateOne(
         {_id: id},
         { $pull: {category: "popular"}}
       ).then()
@@ -331,7 +331,7 @@ router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
         req.flash('info', 'Error while updating data');
         res.redirect('/');
           });
-      songModel.update(
+      songModel.updateOne(
         {_id: id},
         { $addToSet: {category: "favourite"}}
       ).then()
@@ -341,7 +341,7 @@ router.get('/category/:id/:opt',isAuthenticated, function(req,res,next){
           });
     }
     if(category == 'none') {
-      songModel.update(
+      songModel.updateOne(
         {_id: id},
         { $pullAll: {category: ["popular", "favourite"]}}
       ).then()
