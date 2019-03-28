@@ -52,7 +52,6 @@ app.use(express.static("public"));
 
 app.use(passport.initialize());
 app.use(passport.session()); 
-
 const indexRouter = require('./routes/index');
 const filesRouter = require('./routes/awsfiles');
 
