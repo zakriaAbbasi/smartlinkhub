@@ -6,7 +6,7 @@ const songModel = require('../models/songs');
 const isAuthenticated = require('../config/isAuthenticated');
 const isAuth = require('../config/isAuth');
 const playlistModel = require('../models/playlist');
-
+const isAdmin = require('../config/isAdmin');
 
 router.get('/', function(req, res, next){
   var us = req.user;
@@ -144,6 +144,7 @@ router.get('/login', function(req, res, next){
   res.render('login', {layout: 'abc'} );
 });
 router.get('/admin' ,isAuthenticated, function(req, res, next){
+  console.log(req.user);
   res.render('admin' , {layout: 'admin'});
 });
 
@@ -236,7 +237,7 @@ router.post('/members', isAuthenticated,  function(req, res) {
   res.send('Authenticated members page'); 
 });
 
-router.get('/artist',isAuthenticated, function(req,res,next){
+router.get('/artist', isAdmin, function(req,res,next){
   usermodel.find(
     { usertype: "artist"}
   )
@@ -249,7 +250,7 @@ router.get('/artist',isAuthenticated, function(req,res,next){
       });
 });
 
-router.get('/songs/:artist',isAuthenticated, function(req,res,next){
+router.get('/songs/:artist', isAdmin, function(req,res,next){
   songModel.find({ 
     uploadedby: req.params.artist
   }
@@ -263,7 +264,7 @@ router.get('/songs/:artist',isAuthenticated, function(req,res,next){
       });
 });
 
-router.post('/deleteArtist/:id',isAuthenticated, function(req,res,next){
+router.post('/deleteArtist/:id', isAdmin, function(req,res,next){
   usermodel.findOneAndDelete({
     _id: req.params.id
 })
@@ -277,7 +278,7 @@ router.post('/deleteArtist/:id',isAuthenticated, function(req,res,next){
       });
 });
 
-router.post('/delete/:id',isAuthenticated, function(req,res,next){
+router.post('/delete/:id', isAdmin, function(req,res,next){
   songModel.findOneAndDelete({
     _id: req.params.id
 })
