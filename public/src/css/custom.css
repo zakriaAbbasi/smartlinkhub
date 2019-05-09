@@ -29,6 +29,73 @@
 /** "../font/LICENSE.pdf" */
 /* SF UI Text */
 /** Regular */
+
+#widget > div{
+	margin-top:2px !important;
+}
+
+.w-50{
+	width:50%;
+}
+
+.w-70{
+	width:70%;
+}
+
+.w-100{
+	width:100%;
+}
+
+.s-media{
+	width:100%;
+	display:flex;
+	align-items:center;
+}
+
+.custom-text{
+	margin: 17px 0 0 1px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: .2px;
+	color: #fff;
+	overflow: hidden;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+.custom-author-text {
+	display: block;
+    margin: 7px 0 0 1px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: .3px;
+    color: rgba(255, 255, 255, .52);
+    font-style: normal;
+}
+
+/* .social{
+	display:flex;
+} */
+
+
+.social-media{
+	width:100%;
+	display:flex;
+	justify-content:space-around;
+	align-items:center;
+}
+
+.twitter-margin{
+	margin-top:2px;
+}
+
+/* body > div.container > div > div.view.view-main > div.options-container-overlay.player-attribute.fromBottomToTop.music-player-add-to.open > section.add-to-button-container > div > div.inner.option-container > form > section > div > div > div > span{
+	width:100px;
+	height:100px;
+} */
 @font-face {font-family: "SF Text"; font-weight: 400; src: url("../font/SF-UI-Text-Regular.otf");}
 
 /* 00 RESET CSS */
@@ -41,7 +108,29 @@ button {outline: 0; border: 0; cursor: pointer; font-family: Heebo, "Helvetica N
 
 ::-moz-selection {background: transparent;}
 ::selection {background: transparent;}
-::-webkit-scrollbar {display: none;}
+/* ::-webkit-scrollbar {display: none;} */
+
+::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #0c2065;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	box-shadow:inset 0 0 6px rgba(0,0,0,.3);
+	background-color:#0c2065;
+}
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: black;
+}
 
 a {outline: none; cursor: pointer; -webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
 a:link,
@@ -2248,9 +2337,9 @@ body[device-size="iphoneX"] .add-to-section-title {padding-top: 76px; margin-bot
 .add-to-section-title h2 {font-size: 33px; font-weight: 500; letter-spacing: .2px; text-align: center; color: #fff;}
 
 .share-button-container,
-.add-to-button-container {position:relative; text-align: center; padding-top: 232px; padding-bottom: 140px;}
+.add-to-button-container {position:relative; text-align: center; margin:100px; padding-bottom: 140px;}
 body[device-size="iphoneX"] .share-button-container,
-body[device-size="iphoneX"] .add-to-button-container {padding-top: 262px;}
+body[device-size="iphoneX"] .add-to-button-container {margin-top:200px;}
 .share-button-container .share-button:first-of-type,
 .add-to-button-container .add-to-button:first-of-type {margin-top: 0;}
 .share-button-container .share-button,

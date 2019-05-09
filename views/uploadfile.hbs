@@ -1,68 +1,119 @@
 <body>
-{{#if messages.info }}
-   <div class="alert alert-danger">{{messages.info}}</div>
- {{/if}}  
-<div class="container">
-	<div class="d-flex justify-content-center h-100">
-		<div class="card" style="height: 500px; width:600px ">
-			<div class="card-header">
-				<h3>Upload new song</h3>
-				{{!-- <div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
-				</div> --}}
-			</div>
-			<div class="card-body">
-				<form action="/mp3/upload" id="upload_form" method="post" enctype="multipart/form-data" onsubmit="myfun()">
-           <div class="row align-items-center remember">
-					 Select you mp3 file:
-					</div>
-          <div class="btn btn-primary btn-block mb-5" style="font-size: calc(12px + .2vw); overflow: hidden">
-            <span>Open file Browser</span>
-           <input type="file" name= 'file1' id="file1" accept=".mp3,audio/*" />
-           </div>	
-          
-           <div class="row align-items-center remember">
-					 Select your avatar:
-					</div>
-          <div class="btn btn-primary btn-block mb-5" style="font-size: calc(12px + .2vw); overflow: hidden">
-            <span>Open file Browser</span>
-           <input type="file" name= 'file2' accept="image/*" />
-           </div>	
-   <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-						<input type="text" class="form-control" placeholder="Artist" name="artist">
-					</div>
-				<input type="hidden" name="uploadedby" value={{uploadedby}} /> 
-					{{!-- <div class="row align-items-center remember">
-						<input type="checkbox">Remember Me
-					</div> --}}
-					<div class="form-group">
-						<input id="upload-btn" type="submit" value="Upload" class="btn float-right login_btn" onclick="uploadfile()">
-					</div> <br> <br> <br>
-					<div class="progress" id="bar" style="visibility: hidden"> 
-					<div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" value="0" max="100" style="width:0%">
-                    <center>Uploading...</center>
-					</div>
-						</div>
-				</form>
-			</div>
-			
-			{{!-- <div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="/signup">Sign Up</a>
+	{{#if messages.info }}
+	<div class="alert alert-danger">{{messages.info}}</div>
+	{{/if}}
+	<div class="container" style="height:100vh">
+		<div class="d-flex justify-content-center h-100">
+			<div class="card" style="height:640px; width:600px ">
+				<div class="card-header text-center">
+					<h3>Upload new song</h3>
+					{{!-- <div class="d-flex justify-content-end social_icon">
+		<span><i class="fab fa-facebook-square"></i></span>
+		<span><i class="fab fa-google-plus-square"></i></span>
+		<span><i class="fab fa-twitter-square"></i></span>
+	</div> --}}
 				</div>
-				<div class="d-flex justify-content-center">
-					<a href="#">Forgot your password?</a>
+				<div class="card-body">
+					<form action="/mp3/upload" id="upload_form" method="post" enctype="multipart/form-data" onsubmit="myfun()">
+						<div class="row align-items-center remember col-md-12">
+							<h6>Select you mp3 file:</h6>
+						</div>
+						<div class="btn btn-primary btn-block mb-2" style="font-size: calc(12px + .2vw);">
+							<span>Open file Browser</span>
+							<input type="file" name='file1' id="file1" accept=".mp3,audio/*" />
+						</div>
+
+
+						<div class="row align-items-center remember col-md-12">
+							Select your avatar:
+						</div>
+						<div class="btn btn-primary btn-block mb-2" style="font-size: calc(12px + .2vw); overflow: hidden">
+							<span>Open file Browser</span>
+							<input type="file" name='file2' accept="image/*" />
+						</div>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Artist Name" name="artist">
+						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Song Title" name="Title">
+						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Genre" name="Genre">
+						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Release Date" name="ReleaseDate">
+						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Isrc / Upc Code" name="Code">
+						</div>
+						{{!-- <div class="input-group form-group">
+							<small id="emailHelp" class="form-text col-md-12 text-light mb-1">Enter <b>Comma</b>
+								to Seperate
+								Artist.</small>
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Featured Artist" name="Featured">
+						</div> --}}
+
+						{{!-- Featured Artist Input With Tags --}}
+						<div class="input-group form-group">
+							<small id="emailHelp" class="form-text col-md-12 text-light mb-1">Enter <b>Comma</b> or Tap
+								<b>Enter</b>
+								to add a new Artist.</small>
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input class="col bg-light" type="text" name='tags3' placeholder='Enter Featured Artist'
+								pattern='^[A-Za-z_ ]{1,15}$'>
+						</div>
+						<input type="hidden" name="uploadedby" value={{uploadedby}} />
+						{{!-- <div class="row align-items-center remember">
+			<input type="checkbox">Remember Me
+		</div> --}}
+						<div class="form-group">
+							<input id="upload-btn" type="submit" value="Upload" class="btn btn-block login_btn"
+								onclick="uploadfile()">
+						</div> <br> <br> <br>
+						<div class="progress" id="bar" style="visibility: hidden">
+							<div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" value="0"
+								max="100" style="width:0%">
+								<center>Uploading...</center>
+							</div>
+						</div>
+					</form>
 				</div>
-			</div> --}}
+
+				{{!-- <div class="card-footer">
+	<div class="d-flex justify-content-center links">
+		Don't have an account?<a href="/signup">Sign Up</a>
+	</div>
+	<div class="d-flex justify-content-center">
+		<a href="#">Forgot your password?</a>
+	</div>
+</div> --}}
+			</div>
 		</div>
 	</div>
-</div>
 </body>
-</html>
 
- 
+</html>

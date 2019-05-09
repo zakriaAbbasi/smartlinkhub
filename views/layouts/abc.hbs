@@ -2,47 +2,60 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>SmartLinkHub</title>
-   <!--Made with love by Mutiullah Samim -->
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!--Fontawesome CDN-->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<!--Custom styles-->
-	<link rel="stylesheet" type="text/css" href="/src/css/login.css">
+  <title>SmartLinkHub</title>
+  <!--Made with love by Mutiullah Samim -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!--Fontawesome CDN-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <!--Custom styles-->
+  <link rel="stylesheet" type="text/css" href="/src/css/login.css">
+  <link rel="stylesheet" href="https://yaireo.github.io/tagify/dist/tagify.css">
 </head>
+
 <body>
-	{{{body}}}
+  {{{body}}}
 </body>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://yaireo.github.io/tagify/dist/tagify.js"></script>
 <script>
 
-function _(el) {
-  return document.getElementById(el);
-}
+  var input = document.querySelector('input[name=tags3]'),
+    tagify = new Tagify(input, {
+      delimiters: ",",  // add new tags when a comma or a space character
+      maxTags: 6,
+    });
 
-function uploadfile() {
- _("upload-btn").disabled = "disabled";
- _("upload_form").submit();
-_("bar").style.visibility = "visible";
-  var file = _("file1").files[0];
- var formdata = new FormData();
- formdata.append("file1", file);
- var ajax = new XMLHttpRequest();
- ajax.upload.addEventListener("progress", function(event)
- {
-  var p = (event.loaded / event.total) * 100;
-  $('#progressbar').attr('value',p).css('width',p+'%');
+  function _(el) {
+    return document.getElementById(el);
+  }
 
-});
- ajax.open("POST", "/mp3/upload");
- ajax.send(formdata);
-}
-function myfun() {
-   _("upload-btn").disabled = false;
-}
+  function uploadfile() {
+    _("upload-btn").disabled = "disabled";
+    _("upload_form").submit();
+    _("bar").style.visibility = "visible";
+    var file = _("file1").files[0];
+    var formdata = new FormData();
+    console.log(formdata);
+    formdata.append("file1", file);
+    var ajax = new XMLHttpRequest();
+    ajax.upload.addEventListener("progress", function (event) {
+      var p = (event.loaded / event.total) * 100;
+      $('#progressbar').attr('value', p).css('width', p + '%');
+
+    });
+    ajax.open("POST", "/mp3/upload");
+    ajax.send(formdata);
+  }
+  function myfun() {
+    _("upload-btn").disabled = false;
+  }
 </script>
+
 </html>

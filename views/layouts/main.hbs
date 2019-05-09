@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
 
   <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1 , maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -22,55 +24,88 @@
   <meta name="msapplication-TileImage" content="/src/images/favicon-biobutterfly.png">
 
 
-  
+
 
 
 </head>
+{{!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large"
+  data-show-count="false">Tweet</a> --}}
+
 <body class="app" theme-color="rose" device-style="ios" device-size="iphoneX" style="margin-top: 0%">
+  {{{body}}}
 
-	{{{body}}}
 
-  
 </body>
 
-    <script type="text/javascript" src="/src/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/src/js/framework7.min.js"></script>
-    <script type="text/javascript" src="/src/js/script.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/src/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/src/js/framework7.min.js"></script>
+<script type="text/javascript" src="/src/js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script type="text/javascript" src="/src/js/ourScript.js"></script>
+<script>
 
-    <script type="text/javascript" src="/src/js/ourScript.js"></script>
-    <script>
-      function sendid(value) {
-        document.getElementById("song_id").value = value;
-        var user = document.getElementById("userid").value;
-        var xhttp = new XMLHttpRequest();
-        var url = '/addtoRecent/'+user+'/'+value;
-        xhttp.open('POST',url);
-        xhttp.send(); 
-      }
-    </script>
-    <script>
-      function addtoplaylist(value) {
-        var id = document.getElementById("song_id").value;
-        var xhttp = new XMLHttpRequest();
-        var url = '/addtoplaylist/'+id+'/'+value;
-        xhttp.open('POST',url);
-        xhttp.send(); 
-      }
-    </script>
-    <script>
-      function removefromplaylist(value) {
-        var id = document.getElementById("song_id").value;
-        var xhttp = new XMLHttpRequest();
-        var url = '/deleteSong/'+id+'/'+value;
-        xhttp.open('POST',url);
-        xhttp.send(); 
-      }
-    </script>
-    <script>
-     function done() {
-      document.getElementById("imageform").submit();
-     }
-    </script>
+
+
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+
+  window.twttr = (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function (f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));
+
+  function sendid(value) {
+    document.getElementById("song_id").value = value;
+    var user = document.getElementById("userid").value;
+    console.log(user);
+    var xhttp = new XMLHttpRequest();
+    var url = '/addtoRecent/' + user + '/' + value;
+    xhttp.open('POST', url);
+    xhttp.send();
+  }
+</script>
+<script>
+  function addtoplaylist(value) {
+    var id = document.getElementById("song_id").value;
+    var xhttp = new XMLHttpRequest();
+    var url = '/addtoplaylist/' + id + '/' + value;
+    xhttp.open('POST', url);
+    xhttp.send();
+  }
+</script>
+<script>
+  function removefromplaylist(value) {
+    var id = document.getElementById("song_id").value;
+    var xhttp = new XMLHttpRequest();
+    var url = '/deleteSong/' + id + '/' + value;
+    xhttp.open('POST', url);
+    xhttp.send();
+  }
+</script>
+<script>
+  function done() {
+    document.getElementById("imageform").submit();
+  }
+</script>
+
 </html>
-
