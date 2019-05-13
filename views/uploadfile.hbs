@@ -14,7 +14,8 @@
 	</div> --}}
 				</div>
 				<div class="card-body">
-					<form action="/mp3/upload" id="upload_form" method="post" enctype="multipart/form-data" onsubmit="myfun()">
+					<form action="/mp3/upload" id="upload_form" method="post" enctype="multipart/form-data"
+						onsubmit="myfun()">
 						<div class="row align-items-center remember col-md-12">
 							<h6>Select you mp3 file:</h6>
 						</div>
@@ -22,12 +23,11 @@
 							<span>Open file Browser</span>
 							<input type="file" name='file1' id="file1" accept=".mp3,audio/*" />
 						</div>
-
-
 						<div class="row align-items-center remember col-md-12">
 							Select your avatar:
 						</div>
-						<div class="btn btn-primary btn-block mb-2" style="font-size: calc(12px + .2vw); overflow: hidden">
+						<div class="btn btn-primary btn-block mb-2"
+							style="font-size: calc(12px + .2vw); overflow: hidden">
 							<span>Open file Browser</span>
 							<input type="file" name='file2' accept="image/*" />
 						</div>
@@ -95,7 +95,8 @@
 								onclick="uploadfile()">
 						</div> <br> <br> <br>
 						<div class="progress" id="bar" style="visibility: hidden">
-							<div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" value="0"
+							<div id="progressbar"
+								class="progress-bar progress-bar-striped progress-bar-animated bg-success" value="0"
 								max="100" style="width:0%">
 								<center>Uploading...</center>
 							</div>

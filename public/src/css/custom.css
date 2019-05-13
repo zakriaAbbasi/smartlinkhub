@@ -30,10 +30,24 @@
 /* SF UI Text */
 /** Regular */
 
+
+
+
 #widget > div{
 	margin-top:2px !important;
 }
-
+.mt-3{
+	margin-top:30px;
+}
+.jumbotron{
+	opacity:0.97;
+    padding: 2rem 4rem;
+    margin-bottom: 2rem;
+    background-color: #0a1c58;
+	border-radius: .3rem;
+	margin:auto;
+	color:white;
+}
 .w-50{
 	width:50%;
 }
@@ -64,7 +78,9 @@
 	white-space: nowrap;
 }
 
-
+.flex{
+	display:flex;
+}
 .custom-author-text {
 	display: block;
     margin: 7px 0 0 1px;
@@ -1046,7 +1062,7 @@ body[device-size="iphoneX"] .headers[header-type="music-player"][header-style="s
 
 .swiper-container .img-inner-wrapper {position:relative;}
 
-.mixed-swiper {padding-top: 101px; padding-bottom: 70px;}
+.mixed-swiper {padding-top: 101px; padding-bottom: 30px;}
 body[device-size="iphoneX"] .mixed-swiper {padding-top: 110px;}
 
 .mobile .mixed-swiper,

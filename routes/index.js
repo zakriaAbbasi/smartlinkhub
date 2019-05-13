@@ -7,17 +7,39 @@ const isAuthenticated = require('../config/isAuthenticated');
 const isAuth = require('../config/isAuth');
 const playlistModel = require('../models/playlist');
 const isAdmin = require('../config/isAdmin');
+const MessageModel = require('../models/guestmessage');
+const MarkdownIt = require('markdown-it');
+let md = new MarkdownIt();
+const markDown = text => md.render(text);
 
-router.get('/', function(req, res, next) {
+const ToArray = Array => {
+  let Artist = [];
+  let TagsArray = JSON.parse(Array);
+  for (let i = 0; i < TagsArray.length; i++) {
+    Artist.push(TagsArray[i].value);
+  }
+  return Artist;
+};
+router.get('/', function (req, res, next) {
   var us = req.user;
-  console.log(us);
   if (!us) {
     songModel
       .find()
       .sort({ _id: -1 })
       .limit(5)
       .then(latest => {
-        res.render('index', { user: null, text: 'Login', latestSongs: latest });
+        latest;
+        MessageModel.find()
+          .sort({ _id: -1 })
+          .limit(1)
+          .then(message => {
+            let gmessage = markDown(message[0].text);
+            res.render('index', { user: null, notadmin: 'guest', text: 'Login', latestSongs: latest, guestmessage: gmessage });
+          });
+      }).catch(err => {
+        throw err;
+      }).catch(err => {
+        throw err;
       });
   } else {
     songModel
@@ -45,7 +67,6 @@ router.get('/', function(req, res, next) {
                             .populate('songs')
                             .then(song => {
                               song = song.map(song => song.songs);
-                              console.log(req.body);
                               usermodel
                                 .find({ _id: us._id })
                                 .populate('recent')
@@ -134,7 +155,7 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.post('/addtoplaylist/:id/:user', isAuthenticated, function(
+router.post('/addtoplaylist/:id/:user', isAuthenticated, function (
   req,
   res,
   next
@@ -145,7 +166,7 @@ router.post('/addtoplaylist/:id/:user', isAuthenticated, function(
         user: req.params.user,
         songs: req.params.id
       });
-      newPlaylist.save(function(err) {
+      newPlaylist.save(function (err) {
         if (err) {
           req.flash('info', 'Failed to add song');
           res.redirect('/');
@@ -172,7 +193,7 @@ function updatePlaylist(user, song) {
     });
 }
 
-router.post('/deleteSong/:id/:user', isAuthenticated, function(req, res, next) {
+router.post('/deleteSong/:id/:user', isAuthenticated, function (req, res, next) {
   playlistModel
     .update({ user: req.params.user }, { $pull: { songs: req.params.id } })
     .then(playlist => {
@@ -184,7 +205,7 @@ router.post('/deleteSong/:id/:user', isAuthenticated, function(req, res, next) {
 
 // Recently Played  Route.
 
-router.post('/addtoRecent/:user/:song', isAuthenticated, function(
+router.post('/addtoRecent/:user/:song', isAuthenticated, function (
   req,
   res,
   next
@@ -199,16 +220,16 @@ router.post('/addtoRecent/:user/:song', isAuthenticated, function(
         res.redirect('/');
       }
     })
-    .catch(err=>{
-        console.log(err);
+    .catch(err => {
+      console.log(err);
     });
 });
 
-router.get('/login', function(req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('login', { layout: 'abc' });
 });
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   songModel.find({ category: 'popular' }).then(popular => {
     popular = popular.reverse();
     res.render('index', { popularSongs: popular });
@@ -216,23 +237,67 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/login', function(req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('login', { layout: 'abc' });
 });
-router.get('/admin', isAuthenticated, function(req, res, next) {
+router.get('/admin', isAuthenticated, function (req, res, next) {
   console.log(req.user);
   res.render('admin', { layout: 'admin' });
 });
 
-router.get('/signup', function(req, res, next) {
+router.get('/guestpage', isAuth, function (req, res, next) {
+  res.render('guest', { layout: 'abc' });
+});
+
+router.post('/guestpage/add', (req, res, next) => {
+  var message = new MessageModel({
+    text: req.body.text
+  });
+  message.save((err, data) => {
+    if (err) {
+      req.flash(
+        'info',
+        'cannot upload song, Please try again later :('
+      );
+      res.redirect('/guest');
+    } else {
+      res.redirect('/');
+    }
+  });
+});
+
+router.get('/guestpage/post', (req, res) => {
+  MessageModel.find().then(message => {
+    console.log(message);
+  });
+});
+
+router.post('/guestpage/edit', (req, res, next) => {
+  MessageModel.updateOne({
+    _id: req.body.id
+  },
+    {
+      $set: {
+        text: req.body.text
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch(err => {
+      throw err;
+    });
+});
+
+router.get('/signup', function (req, res, next) {
   res.render('signup', { layout: 'abc' });
 });
 
-router.get('/uploadfile', isAuth, function(req, res, next) {
+router.get('/uploadfile', isAuth, function (req, res, next) {
   res.render('uploadfile', { layout: 'abc', uploadedby: req.user.username });
 });
 
-router.get('/profile', function(req, res, next) {
+router.get('/profile', function (req, res, next) {
   playlistModel
     .find({ user: req.user._id })
     .populate('songs')
@@ -247,7 +312,7 @@ router.get('/profile', function(req, res, next) {
     });
 });
 
-router.get('/artistProfile/:id', function(req, res, next) {
+router.get('/artistProfile/:id', function (req, res, next) {
   usermodel.findOne({ _id: req.params.id }).then(us => {
     playlistModel
       .find({ user: us._id })
@@ -263,7 +328,7 @@ router.get('/artistProfile/:id', function(req, res, next) {
   });
 });
 
-router.post('/signup', function(req, res) {
+router.post('/signup', function (req, res) {
   if (
     !req.body.email ||
     !req.body.password ||
@@ -281,7 +346,7 @@ router.post('/signup', function(req, res) {
       image: '../src/images/artist/user.png'
     });
     // save the user
-    newUser.save(function(err) {
+    newUser.save(function (err) {
       if (err) {
         //console.log(err);
         req.flash('info', 'This email has already been used');
@@ -294,10 +359,10 @@ router.post('/signup', function(req, res) {
   }
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', function (req, res, next) {
   if (req.body.email == 'admin@dmt.com' && req.body.password == 'dmt') {
     var user = { username: 'admin', usertype: 'admin' };
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       if (err) {
         req.flash('info', 'Error logging in');
         res.redirect('/login');
@@ -306,12 +371,12 @@ router.post('/login', function(req, res, next) {
       }
     });
   } else {
-    passport.authenticate('local', function(err, user, info) {
+    passport.authenticate('local', function (err, user, info) {
       if (user == false) {
         req.flash('info', info.message);
         res.redirect('/login');
       } else {
-        req.logIn(user, function(err) {
+        req.logIn(user, function (err) {
           if (err) {
             req.flash('info', 'Error logging in');
             res.redirect('/login');
@@ -323,11 +388,11 @@ router.post('/login', function(req, res, next) {
     })(req, res, next);
   }
 });
-router.post('/members', isAuthenticated, function(req, res) {
+router.post('/members', isAuthenticated, function (req, res) {
   res.send('Authenticated members page');
 });
 
-router.get('/artist', isAdmin, function(req, res, next) {
+router.get('/artist', isAdmin, function (req, res, next) {
   usermodel
     .find({ usertype: 'artist' })
     .select('username usertype')
@@ -340,12 +405,12 @@ router.get('/artist', isAdmin, function(req, res, next) {
     });
 });
 
-router.get('/songs/:artist', isAdmin, function(req, res, next) {
+router.get('/songs/:artist', isAdmin, function (req, res, next) {
   songModel
     .find({
       uploadedby: req.params.artist
     })
-    .select('_id fileName avatar artist timesPlayed uploadedby category')
+    .select('_id SongTitle avatar artist timesPlayed uploadedby category ReleaseDate')
     .then(artist => {
       res.render('songs', { layout: 'admin', artistList: artist });
     })
@@ -355,7 +420,56 @@ router.get('/songs/:artist', isAdmin, function(req, res, next) {
     });
 });
 
-router.post('/deleteArtist/:id', isAdmin, function(req, res, next) {
+
+router.get('/song/:id', (req, res) => {
+  songModel
+    .findOne({
+      _id: req.params.id
+    }).then(song => {
+      song
+      res.render('songsedit', {
+        layout: 'abc',
+        id: song._id,
+        Songtitle: song.SongTitle,
+        Releasedate: song.ReleaseDate,
+        Code: song.IsrcCode,
+        Artistname: song.artist,
+        Songgenre: song.Genre,
+        FeaturedArtist: song.FeaturedArtist,
+        category: song.category
+      });
+    });
+});
+
+
+router.post('/song/edit', (req, res) => {
+  let FeaturedArtist = ToArray(req.body.tags);
+  songModel.updateOne({
+    _id: req.body.id
+  },
+    {
+      $set: {
+        SongTitle: req.body.Songtitle,
+        ReleaseDate: req.body.Releasedate,
+        FeaturedArtist: FeaturedArtist,
+        IsrcCode: req.body.Code,
+        Genre: req.body.genre,
+        category: req.body.category,
+        artist: req.body.Artistname
+      }
+    }, {
+      new: true
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch(err => {
+      throw err;
+    });
+})
+
+
+router.post('/deleteArtist/:id', isAdmin, function (req, res, next) {
   usermodel
     .findOneAndDelete({
       _id: req.params.id
@@ -371,7 +485,7 @@ router.post('/deleteArtist/:id', isAdmin, function(req, res, next) {
 });
 
 //Delete Route For Admin.
-router.post('/delete/:id', isAdmin, function(req, res, next) {
+router.post('/delete/:id', isAdmin, function (req, res, next) {
   songModel
     .findOneAndDelete({
       _id: req.params.id
@@ -386,7 +500,7 @@ router.post('/delete/:id', isAdmin, function(req, res, next) {
     });
 });
 
-router.get('/category/:id/:opt', isAuthenticated, function(req, res, next) {
+router.get('/category/:id/:opt', isAuthenticated, function (req, res, next) {
   const id = req.params.id;
   const category = req.params.opt;
   if (category == 'pop&fav') {

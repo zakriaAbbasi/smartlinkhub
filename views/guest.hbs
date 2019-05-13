@@ -1,0 +1,31 @@
+{{#if messages.info }}
+<div class="alert alert-danger">{{messages.info}}</div>
+{{/if}}
+<div class="container" style="height:100vh">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card" style="height:80%; width:600px ">
+            <div class="card-header text-center">
+                <h3>Add Guest Message</h3>
+            </div>
+            <div class="card-body">
+                <form action="/guestpage/add" id="guestform" method="post" onsubmit="myfun()">
+                    <div class="form-group">
+                        <textarea class="form-control" name="text" cols="30" rows="10"></textarea>
+                    </div>
+                    <input type="hidden" name="uploadedby" value={{uploadedby}} />
+                    <div class="form-group">
+                        <input id="guestbtn" type="submit" value="Upload" class="btn btn-block login_btn"
+                            onclick="guestMessage()">
+                    </div> <br> <br> <br>
+                    <div class="progress" id="bar" style="visibility: hidden">
+                        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                            value="0" max="100" style="width:0%">
+                            <center>Uploading...</center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

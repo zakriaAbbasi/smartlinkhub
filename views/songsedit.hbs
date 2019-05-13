@@ -1,0 +1,62 @@
+{{#if messages.info }}
+<div class="alert alert-danger">{{messages.info}}</div>
+{{/if}}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="card" style="height:50%; width:600px;margin:2rem; ">
+            <div class="card-header text-center">
+                <h3>Edit Song</h3>
+            </div>
+            <div class="card-body">
+                <form action="/song/edit" id="songeditform" method="post" onsubmit="myfun()">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <div class="form-group">
+                        <label class="text-light">Song Title</label>
+                        <input type="text" class="form-control" name="Songtitle" value="{{Songtitle}}"
+                            placeholder="Songtitle">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Song Genre</label>
+                        <input type="text" class="form-control" name="genre" value="{{Songgenre}}"
+                            placeholder="category">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Releasedate</label>
+                        <input type="text" class="form-control" name="Releasedate" value="{{Releasedate}}"
+                            placeholder="Releasedate">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Isrc / Code</label>
+                        <input type="text" class="form-control" name="Code" value="{{Code}}" placeholder="Isrc Code">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">ArtistName</label>
+                        <input type="text" class="form-control" name="Artistname" value="{{Artistname}}"
+                            placeholder="Artistname">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">FeaturedArtist</label>
+                        <input type="text" class="col bg-light" name="tags" value="{{FeaturedArtist}}"
+                            placeholder="FeaturedArtist">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Category</label>
+                        <input type="text" class="form-control" name="category" value="{{category}}"
+                            placeholder="Category">
+                    </div>
+                    <div class="form-group">
+                        <input id="EditSongBtn" type="submit" value="Upload" class="btn btn-block login_btn"
+                            onclick="EditSong()">
+                    </div> <br> <br> <br>
+                    <div class="progress" id="bar" style="visibility: hidden">
+                        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                            value="0" max="100" style="width:0%">
+                            <center>Uploading...</center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

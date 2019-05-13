@@ -32,6 +32,13 @@
       maxTags: 6,
     });
 
+
+  var input = document.querySelector('input[name=tags]'),
+    tagify = new Tagify(input, {
+      delimiters: ",",  // add new tags when a comma or a space character
+      maxTags: 6,
+    });
+
   function _(el) {
     return document.getElementById(el);
   }
@@ -42,7 +49,6 @@
     _("bar").style.visibility = "visible";
     var file = _("file1").files[0];
     var formdata = new FormData();
-    console.log(formdata);
     formdata.append("file1", file);
     var ajax = new XMLHttpRequest();
     ajax.upload.addEventListener("progress", function (event) {
@@ -53,6 +59,36 @@
     ajax.open("POST", "/mp3/upload");
     ajax.send(formdata);
   }
+
+  function guestmessage() {
+    _("guestbtn").disabled = "disabled";
+    _("guestform").submit();
+    _("bar").style.visibility = "visible";
+    let formdata = new FormData();
+    ajax.upload.addEventListener("progress", function (event) {
+      var p = (event.loaded / event.total) * 100;
+      $('#progressbar').attr('value', p).css('width', p + '%');
+    });
+    ajax.open("POST", "/guestpage/add");
+    ajax.send(formdata);
+  }
+
+
+  function EditSong() {
+    _("EditSongBtn").disabled = "disabled";
+    _("songeditform").submit();
+    _("bar").style.visibility = "visible";
+    let formdata = new FormData();
+    ajax.upload.addEventListener("progress", function (event) {
+      var p = (event.loaded / event.total) * 100;
+      $('#progressbar').attr('value', p).css('width', p + '%');
+    });
+    ajax.open("POST", "/song/edit");
+    ajax.send(formdata);
+  }
+
+
+
   function myfun() {
     _("upload-btn").disabled = false;
   }
