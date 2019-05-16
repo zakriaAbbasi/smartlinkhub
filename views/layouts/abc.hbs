@@ -56,7 +56,7 @@
       $('#progressbar').attr('value', p).css('width', p + '%');
 
     });
-    ajax.open("POST", "/mp3/upload");
+    ajax.open("POST", "/file/upload");
     ajax.send(formdata);
   }
 
@@ -87,6 +87,19 @@
     ajax.send(formdata);
   }
 
+
+  function uploadvideo() {
+    _("videouploadbtn").disabled = "disabled";
+    _("uploadvideo").submit();
+    _("bar").style.visibility = "visible";
+    let formdata = new FormData();
+    ajax.upload.addEventListener("progress", function (event) {
+      var p = (event.loaded / event.total) * 100;
+      $('#progressbar').attr('value', p).css('width', p + '%');
+    });
+    ajax.open("POST", "/file/video/upload");
+    ajax.send(formdata);
+  }
 
 
   function myfun() {

@@ -9,6 +9,18 @@ const playlistModel = require('../models/playlist');
 const isAdmin = require('../config/isAdmin');
 const MessageModel = require('../models/guestmessage');
 const MarkdownIt = require('markdown-it');
+const videoModel = require('../models/video');
+
+
+// videoModel
+//   .find()
+//   .then(videos => {
+//     let videosarray = videos.reverse();
+//     console.log(videosarray);
+//   });
+
+
+
 let md = new MarkdownIt();
 const markDown = text => md.render(text);
 
@@ -72,60 +84,71 @@ router.get('/', function (req, res, next) {
                                 .populate('recent')
                                 .then(recentPlayed => {
                                   recentPlayed = recentPlayed.map(
-                                    recentPlayed => recentPlayed.recent
-                                  );
+                                    recentPlayed => recentPlayed.recent);
                                   if (recentPlayed[0]) {
                                     recentPlayed[0] = recentPlayed[0].reverse();
                                   }
-                                  if (us && us.usertype == 'listener') {
-                                    res.render('index', {
-                                      playlistUser: users,
-                                      recentlyPlayed: recentPlayed[0],
-                                      playlist: song[0],
-                                      uid: us._id,
-                                      user: us.username,
-                                      image: us.image,
-                                      utype: null,
-                                      notadmin: us.usertype,
-                                      latestSongs: latest,
-                                      popularSongs: popular,
-                                      favSongs: fav,
-                                      mostPlayed: songList,
-                                      artistList: artist
-                                    });
-                                  } else if (us && us.usertype == 'artist') {
-                                    res.render('index', {
-                                      playlistUser: users,
-                                      recentlyPlayed: recentPlayed[0],
-                                      playlist: song[0],
-                                      uid: us._id,
-                                      user: us.username,
-                                      image: us.image,
-                                      utype: us.usertype,
-                                      notadmin: us.usertype,
-                                      latestSongs: latest,
-                                      popularSongs: popular,
-                                      favSongs: fav,
-                                      mostPlayed: songList,
-                                      artistList: artist
-                                    });
-                                  } else {
-                                    res.render('index', {
-                                      playlistUser: users,
-                                      recentlyPlayed: recentPlayed[0],
-                                      playlist: song[0],
-                                      uid: us._id,
-                                      user: us.username,
-                                      image: us.image,
-                                      utype: us.usertype,
-                                      notadmin: null,
-                                      latestSongs: latest,
-                                      popularSongs: popular,
-                                      favSongs: fav,
-                                      mostPlayed: songList,
-                                      artistList: artist
-                                    });
-                                  }
+                                  videoModel
+                                    .find()
+                                    .then(videos => {
+                                      let videoarray = videos.reverse();
+                                      // console.log(videoarray);
+                                      if (us && us.usertype == 'listener') {
+                                        res.render('index', {
+                                          playlistUser: users,
+                                          recentlyPlayed: recentPlayed[0],
+                                          playlist: song[0],
+                                          uid: us._id,
+                                          user: us.username,
+                                          image: us.image,
+                                          utype: null,
+                                          notadmin: us.usertype,
+                                          latestSongs: latest,
+                                          popularSongs: popular,
+                                          favSongs: fav,
+                                          mostPlayed: songList,
+                                          artistList: artist,
+                                          Videolist: videoarray
+                                        });
+                                      } else if (us && us.usertype == 'artist') {
+                                        res.render('index', {
+                                          playlistUser: users,
+                                          recentlyPlayed: recentPlayed[0],
+                                          playlist: song[0],
+                                          uid: us._id,
+                                          user: us.username,
+                                          image: us.image,
+                                          utype: us.usertype,
+                                          notadmin: us.usertype,
+                                          latestSongs: latest,
+                                          popularSongs: popular,
+                                          favSongs: fav,
+                                          mostPlayed: songList,
+                                          artistList: artist,
+                                          Videolist: videoarray
+                                        });
+                                      } else {
+                                        res.render('index', {
+                                          playlistUser: users,
+                                          recentlyPlayed: recentPlayed[0],
+                                          playlist: song[0],
+                                          uid: us._id,
+                                          user: us.username,
+                                          image: us.image,
+                                          utype: us.usertype,
+                                          notadmin: null,
+                                          latestSongs: latest,
+                                          popularSongs: popular,
+                                          favSongs: fav,
+                                          mostPlayed: songList,
+                                          artistList: artist,
+                                          Videolist: videoarray
+                                        });
+                                      }
+                                    })
+                                    .catch(err => {
+                                      console.log(err);
+                                    })
                                 })
                                 .catch(err => {
                                   console.log(err);
@@ -297,6 +320,11 @@ router.get('/uploadfile', isAuth, function (req, res, next) {
   res.render('uploadfile', { layout: 'abc', uploadedby: req.user.username });
 });
 
+
+router.get('/uploadvideo', isAuth, function (req, res, next) {
+  res.render('uploadvideo', { layout: 'abc', uploadedby: req.user.username });
+});
+
 router.get('/profile', function (req, res, next) {
   playlistModel
     .find({ user: req.user._id })
@@ -358,6 +386,13 @@ router.post('/signup', function (req, res) {
     });
   }
 });
+
+
+
+
+
+
+
 
 router.post('/login', function (req, res, next) {
   if (req.body.email == 'admin@dmt.com' && req.body.password == 'dmt') {

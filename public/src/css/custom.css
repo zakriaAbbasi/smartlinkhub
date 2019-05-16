@@ -31,6 +31,10 @@
 /** Regular */
 
 
+.close-video-player,.option{
+	visibility:hidden;
+}
+
 
 
 #widget > div{

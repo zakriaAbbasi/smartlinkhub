@@ -4,6 +4,7 @@ const songsModel = require('../models/songs');
 const usermodel = require('../models/user');
 const AWS = require('aws-sdk');
 const isAuthenticated = require('../config/isAuthenticated');
+const videoModel = require('../models/video');
 // var filemanager = require('easy-file-manager');
 
 const ToArray = Array => {
@@ -15,7 +16,7 @@ const ToArray = Array => {
   return Artist;
 };
 
-router.post('/upload', function(req, res) {
+router.post('/upload', function (req, res) {
   if (!req.files.file1 || !req.files.file2 || !req.body.artist) {
     req.flash('info', 'Please Provide all the credentials');
     res.redirect('/uploadfile');
@@ -65,8 +66,93 @@ router.post('/upload', function(req, res) {
   }
 });
 
+
+// Video Route
+router.post('/video/upload', function (req, res) {
+  console.log(req.body);
+  if (!req.body.Title || !req.body.artist || !req.files.video) {
+    req.flash('info', 'Please Provide all the credentials');
+    res.redirect('/uploadvideo');
+  }
+  AwsMp3(req.files.video, (err, data) => {
+    if (err === true) {
+      req.flash('info', 'cannot upload song, Please try again later :(');
+      res.redirect('/uploadvideo');
+    } else {
+      let Video = new videoModel({
+        filename: req.files.video.name,
+        VideoTitle: req.body.Title,
+        Artist: req.body.artist,
+        uploadedby: req.body.uploadedby
+      });
+      console.log(Video);
+      Video.save(err => {
+        if (err) {
+          req.flash(
+            'info',
+            'cannot upload song, Please try again later :('
+          );
+          console.log(err);
+          res.redirect('/uploadvideo');
+        } else {
+          res.redirect('/');
+        }
+      });
+    }
+  });
+});
+
+
+router.get('/video/download', function (req, res) {
+  videoModel.findOneAndUpdate(
+    { filename: req.query.id },
+    { $inc: { timesPlayed: 1 } },
+    { useFindAndModify: false },
+    err => {
+      if (err) {
+        console.log('Error updating song');
+      }
+    }
+  );
+
+  let s3bucket = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    Bucket: process.env.AWS_BUCKET
+  });
+  var params = {
+    Bucket: process.env.AWS_BUCKET,
+    Key: req.query.id
+  };
+
+  var stream = s3bucket.getObject(params).createReadStream();
+  // forward errors
+  stream.on('error', function error(err) {
+    console.log('error streaming this Video ', err);
+  });
+  stream.on('end', () => {
+    console.log('Served by Amazon S3: ' + params.Key);
+  });
+  //Pipe the s3 object to the response
+  stream.pipe(res);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Route to download file from AWS bucket
-router.get('/download', function(req, res) {
+router.get('/download', function (req, res) {
   songsModel.findOneAndUpdate(
     { fileName: req.query.id },
     { $inc: { timesPlayed: 1 } },
@@ -87,6 +173,7 @@ router.get('/download', function(req, res) {
     Bucket: process.env.AWS_BUCKET,
     Key: req.query.id
   };
+
   var stream = s3bucket.getObject(params).createReadStream();
   // forward errors
   stream.on('error', function error(err) {
@@ -105,7 +192,7 @@ function AwsImage(file, callback) {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     Bucket: process.env.AWS_IMAGES
   });
-  s3bucket.createBucket(function() {
+  s3bucket.createBucket(function () {
     var params = {
       Bucket: process.env.AWS_IMAGES,
       Key: file.name,
@@ -114,7 +201,7 @@ function AwsImage(file, callback) {
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       ACL: 'public-read'
     };
-    s3bucket.upload(params, function(err, data) {
+    s3bucket.upload(params, function (err, data) {
       if (err) {
         return callback(true, err);
       } else {
@@ -129,7 +216,7 @@ function AwsMp3(file, callback) {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     Bucket: process.env.AWS_BUCKET
   });
-  s3bucket.createBucket(function() {
+  s3bucket.createBucket(function () {
     var params = {
       Bucket: process.env.AWS_BUCKET,
       Key: file.name,
@@ -137,7 +224,7 @@ function AwsMp3(file, callback) {
       accessKeyId: process.env.AWS_ACCESS_KEY,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
     };
-    s3bucket.upload(params, function(err, data) {
+    s3bucket.upload(params, function (err, data) {
       if (err) {
         return callback(true, err);
       } else {
@@ -147,7 +234,14 @@ function AwsMp3(file, callback) {
   });
 }
 
-router.post('/uploadImage/:id', function(req, res) {
+
+
+
+
+
+
+
+router.post('/uploadImage/:id', function (req, res) {
   if (!req.files.file1) {
     req.flash('info', 'Please Provide all the credentials');
     res.redirect('/profile');
