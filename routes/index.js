@@ -10,16 +10,7 @@ const isAdmin = require('../config/isAdmin');
 const MessageModel = require('../models/guestmessage');
 const MarkdownIt = require('markdown-it');
 const videoModel = require('../models/video');
-
-
-// videoModel
-//   .find()
-//   .then(videos => {
-//     let videosarray = videos.reverse();
-//     console.log(videosarray);
-//   });
-
-
+const AlbumModel = require('../models/Album');
 
 let md = new MarkdownIt();
 const markDown = text => md.render(text);
@@ -32,6 +23,11 @@ const ToArray = Array => {
   }
   return Artist;
 };
+
+
+
+
+
 router.get('/', function (req, res, next) {
   var us = req.user;
   if (!us) {
@@ -86,65 +82,75 @@ router.get('/', function (req, res, next) {
                                   recentPlayed = recentPlayed.map(
                                     recentPlayed => recentPlayed.recent);
                                   if (recentPlayed[0]) {
-                                    recentPlayed[0] = recentPlayed[0].reverse();
+                                    let recentlist = recentPlayed[0].reverse();
+                                    uniquevalue = [...new Set(recentlist)];
                                   }
                                   videoModel
                                     .find()
                                     .then(videos => {
                                       let videoarray = videos.reverse();
-                                      // console.log(videoarray);
-                                      if (us && us.usertype == 'listener') {
-                                        res.render('index', {
-                                          playlistUser: users,
-                                          recentlyPlayed: recentPlayed[0],
-                                          playlist: song[0],
-                                          uid: us._id,
-                                          user: us.username,
-                                          image: us.image,
-                                          utype: null,
-                                          notadmin: us.usertype,
-                                          latestSongs: latest,
-                                          popularSongs: popular,
-                                          favSongs: fav,
-                                          mostPlayed: songList,
-                                          artistList: artist,
-                                          Videolist: videoarray
+                                      AlbumModel
+                                        .find()
+                                        .then(albums => {
+                                          let albumarray = albums.reverse();
+                                          if (us && us.usertype == 'listener') {
+                                            res.render('index', {
+                                              playlistUser: users,
+                                              recentlyPlayed: uniquevalue,
+                                              playlist: song[0],
+                                              uid: us._id,
+                                              user: us.username,
+                                              image: us.image,
+                                              utype: null,
+                                              notadmin: us.usertype,
+                                              latestSongs: latest,
+                                              popularSongs: popular,
+                                              favSongs: fav,
+                                              mostPlayed: songList,
+                                              artistList: artist,
+                                              Videolist: videoarray,
+                                              AlbumList: albumarray
+                                            });
+                                          } else if (us && us.usertype == 'artist') {
+                                            res.render('index', {
+                                              playlistUser: users,
+                                              recentlyPlayed: uniquevalue,
+                                              playlist: song[0],
+                                              uid: us._id,
+                                              user: us.username,
+                                              image: us.image,
+                                              utype: us.usertype,
+                                              notadmin: us.usertype,
+                                              latestSongs: latest,
+                                              popularSongs: popular,
+                                              favSongs: fav,
+                                              mostPlayed: songList,
+                                              artistList: artist,
+                                              Videolist: videoarray,
+                                              AlbumList: albumarray
+                                            });
+                                          } else {
+                                            res.render('index', {
+                                              playlistUser: users,
+                                              recentlyPlayed: recentPlayed[0],
+                                              playlist: song[0],
+                                              uid: us._id,
+                                              user: us.username,
+                                              image: us.image,
+                                              utype: us.usertype,
+                                              notadmin: null,
+                                              latestSongs: latest,
+                                              popularSongs: popular,
+                                              favSongs: fav,
+                                              mostPlayed: songList,
+                                              artistList: artist,
+                                              Videolist: videoarray,
+                                              AlbumList: albumarray
+                                            });
+                                          }
+                                        }).catch((err) => {
+                                          console.log(err);
                                         });
-                                      } else if (us && us.usertype == 'artist') {
-                                        res.render('index', {
-                                          playlistUser: users,
-                                          recentlyPlayed: recentPlayed[0],
-                                          playlist: song[0],
-                                          uid: us._id,
-                                          user: us.username,
-                                          image: us.image,
-                                          utype: us.usertype,
-                                          notadmin: us.usertype,
-                                          latestSongs: latest,
-                                          popularSongs: popular,
-                                          favSongs: fav,
-                                          mostPlayed: songList,
-                                          artistList: artist,
-                                          Videolist: videoarray
-                                        });
-                                      } else {
-                                        res.render('index', {
-                                          playlistUser: users,
-                                          recentlyPlayed: recentPlayed[0],
-                                          playlist: song[0],
-                                          uid: us._id,
-                                          user: us.username,
-                                          image: us.image,
-                                          utype: us.usertype,
-                                          notadmin: null,
-                                          latestSongs: latest,
-                                          popularSongs: popular,
-                                          favSongs: fav,
-                                          mostPlayed: songList,
-                                          artistList: artist,
-                                          Videolist: videoarray
-                                        });
-                                      }
                                     })
                                     .catch(err => {
                                       console.log(err);
@@ -260,15 +266,12 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.get('/login', function (req, res, next) {
-  res.render('login', { layout: 'abc' });
-});
 router.get('/admin', isAuthenticated, function (req, res, next) {
   console.log(req.user);
   res.render('admin', { layout: 'admin' });
 });
 
-router.get('/guestpage', isAuth, function (req, res, next) {
+router.get('/guestpage', isAdmin, function (req, res, next) {
   res.render('guest', { layout: 'abc' });
 });
 
@@ -355,6 +358,97 @@ router.get('/artistProfile/:id', function (req, res, next) {
       });
   });
 });
+
+
+
+
+
+router.get('/getalbums/:id', function (req, res, next) {
+  AlbumModel
+    .find({
+      _id: req.params.id
+    })
+    .populate('songs')
+    .then(album => {
+      let song = album.map(song => song.songs);
+      let albumname = album[0].albumName;
+      let img = album[0].albumImg;
+      res.render('viewalbum', {
+        Songlist: song[0],
+        Albumname: albumname,
+        Albumimg: img
+      });
+    }).catch((err) => {
+      throw err
+    }
+    );
+});
+
+
+
+
+// Create Album Route
+
+router.get('/album', isAdmin, function (req, res, next) {
+  songModel
+    .find()
+    .sort({ _id: -1 })
+    .then(songlist => {
+      songlist;
+      // console.log(songlist);
+      res.render('album', {
+        layout: 'admin',
+        SongList: songlist,
+        uid: req.user._id
+      });
+    }).catch(err => {
+      throw err;
+    });
+});
+
+
+
+
+
+
+
+
+
+
+// Add to Album Route
+// router.post('/addtoalbum/:id/:user', isAuthenticated, function (
+//   req,
+//   res,
+//   next
+// ) {
+//   playlistModel.findOne({ user: req.params.user }, (err, playlist) => {
+//     if (playlist == null) {
+//       var newPlaylist = new playlistModel({
+//         user: req.params.user,
+//         songs: req.params.id
+//       });
+//       newPlaylist.save(function (err) {
+//         if (err) {
+//           req.flash('info', 'Failed to add song');
+//           res.redirect('/');
+//         }
+//       });
+//       console.log(req.body);
+//       usermodel
+//         .update({ _id: req.params.user }, { playlist: newPlaylist._id })
+//         .then(us => {
+//           //console.log(us);
+//         });
+//     } else {
+//       updatePlaylist(req.params.user, req.params.id);
+//     }
+//   });
+// });
+
+
+
+
+
 
 router.post('/signup', function (req, res) {
   if (

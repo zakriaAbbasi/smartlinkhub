@@ -34,6 +34,7 @@
   <!-- Core -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.0.0"></script>
@@ -82,9 +83,45 @@
     }
   </script>
   <script>
+    function _(el) {
+      return document.getElementById(el);
+    }
     function activate() {
       document.getElementById("save").disabled = false;
     }
+
+
+    $("button").click(function () {
+      var formdata = new FormData();
+      var file = _("file1").files[0];
+      console.log(file);
+      formdata.append("file1", file);
+      var ajax = new XMLHttpRequest();
+      let albumname = document.querySelector('#albumname').value;
+      formdata.append("albumname", albumname);
+      var favorite = [];
+      $.each($("input[name='song']:checked"), function () {
+        favorite.push($(this).val());
+      });
+      formdata.append("songs", favorite);
+      ajax.open('POST', '/file/createalbum');
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4) {
+          if (ajax.status == 200) {
+            var data = ajax.responseText;
+            var jsonResponse = JSON.parse(data);
+            if (jsonResponse.message === "Success") {
+              window.location.assign("/");
+            }
+          }
+        }
+      };
+      ajax.send(formdata);
+    });
+
+
+
+
   </script>
 </body>
 

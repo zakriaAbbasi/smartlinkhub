@@ -26,6 +26,11 @@
 <script src="https://yaireo.github.io/tagify/dist/tagify.js"></script>
 <script>
 
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+
   var input = document.querySelector('input[name=tags3]'),
     tagify = new Tagify(input, {
       delimiters: ",",  // add new tags when a comma or a space character

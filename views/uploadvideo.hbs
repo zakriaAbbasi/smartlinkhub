@@ -12,23 +12,29 @@
 		<span><i class="fab fa-google-plus-square"></i></span>
 		<span><i class="fab fa-twitter-square"></i></span>
 	</div> --}}
-                </div>
-                <div class="card-body">
                     <div class="progress green" id="bar" style="visibility:hidden">
                         <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                             value="0" max="100" style="width:100%">
-
                         </div>
                     </div>
+                </div>
+                <div class="card-body">
                     <form action="file/video/upload" id="uploadvideo" method="post" enctype="multipart/form-data"
                         onsubmit="myfun()">
-                        <div class="row align-items-center remember col-md-12">
+                        {{!-- <div class="row align-items-center remember col-md-12">
                             <h6>Select Video file</h6>
                         </div>
                         <div class="btn btn-primary btn-block mb-2" style="font-size: calc(12px + .2vw);">
                             <span>Open file Browser</span>
                             <input type="file" name='video' id="video" accept="video/mp4" />
+                        </div> --}}
+
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" name='video' id="video" accept="video/mp4">
+                            <label class="custom-file-label" for="customFile">Select mp4 Video</label>
                         </div>
+
+
                         {{!-- <div class="row align-items-center remember col-md-12">
                             Select your avatar:
                         </div>
@@ -39,7 +45,7 @@
                         </div> --}}
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <span class="input-group-text"><i class="fab fa-youtube"></i></span>
                             </div>
                             <input type="text" class="form-control" placeholder="Video Title" name="Title">
                         </div>

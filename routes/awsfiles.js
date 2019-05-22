@@ -5,6 +5,7 @@ const usermodel = require('../models/user');
 const AWS = require('aws-sdk');
 const isAuthenticated = require('../config/isAuthenticated');
 const videoModel = require('../models/video');
+const AlbumModel = require('../models/Album');
 // var filemanager = require('easy-file-manager');
 
 const ToArray = Array => {
@@ -17,6 +18,7 @@ const ToArray = Array => {
 };
 
 router.post('/upload', function (req, res) {
+  console.log(req.body);
   if (!req.files.file1 || !req.files.file2 || !req.body.artist) {
     req.flash('info', 'Please Provide all the credentials');
     res.redirect('/uploadfile');
@@ -55,7 +57,7 @@ router.post('/upload', function (req, res) {
                 );
                 res.redirect('/uploadfile');
               } else {
-                req.flash('info', 'Successfully uploaded');
+                // req.flash('info', 'Successfully uploaded');
                 res.redirect('/');
               }
             });
@@ -69,14 +71,13 @@ router.post('/upload', function (req, res) {
 
 // Video Route
 router.post('/video/upload', function (req, res) {
-  console.log(req.body);
   if (!req.body.Title || !req.body.artist || !req.files.video) {
     req.flash('info', 'Please Provide all the credentials');
     res.redirect('/uploadvideo');
   }
   AwsMp3(req.files.video, (err, data) => {
     if (err === true) {
-      req.flash('info', 'cannot upload song, Please try again later :(');
+      req.flash('info', 'cannot upload Video, Please try again later :(');
       res.redirect('/uploadvideo');
     } else {
       let Video = new videoModel({
@@ -90,7 +91,7 @@ router.post('/video/upload', function (req, res) {
         if (err) {
           req.flash(
             'info',
-            'cannot upload song, Please try again later :('
+            'cannot upload Video, Please try again later :('
           );
           console.log(err);
           res.redirect('/uploadvideo');
@@ -101,6 +102,47 @@ router.post('/video/upload', function (req, res) {
     }
   });
 });
+
+
+router.post('/createalbum',isAuthenticated, function (req, res) {
+  console.log(req.body);
+  if (!req.body) {
+    req.flash('info', 'Please Provide all the credentials');
+    return res.redirect('/');
+  }
+  AwsImage(req.files.file1, (err, data) => {
+    if (err === true) {
+      req.flash('info', 'cannot upload Video, Please try again later :(');
+      res.redirect('/album');
+    }
+    let imgurl = data;
+    let songs = req.body.songs;
+    let songsarray = songs.split(',');
+
+    let album = new AlbumModel({
+      albumName: req.body.albumname,
+      albumImg: imgurl,
+      songs: songsarray,
+    });
+    album.save(err => {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.json({
+          message: "Success"
+        });
+      }
+    });
+
+  });
+});
+
+
+
+
+
+
 
 
 router.get('/video/download', function (req, res) {
@@ -236,11 +278,6 @@ function AwsMp3(file, callback) {
 
 
 
-
-
-
-
-
 router.post('/uploadImage/:id', function (req, res) {
   if (!req.files.file1) {
     req.flash('info', 'Please Provide all the credentials');
@@ -269,5 +306,4 @@ router.post('/uploadImage/:id', function (req, res) {
     });
   }
 });
-
 module.exports = router;
