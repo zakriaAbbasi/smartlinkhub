@@ -97,7 +97,10 @@
     _("videouploadbtn").disabled = "disabled";
     _("uploadvideo").submit();
     _("bar").style.visibility = "visible";
-    let formdata = new FormData();
+    var ajax = new XMLHttpRequest();
+    var file = _("file1").files[0];
+    var formdata = new FormData();
+    formdata.append("file1", file);
     ajax.upload.addEventListener("progress", function (event) {
       var p = (event.loaded / event.total) * 100;
       $('#progressbar').attr('value', p).css('width', p + '%');

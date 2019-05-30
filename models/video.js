@@ -7,7 +7,8 @@ var videoSchema = new mongoose.Schema({
     VideoTitle: { type: String },
     timesPlayed: { type: Number },
     Artist: { type: String },
-    uploadedby: { type: String }
+    uploadedby: { type: String },
+    VideoImg: { type: String }
 
 });
 
