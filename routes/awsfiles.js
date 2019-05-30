@@ -31,6 +31,7 @@ router.post('/upload', function (req, res) {
         req.body.imgurl = data;
         AwsMp3(req.files.file1, (err, data) => {
           if (err === true) {
+            console.log(err);
             req.flash('info', 'cannot upload song, Please try again later :(');
             res.redirect('/uploadfile');
           } else {
@@ -51,6 +52,7 @@ router.post('/upload', function (req, res) {
             });
             mp3.save(err => {
               if (err) {
+                console.log(err,'cannot upload');
                 req.flash(
                   'info',
                   'cannot upload song, Please try again later :('

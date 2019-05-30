@@ -5,8 +5,8 @@ var mongoose = require('mongoose');
 var songSchema = new mongoose.Schema({
   Genre: { type: String },
   SongTitle: { type: String },
-  ReleaseDate: { type: Number },
-  IsrcCode: { type: Number },
+  ReleaseDate: { type: String },
+  IsrcCode: { type: String },
   fileName: { type: String },
   FeaturedArtist: [],
   avatar: { type: String },
