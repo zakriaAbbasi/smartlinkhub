@@ -10,7 +10,7 @@
   "author": "dmt",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.378.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "busboy-body-parser": "^0.3.2",
